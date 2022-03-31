@@ -16,7 +16,7 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.positions.World;
-import game.FollowBehaviour;
+import game.behaviour.FollowBehaviour;
 
 import java.util.Arrays;
 import java.util.List;
