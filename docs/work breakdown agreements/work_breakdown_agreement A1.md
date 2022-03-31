@@ -43,4 +43,4 @@
 # Signed
 * Matthew Siegenthaler: I accept this WBA
 * Chun Mok: I accept this WBA
-* James Huynh: 
+* James Huynh: I accept this WBA
