@@ -5,20 +5,20 @@
 - [ ] Work Breakdown Agreement
 ---
 ## Class Diagram
-* Tasks:            REQ4, REQ5, REQ7
-* Assignee:         Chun
-* Completed by:     4/4/2022
-
-* Reviewer:         James
-* Completed by:     8/4/2022
-
+* Tasks:            REQ4, REQ5, REQ7  
+* Assignee:         Chun  
+* Completed by:     4/4/2022  
+  
+* Reviewer:         James  
+* Completed by:     8/4/2022  
+---
 * Tasks:            REQ1
 * Assignee:         Matthew
-* Completed by:     4/4/2022
+* Completed by:     4/4/2022  
 
 * Reviewer:         Chun
 * Completed by:     8/4/2022
-
+---
 * Tasks:            REQ2, REQ3, REQ6
 * Assignee:         James
 * Completed by:     4/4/2022
@@ -41,6 +41,6 @@
 * Completed by:     8/4/2022
 ---
 # Signed
-* Matthew Siegenthaler: I accept this WBA
+* Matthew Siegenthaler:
 * Chun Mok: 
 * James Huynh: 
