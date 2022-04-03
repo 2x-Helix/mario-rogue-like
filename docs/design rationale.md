@@ -12,3 +12,15 @@ for it's to regrow a new sprout.
 ### Cons
 * Additional code required to implement abstract class.
 * Increased code size.
+
+
+## REQ 2
+Added JumpAction to allow jumping on walls and trees. The MoveActorAction does not allow for conditional movement
+of actors. Since we cannot modify engine files, this requires to be a separate action to allow for the
+success chance of jumping.
+
+### Pros
+* Allows for optional chance of not succeeding the jump.
+
+### Cons
+* Jump hotkey is not bound to the standard movement hotkeys.
