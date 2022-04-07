@@ -13,14 +13,19 @@ for it's to regrow a new sprout.
 * Additional code required to implement abstract class.
 * Increased code size.
 
+## REQ2
+JumpActorAction extends MoveActorAction:
+As we want the player to have an action to move to another location in the gamemap, the MoveActorAction has the necessary methods to enable player to move to another location when called.
 
-## REQ 2
-Added JumpAction to allow jumping on walls and trees. The MoveActorAction does not allow for conditional movement
-of actors. Since we cannot modify engine files, this requires to be a separate action to allow for the
-success chance of jumping.
+JumpManager is associated with <<interface>> Jumpable:
+We want jumpmanager to store the instances of jumpable grounds, so it can be assessed by JumpActorAction and decide whether player can jump to new location or not.
 
-### Pros
-* Allows for optional chance of not succeeding the jump.
+<<abstract>> tree and wall implements the <<interface>> Jumpable:
+We want only specific grounds to be jumpable but not others, such as dirt. So we will use an interface, that will be implemented by trees and the wall.
 
-### Cons
-* Jump hotkey is not bound to the standard movement hotkeys.
+## REQ3
+Goomba and Kooper both extends <<abstract>> enemy, and Player extends <<abstract>> friendly
+As we know enemies have different methods compared to friendlies, e.g enemies are able to wander and follow the player but player can’t. Indeed, both enemy and friendly extends actor.
+
+Player holds Wrench
+If player is holding Wrench in the inventory, then HitAction can be called to hit Koopa. On the other hand, Goomba is able to kick Player if it is close enough to Player.
