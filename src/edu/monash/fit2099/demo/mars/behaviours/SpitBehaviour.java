@@ -2,10 +2,10 @@ package edu.monash.fit2099.demo.mars.behaviours;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.positions.NumberRange;
+import game.behaviours.Behaviour;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.behaviour.Behaviour;
 
 public class SpitBehaviour extends Action implements Behaviour {
 

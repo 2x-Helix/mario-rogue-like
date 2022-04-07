@@ -9,8 +9,8 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.AttackAction;
 import game.Status;
-import game.behaviour.Behaviour;
-import game.behaviour.WanderBehaviour;
+import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
 
 import java.util.HashMap;
 import java.util.Map;
