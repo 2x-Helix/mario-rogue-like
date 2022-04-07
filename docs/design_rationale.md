@@ -6,21 +6,29 @@
 
 ## REQ1: Tress
 
-The tree stages were implemented as 3 subclasses that inherit from an abstract class
-**Tree**. All tree stages are expected to grow to a new stage after a set amount of turns. The number of turns required to grow should be stored as an instance variable for a Tree.
-Once the requisite amount of time to grow has passed, a new object of the next growth stage may be returned.
+The tree stages were implemented as 3 subclasses that inherit from the abstract class **Tree**. 
+Since all tree stages are expected to grow to a new stage after a set amount of turns, 
+The number of turns required to grow should be stored as an instance variable as part of **Tree**.
+Once the requisite amount of time to grow has passed, a new object of the next tree stage may be returned.
 Once 5 turns has passed to grow for the Mature stage, the growth timer may be reset back to 5 to
 for it's to regrow a new sprout. 
 
 ### Pros
 
-* Safeguarding implementation of grow().
+* Safeguarding implementation of grow() and growTurns attribute.
 * Able to identify all growth stages as a Tree class.
-  
+
 ### Cons
 
 * Additional code required to implement abstract class.
 * Increased code size.
+
+
+As sprouts require fertile land to grow, we have chosen to give **Ground** objects that are fertile
+the capability **FERTILE** in the enumeration **GroundTraits**. 
+This is as future **Ground** tiles may also be fertile tiles, requiring a unified identifier for all such tiles.
+This allows us to follow the *"Don't repeat yourself"* design principle through use of public constants.
+**Ground** already features a **CapabilitySet** which we can use to store the enumeration value.
 
 <br>
 
@@ -34,12 +42,14 @@ We want jumpmanager to store the instances of jumpable grounds, so it can be ass
 
 <<abstract>> tree and wall implements the <<interface>> Jumpable:
 We want only specific grounds to be jumpable but not others, such as dirt. So we will use an interface, that will be implemented by trees and the wall.
+This follows the SOLID principle *"the Dependency Inversion Principle"* allowing for other objects (i.e. **JumpableManager**) to depend on the abstraction **Jumpable** 
+rather than the **Ground** classes that are jumpable.
 
 <br>
 
 ## REQ3: Enemies
 
-Goomba and Kooper both extends <<abstract>> Enemy, and Player extends <<abstract>> Friendly
+**Goomba** and **Koopa** both extends the abstract class **Enemy**, and **Player** extends the abstract class **Friendly**.
 As we know enemies have different methods compared to friendlies, e.g enemies are able to wander and follow the player but player can’t. Indeed, both enemy and friendly extends actor.
 
 Player holds Wrench
