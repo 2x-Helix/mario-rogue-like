@@ -1,4 +1,4 @@
-package game;
+package game.reset;
 
 public interface Resettable {
     /**
