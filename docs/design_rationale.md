@@ -44,7 +44,7 @@ We want **JumpManager** to store the instances of **Jumpable** grounds, so it ca
 We want only **Tree** and **Wall** grounds to be jumpable but not others, such as **Dirt**. Hence, we use interface.
 
 ### Pros
-This follows the SOLID principle *"the Dependency Inversion Principle"* allowing for other objects (i.e. **JumpableManager**) to depend on the abstraction **Jumpable** 
+*This follows the SOLID principle *"the Dependency Inversion Principle"* allowing for other objects (i.e. **JumpableManager**) to depend on the abstraction **Jumpable** 
 rather than the **Ground** classes that are jumpable.
 
 ### Cons
