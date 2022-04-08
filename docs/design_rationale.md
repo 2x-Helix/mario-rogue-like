@@ -4,7 +4,7 @@
 
 <br>
 
-## REQ1: Tress
+## REQ1: Trees
 
 The tree stages were implemented as 3 subclasses that inherit from the abstract class **Tree**. 
 Since all tree stages are expected to grow to a new stage after a set amount of turns, 
@@ -34,16 +34,21 @@ This allows us to follow the *"Don't repeat yourself"* design principle through 
 
 ## REQ2: Jump
 
-JumpActorAction extends MoveActorAction:
-As we want the player to have an action to move to another location in the gamemap, the MoveActorAction has the necessary methods to enable player to move to another location when called.
+**JumpActorAction** extends **MoveActorAction**:
+We want **Player** to have an action to move to another location in the **GameMap**, the **MoveActorAction** has the methods to enable **Player** to have this ability.
 
-JumpManager is associated with <<interface>> Jumpable:
-We want jumpmanager to store the instances of jumpable grounds, so it can be assessed by JumpActorAction and decide whether player can jump to new location or not.
+**JumpManager** is associated with **(interface) Jumpable**:
+We want **JumpManager** to store the instances of **Jumpable** grounds, so it can be assessed by JumpActorAction and decide whether player can jump to new location or not.
 
-<<abstract>> tree and wall implements the <<interface>> Jumpable:
-We want only specific grounds to be jumpable but not others, such as dirt. So we will use an interface, that will be implemented by trees and the wall.
+**(abstract) Tree** and **Wall** implements **(interface) Jumpable**:
+We want only **Tree** and **Wall** grounds to be jumpable but not others, such as **Dirt**. Hence, we use interface.
+
+### Pros
 This follows the SOLID principle *"the Dependency Inversion Principle"* allowing for other objects (i.e. **JumpableManager**) to depend on the abstraction **Jumpable** 
 rather than the **Ground** classes that are jumpable.
+
+### Cons
+* Use of abstraction - slower time complexity and more use of resources (less efficient).
 
 <br>
 
@@ -52,8 +57,18 @@ rather than the **Ground** classes that are jumpable.
 **Goomba** and **Koopa** both extends the abstract class **Enemy**, and **Player** extends the abstract class **Friendly**.
 As we know enemies have different methods compared to friendlies, e.g enemies are able to wander and follow the player but player can’t. Indeed, both enemy and friendly extends actor.
 
-Player holds Wrench
-If player is holding Wrench in the inventory, then HitAction can be called to hit Koopa. On the other hand, Goomba is able to kick Player if it is close enough to Player.
+**AttackBehaviour**, **WanderBehaviour** and **FollowBehaviour** all implement **(interface) Behaviour**, so can act these behaviours without
+the player's input.
+
+**Player** holds **Wrench**
+If **Player** is holding **Wrench** in the inventory, then **HitAction** can be called to hit **Koopa**. On the other hand, **Goomba** is able to use **KickAction** on **Player** if it is close enough to **Player** via the **GameMap** and **Location**.
+
+### Pros
+* Easier to understand and follow, e.g. an **Action** is used on the object being attacked
+* Separating Actors into either enemies or friendlies (abstract classes) allows simple, clear divide between two Actors with different methods.
+
+### Cons
+* More space and time complexity is required for abstraction
 
 <br>
 
@@ -84,23 +99,24 @@ Two new classes, **Toad** and **Coin**, are added in this section. **Toad** serv
 
 ### Cons
 
-* Not as simple as each item having an Integer attribute representing its cost/player having an Integer attribute representing how much the player have
+* Not as simple as each item having an Integer attribute representing its cost/player having an Integer attribute representing how much the player have.
 
 <br>
 
 ## REQ6: Monologue
 
-foobar
+**GameMap** and **Location** keep track of where **Toad** and **Player** are. If close enough, **SpeakAction** is available as an option: grabs monologue from **Toad**, checks if **Player** contains **Wrench**, **Status** of a PowerStar or else the **CapabilitySet** of the Actor e.g cannot be Goomba and decides what to say. Uses **Display** to print monologue string.
+
+**Player** holds **(abstract) WeaponItem**, and is extended by **Wrench**.
+Use of **(abstract) WeaponItem** from engine, ease of implementation of new weapons in the future. **(enum) Status** able to contain the different statuses for **Player**
 
 ### Pros
 
-* foo
-* bar
+* Choice to utilise enumeration will avoid the excessive use of literals, and hence improve maintainability and extensibility of the code in the long-term.
 
 ### Cons
 
-* foo
-* bar
+* **Toad** isn't directly responsible for calling **SpeakAction**, but rather relies on **GameMap** and **Location**, e.g, **Player** must close enough in coordinates to **Toad** for **SpeakAction** to be available in console (could be a possible way for Toad to directly call **SpeakAction**).
 
 <br>
 
