@@ -36,14 +36,17 @@ We can then randomly select one of the **FERTILE** locations and replace its **G
 ## REQ2: Jump
 **JumpActorAction** extends **MoveActorAction**:
 We want **Player** to have an action to move to another location in the **GameMap**, the **MoveActorAction** 
-has the methods to enable **Player** to have this ability.
+has the methods to enable **Player** to have this ability. This will overide the execute() method
+to include the success rate check for jumps and if **Player** has the **TALL** status.
+It will also override the description() method of the action.
 
 **JumpManager** is associated with **(interface) Jumpable**:
-We want **JumpManager** to store the instances of **Jumpable** grounds, so it can be assessed by JumpActorAction 
-and decide whether player can jump to new location or not.
+We want **JumpManager** to store the **Jumpable** grounds.
 
 **(abstract) Tree** and **Wall** implements **(interface) Jumpable**:
 We want only **Tree** and **Wall** grounds to be jumpable but not others, such as **Dirt**. Hence, we use interface.
+This will also add the **JumpActorAction** to the **ActionList** to allow **Actor**'s with the **CAN_JUMP**
+status the ability to jump to the **Jumpable** terrain.
 
 ### Pros
 * This follows the SOLID principle *"the Dependency Inversion Principle"* allowing for other objects 
@@ -72,7 +75,7 @@ This would allow us to set enemies to attack the **Player** when nearby.
 
 **Player** holds **Wrench**
 If **Player** is holding **Wrench** in the inventory, then **SmashShellAction** can be called to kill **Koopa**. 
-This will drop a **SuperMushroom** it its location upon death.
+This will drop a **SuperMushroom** on its location upon death.
 
 The **Goomba**'s kick and **Koopa**'s punch will be implemented by overriding the **getIntrinsicWeapon()** method of 
 **Actor**. Here we would specify the attack it performs by setting the verb and damage 
@@ -110,8 +113,6 @@ Upon taking damage, we check the **Player** has the **INVINCIBLE** status to see
 
 The **AttackAction** may also check for the **INVINCIBLE** status of the actor
 to instantly kill a target when attacking after checking that **Player** successfully hits.
-
-
 
 ### Pros
 * More defined purpose of items
