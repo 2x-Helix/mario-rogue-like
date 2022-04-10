@@ -96,6 +96,23 @@ A new abstract class **MagicalItem**, which is inherited from the base class **I
 2 types of **Item**: item that can be equipped as a weapon - **WeaponItem**; item that is not a weapon - 
 **MagicalItem**. **MagicalItem** is consumable, which provides status to the **Actor**.
 
+Eating a **SuperMushroom** will increase the **Player**'s max hp with **Actor**'s 
+increaseMaxHP() method. This will also give the **Player** the status capability **TALL**
+to signify he has eaten the mushroom *(This is indicated with the icon M)*. 
+Upon taking damage, if **Player** has **TALL**, it will remove the capability.
+
+The **PowerStar** item will be given the **FADING** status. This counter for its duration would be 
+stored as part of the **PowerStar** item, decreasing every tick until its removal.
+
+High ground may check to see if the **Player** is standing on it and has the **INVINCIBLE** effect.
+If so, it will convert to dirt and drop a coin. 
+Upon taking damage, we check the **Player** has the **INVINCIBLE** status to see if we are dealt damage.
+
+The **AttackAction** may also check for the **INVINCIBLE** status of the actor
+to instantly kill a target when attacking after checking that **Player** successfully hits.
+
+
+
 ### Pros
 * More defined purpose of items
 * Avoid the need of implementing 2 interfaces
