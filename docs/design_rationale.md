@@ -171,6 +171,17 @@ like **Player** and **Enemy**, implments this interface. And **ResetManager** ma
 This follows the *Dependency Inversion Principle* which depends on the *Resettable* interface.
 Classes that implement *Resettable* will only depend on it.
 
+We will iterate through all items that are in the ResetManager and call their reset methods. They are then
+items deleted will be removed from the manager.
+
+* For trees, the reset() method will perform a 50% chance to change the location **Ground** to **Dirt**.
+* For each enemy, we will remove it from the **GameMap** with .
+* For the **Player**, we will check if they have status **TALL** or **INVINCIBLE** and remove the capability
+if they have it. We will also have it set the **Player** current HP attribute equal to the max HP attribute
+to fully heal **Player**.
+* For coins, we will use its **Location**'s removeItem() method to remove it from its location.
+
+
 ### Pros
 * Easier to debug this features as all the reset method are implemented in this class
 * Able to specify which items are reset with the **Resettable** interface, following the
