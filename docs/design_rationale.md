@@ -131,14 +131,16 @@ Two new classes, **Toad** and **Coin**, are added in this section. **Toad** serv
 like all items, coins can be picked up from the ground. However, it is not inherited from either **WeaponItem** or 
 **MagicalItem**, as it can not be equiped as a weapon or consume to gain status. **Coin** should have 1 Integer 
 attribute to represent its value and 1 static String attribute to represent its visual to be displayed. 
-**Player** should also have one **Coin** class attribute.
+**Player** should also have an integer value tracking the amount of currency they have.
 
 ### Pros
-* One class to represent how many coins a player have/how much an item costs and coins on the ground
+* No additional class to manage currency of only **Player**.
 
 ### Cons
 * Not as simple as each item having an Integer attribute representing its cost/player having an 
 Integer attribute representing how much the player have.
+* Requires other classes to implement class attribute to store total amount of currency.
+*(currently, this is exclusive to player)*.
 
 <br>
 
