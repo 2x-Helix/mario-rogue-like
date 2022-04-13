@@ -11,8 +11,11 @@ public class Coin extends Item{
     private static final char DISPLAY_CHAR = '$';
     private static final boolean PORTABLE = true;
 
-    public Coin() {
+    private Integer value;
+
+    public Coin(Integer value) {
         super(NAME, DISPLAY_CHAR, PORTABLE);
+        this.value = value;
     }
 
 }
