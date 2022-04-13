@@ -3,7 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.items.Item;
 
 /**
- * @TODO: Implement this class
+ * TODO: Implement this class
  */
 public class Coin extends Item{
 
@@ -13,6 +13,10 @@ public class Coin extends Item{
 
     private Integer value;
 
+    /**
+     * 
+     * @param value
+     */
     public Coin(Integer value) {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.value = value;
