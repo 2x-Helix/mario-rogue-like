@@ -34,5 +34,5 @@
 # Signed
 * Matthew Siegenthaler: I agree to this WBA
 * Chun Mok: I agree this WBA
-* James Huynh:
+* James Huynh: I agree to this WBA
   
