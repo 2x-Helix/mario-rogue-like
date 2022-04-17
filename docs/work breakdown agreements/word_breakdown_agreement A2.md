@@ -32,7 +32,7 @@
 * Completed by:     2/5/2022  
 
 # Signed
-* Matthew Siegenthaler:
+* Matthew Siegenthaler: I agree to this WBA
 * Chun Mok: I agree this WBA
 * James Huynh:
   
