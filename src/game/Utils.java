@@ -19,7 +19,7 @@ public class Utils {
         if (low <= high){
             return (r.nextInt(high - low) + low);
         } else {
-            throw new IllegalArgumentException("Low must be less than High.");
+            throw new IllegalArgumentException("Low must be less or equal to High.");
         }
     }
 
