@@ -63,15 +63,11 @@ public final class Mature extends Tree {
     /**
      * Mature has a 15% chance to spawn a Koopa.
      * @param location Location of the Tree.
-     * @return boolean if Koopa was spawned.
      */
     @Override
-    public boolean spawn(Location location) {
+    public void spawn(Location location) {
         if ((location.getActor() == null) && (Utils.nextChance() <= 15)) {
             location.addActor(new Koopa());
-            return true;
-        } else {
-            return false;
         }
     }
 }

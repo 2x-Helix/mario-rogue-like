@@ -29,15 +29,11 @@ public final class Sapling extends Tree {
     /**
      * Sapling has 10% chance to spawn $20 coin.
      * @param location Location of the Tree.
-     * @return boolean if Sapling spawns coin.
      */
     @Override
-    public boolean spawn(Location location) {
+    public void spawn(Location location) {
         if (Utils.nextChance() <= 10) {
             location.addItem(new Coin(20));
-            return true;
-        } else {
-            return false;
         }
     }
 }
