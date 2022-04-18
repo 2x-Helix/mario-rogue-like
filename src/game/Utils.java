@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Utilities class containing random number generator
- * @Author Matthew Siegenthaler
+ * @author Matthew Siegenthaler
  * @version 1.0
  */
 public class Utils {
