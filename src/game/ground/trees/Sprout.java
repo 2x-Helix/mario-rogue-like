@@ -26,7 +26,7 @@ public final class Sprout extends Tree {
     /**
      * 10% to spawn a Goomba on location every tick.
      * @param location Location of the Tree.
-     * @return
+     * @return Boolean if Goomba was spawned
      */
     @Override
     public boolean spawn(Location location) {
