@@ -10,6 +10,9 @@ import game.actors.Goomba;
  * @version 1.0
  */
 public final class Sprout extends Tree {
+    /**
+     * Sprout constructor
+     */
     public Sprout() {
         super('+', 10);
     }

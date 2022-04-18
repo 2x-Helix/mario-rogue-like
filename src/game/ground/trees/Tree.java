@@ -14,10 +14,12 @@ public abstract class Tree extends Ground {
     private Integer growthCounter;
 
     /**
-     * Constructor.
-     *
+     * Tree constructor
+     * @param displayChar Display character of tree.
+     * @param growthCounter Number of turns tree grows for.
+     * @throws IllegalArgumentException growthCounter must be > 0.
      */
-    public Tree(char displayChar, Integer growthCounter) {
+    public Tree(char displayChar, Integer growthCounter) throws IllegalArgumentException {
         super(displayChar);
 
         if (!(setGrowthCounter(growthCounter))) {

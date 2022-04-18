@@ -7,10 +7,12 @@ import game.items.Coin;
 /**
  * Sapling has 10% chance to spawn a coin and takes 10 turns to grow.
  * @author Matthew Siegenthaler
- * 1.0
+ * @version 1.0
  */
 public final class Sapling extends Tree {
-    // Constructor
+    /**
+     * Sapling constructor
+     */
     public Sapling() {
         super('t', 10);
     }
