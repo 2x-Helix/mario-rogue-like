@@ -29,15 +29,11 @@ public final class Sprout extends Tree {
     /**
      * 10% to spawn a Goomba on location every tick.
      * @param location Location of the Tree.
-     * @return Boolean if Goomba was spawned
      */
     @Override
-    public boolean spawn(Location location) {
+    public void spawn(Location location) {
         if((location.getActor() == null) && (Utils.nextChance() <= 10)) {
             location.addActor(new Goomba());
-            return true;
-        } else {
-            return false;
         }
     }
 }
