@@ -1,4 +1,4 @@
-package game.ground;
+package game.ground.trees;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
@@ -65,8 +65,9 @@ public abstract class Tree extends Ground {
     /**
      * Tree spawning behaviour each turn
      * @param location Location of the Tree.
+     * @return true if successful spawn else false
      */
-    public abstract void spawn(Location location);
+    public abstract boolean spawn(Location location);
 
     /**
      * Actors cannot enter tree
