@@ -67,9 +67,8 @@ public abstract class Tree extends HighGround {
     /**
      * Tree spawning behaviour each turn
      * @param location Location of the Tree.
-     * @return true if successful spawn else false
      */
-    public abstract boolean spawn(Location location);
+    public abstract void spawn(Location location);
 
     /**
      * Actors cannot enter tree
