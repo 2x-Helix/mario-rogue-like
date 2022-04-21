@@ -1,4 +1,20 @@
+<<<<<<<< HEAD:src/game/actors/enemies/Goomba.java
 package game.actors.enemies;
+========
+package game.actors.enemy;
+
+
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.AttackAction;
+import game.Status;
+import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
+>>>>>>>> beadc24 (ADDED Status.RESET to indicate Resettables that have been reset):src/game/actors/enemy/Goomba.java
 
 import java.util.HashMap;
 import java.util.Map;

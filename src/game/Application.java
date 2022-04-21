@@ -8,14 +8,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.enemy.Goomba;
 import game.actors.friendly.Player;
-import game.actors.friendly.Toad;
 import game.ground.Dirt;
 import game.ground.Floor;
+import game.ground.Tree;
 import game.ground.Wall;
-import game.ground.trees.Sprout;
-import game.items.magical_items.PowerStar;
-import game.items.magical_items.SuperMushroom;
 
 /**
  * The main class for the Mario World game.
@@ -27,7 +25,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -56,11 +54,8 @@ public class Application {
 			Actor mario = new Player("Player", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
-			gameMap.at(42, 8).addActor(new Toad());
-
-			// Spawn these 2 items at the spawn point of Mario
-			gameMap.locationOf(mario).addItem(new SuperMushroom());
-			gameMap.locationOf(mario).addItem(new PowerStar());
+			// FIXME: the Goomba should be generated from the Tree
+			gameMap.at(35, 10).addActor(new Goomba());
 
 			world.run();
 
