@@ -1,5 +1,7 @@
 package game.reset;
 
+import edu.monash.fit2099.engine.positions.GameMap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,11 @@ public class ResetManager {
     private static ResetManager instance;
 
     /**
+     * The number of resets the player has
+     */
+    private Integer availableResets;
+
+    /**
      * Get the singleton instance of reset manager
      * @return ResetManager singleton instance
      */
@@ -38,6 +45,7 @@ public class ResetManager {
      */
     private ResetManager(){
         resettableList = new ArrayList<>();
+        availableResets = 1;
     }
 
     /**
@@ -45,21 +53,29 @@ public class ResetManager {
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
     public void run(){
+        for (Resettable object : resettableList) {
+            object.resetInstance();
+        }
+        availableResets--;  // Decrements available resets
     }
 
     /**
      * Add the Resettable instance to the list
-     * FIXME: it does nothing, you need to implement it :)
+     * @param reset Resettable object to be added to list
      */
     public void appendResetInstance(Resettable reset){
+        resettableList.add(reset);
     }
-
 
     /**
      * Remove a Resettable instance from the list
      * @param resettable resettable object
-     * FIXME: it does nothing, you need to implement it :)
      */
     public void cleanUp(Resettable resettable){
+        resettableList.remove(resettable);
+    }
+
+    public boolean resetAvailable() {
+        return availableResets > 0;
     }
 }
