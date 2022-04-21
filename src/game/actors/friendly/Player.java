@@ -7,11 +7,14 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.reset.ResetAction;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 
 /**
  * Class representing the Player.
  */
-public class Player extends Actor  {
+public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 
@@ -25,6 +28,7 @@ public class Player extends Actor  {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		registerInstance();
 	}
 
 	@Override
@@ -33,6 +37,10 @@ public class Player extends Actor  {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
+		// Check if reset is available
+		if (ResetManager.getInstance().resetAvailable())
+			actions.add(new ResetAction());
+
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
@@ -40,5 +48,13 @@ public class Player extends Actor  {
 	@Override
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+	}
+
+	/**
+	 * Upon reset: Reset duration of effects, Heals to max hp
+	 */
+	@Override
+	public void resetInstance() {
+		heal(getMaxHp());  // Heal to max hp
 	}
 }
