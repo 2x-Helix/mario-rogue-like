@@ -5,8 +5,8 @@ import java.util.Random;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 
@@ -51,7 +51,15 @@ public class AttackAction extends Action {
 			return actor + " misses " + target + ".";
 		}
 
-		int damage = weapon.damage();
+		int damage;
+		if (actor.hasCapability(Status.INSTA_KILL)) {
+			damage = Integer.MAX_VALUE;
+		} else if (target.hasCapability(Status.IMMUNITY)) {
+			damage = 0;
+		} else {
+			damage = weapon.damage();
+		}
+		
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
 
