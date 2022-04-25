@@ -6,6 +6,11 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.ConsumeAction;
 
+/**
+ * PowerStar is one of the magical items that can be consumed by the players
+ * @author ChunKau Mok (Peter)
+ * @version 1.0
+ */
 public class PowerStar extends MagicalItem {
 
     private static final String NAME = "Power Star";
@@ -15,7 +20,8 @@ public class PowerStar extends MagicalItem {
     private Integer duration;   // active duration
 
     /**
-     * 
+     * PowerStar constructor
+     * Adds capabilities and actions
      */
     public PowerStar() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
@@ -36,7 +42,7 @@ public class PowerStar extends MagicalItem {
 
     /**
      * Inform this item of the passage of time.
-     * Reduce the active duration by 1 turn remaining on the actor
+     * Reduce the active duration remaining on the actor by 1 turn
      * Remove this item from actor's inventory if remaining duration is 0
      * 
      * This method is called once per turn, if the Item is being carried.
