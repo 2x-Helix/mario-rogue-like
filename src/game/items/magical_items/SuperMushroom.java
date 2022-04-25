@@ -3,6 +3,12 @@ package game.items.magical_items;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import game.Status;
 import game.actions.ConsumeAction;
+
+/**
+ * SuperMushroom is one of the magical items that can be consumed by the players
+ * @author ChunKau Mok (Peter)
+ * @version 1.0
+ */
 public class SuperMushroom extends MagicalItem{
     
     private static final String NAME = "Super Mushroom";
@@ -10,7 +16,8 @@ public class SuperMushroom extends MagicalItem{
     private static final boolean PORTABLE = true;
 
     /**
-     * 
+     * SuperMushroom constructor
+     * Adds capabilities and actions
      */
     public SuperMushroom() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
