@@ -58,6 +58,23 @@ public class PowerStar extends MagicalItem {
         }
     }
 
+    /**
+     * Inform an Item on the ground of the passage of time. 
+     * Reduce the active duration remaining on the ground by 1 turn
+     * Remove this item from the ground if remaining duration is 0
+     * 
+     * This method is called once per turn, if the item rests upon the ground.
+     * @param currentLocation The location of the ground on which we lie.
+     */
+    @Override
+	public void tick(Location currentLocation) {
+        if (this.duration > 0) {
+            this.duration -= 1;
+        } else {
+            currentLocation.removeItem(this);
+        }
+	}
+
     @Override
 	public String toString() {
 		return PowerStar.NAME + " - " + this.duration.toString() + " turns remaining";
