@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.*;
 import game.Status;
 import game.Utils;
 import game.actors.friendly.Player;
@@ -74,7 +73,7 @@ public class JumpActorAction extends MoveActorAction {
      * Returns a description of this movement suitable to display in the menu.
      *
      * @param actor The actor performing the action.
-     * @return a String, e.g. "Player moves east"
+     * @return a String, e.g. "Player jumps east"
      */
     @Override
     public String menuDescription(Actor actor) {
