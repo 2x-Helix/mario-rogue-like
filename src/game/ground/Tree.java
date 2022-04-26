@@ -2,7 +2,7 @@ package game.ground;
 
 import edu.monash.fit2099.engine.positions.Ground;
 
-public class Tree extends Ground {
+public abstract class Tree extends Ground {
 
     /**
      * Constructor.
