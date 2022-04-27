@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Goomba;
-import game.actors.friendly.Player;
+import game.actors.Player;
 import game.ground.Dirt;
 import game.ground.Floor;
 import game.ground.Tree;

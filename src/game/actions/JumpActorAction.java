@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.Utils;
-import game.actors.friendly.Player;
+import game.actors.Player;
 import game.ground.Jumpable;
 import game.ground.Wall;
 
