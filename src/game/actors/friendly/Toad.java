@@ -1,15 +1,14 @@
-package game.actors;
+package game.actors.friendly;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.Friendly;
 
 /**
  * @TODO: Implement this class
  */
-public class Toad extends Friendly {
+public class Toad extends Friendly{
     
     private static final String NAME = "Toad";
     private static final char DISPLAY_CHAR = 'O';
