@@ -1,10 +1,8 @@
 package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.ConsumeAction;
 
 /**
  * PowerStar is one of the magical items that can be consumed by the players
@@ -29,17 +27,8 @@ public class PowerStar extends MagicalItem {
         this.addCapability(Status.HIGHER_GROUND);
         this.addCapability(Status.IMMUNITY);
         this.addCapability(Status.INSTA_KILL);
-        this.addAction(new ConsumeAction(this));
-        this.addAction(new DropItemAction(this));
     }
-
-    /**
-     * Create and return an action to consume this item
-     */
-    public ConsumeAction getConsumeAction() {
-        return new ConsumeAction(this);
-    }
-
+    
     /**
      * Inform this item of the passage of time.
      * Reduce the active duration remaining on the actor by 1 turn

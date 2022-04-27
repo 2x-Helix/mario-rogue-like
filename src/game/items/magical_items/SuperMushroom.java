@@ -1,8 +1,6 @@
 package game.items.magical_items;
 
-import edu.monash.fit2099.engine.items.DropItemAction;
 import game.Status;
-import game.actions.ConsumeAction;
 
 /**
  * SuperMushroom is one of the magical items that can be consumed by the players
@@ -23,15 +21,6 @@ public class SuperMushroom extends MagicalItem{
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.addCapability(Status.INCREASED_MAX_HP);
         this.addCapability(Status.EASY_JUMP);
-        this.addAction(new ConsumeAction(this));
-        this.addAction(new DropItemAction(this));
-    }
-
-    /**
-     * Create and return an action to consume this item
-     */
-    public ConsumeAction getConsumeAction() {
-        return new ConsumeAction(this);
     }
 
 }
