@@ -4,9 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.magical_items.PowerStar;
-import game.status.Status;
-import game.status.StatusManager;
+import game.items.magical_items.MagicalItem;
 
 public class ConsumeAction extends Action{
     
@@ -33,29 +31,19 @@ public class ConsumeAction extends Action{
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        StatusManager statusManager = StatusManager.getStatusManager();
-        if (this.item.getClass() == PowerStar.class) {
-            PowerStar star = (PowerStar) item;          // Stinky, i know
-            try {
-                for (Enum<?> capability : item.capabilitiesList()) {
-                    statusManager.insertStatusDuration(actor, (Status)capability, star.getRemainingDuration());
-                }
-            } catch (Exception e) {
-                System.out.println(e + "; Something is wrong with PowerStar.tick :/");
-            }
-        }
-
-        for (Enum<?> capability : item.capabilitiesList()) {
-            actor.addCapability(capability);
+        // FIXME: i've made it less stinky already, but it still is
+        if (this.item instanceof MagicalItem) {
+            MagicalItem downCasting = (MagicalItem) item;               
+            downCasting.onConsume(actor);
         }
         
         if (actor.getInventory().contains(this.item)) {                 // Actor consumes item from the inventory
             actor.removeItemFromInventory(item);
-            return this.menuDescription(actor);
         } else {                                                        // Actor consumes item from the ground, without picking it up
-            map.locationOf(actor).removeItem(this.item);
-            return this.menuDescription(actor);
+            map.locationOf(actor).removeItem(this.item);   
         }
+        
+        return this.menuDescription(actor);
     }
 
     /**
