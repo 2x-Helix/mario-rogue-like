@@ -13,7 +13,7 @@ import game.actors.Player;
 import game.actors.Toad;
 import game.ground.Dirt;
 import game.ground.Floor;
-import game.ground.trees.Tree;
+import game.ground.trees.Sprout;
 import game.ground.Wall;
 
 /**

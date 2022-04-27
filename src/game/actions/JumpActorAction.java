@@ -9,6 +9,7 @@ import game.Utils;
 import game.actors.Player;
 import game.ground.Jumpable;
 import game.ground.Wall;
+import game.ground.trees.*;
 
 public class JumpActorAction extends MoveActorAction {
     // Constructor for JumpActorAction

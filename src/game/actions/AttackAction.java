@@ -1,56 +1,73 @@
 package game.actions;
 
+import java.util.Random;
+
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.weapons.Weapon;
 
 /**
- *
+ * Special Action for attacking other Actors.
  */
 public class AttackAction extends Action {
 
 	/**
-	 * Perform the Action.
-	 *
-	 * @param actor The actor performing the action.
-	 * @param map The map the actor is on.
-	 * @return a description of what happened that can be displayed to the user.
+	 * The Actor that is to be attacked
 	 */
-	@Override
-	public String execute(Actor actor, GameMap map){
-		return null;
-	}
-	
+	protected Actor target;
+
 	/**
-	 * Returns a descriptive string
-	 * @param actor The actor performing the action.
-	 * @return the text we put on the menu
+	 * The direction of incoming attack.
 	 */
-	@Override
-	public String menuDescription(Actor actor){
-		return null;
-	}
-	
+	protected String direction;
+
 	/**
-	 * Returns the key used in the menu to trigger this Action.
-	 *
-	 * There's no central management system for this, so you need to be careful not to use the same one twice.
-	 * See https://en.wikipedia.org/wiki/Connascence
-	 *
-	 * @return The key we use for this Action in the menu, or null to have it assigned for you.
+	 * Random number generator
 	 */
-	public String hotkey() {
-		return null;
-	}
-	
+	protected Random rand = new Random();
+
 	/**
-	 * This provides a mechanism for Actions to take more than one turn.
-	 * For example, an action can change its state and return itself, or return the next Action in a series.
-	 * By default, this returns null, indicating that the Action will complete in one turn.
+	 * Constructor.
 	 * 
-	 * @return null
+	 * @param target the Actor to attack
 	 */
-	public AttackAction getNextAction() {
-		return null;
+	public AttackAction(Actor target, String direction) {
+		this.target = target;
+		this.direction = direction;
+	}
+
+	@Override
+	public String execute(Actor actor, GameMap map) {
+
+		Weapon weapon = actor.getWeapon();
+
+		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
+			return actor + " misses " + target + ".";
+		}
+
+		int damage = weapon.damage();
+		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+		target.hurt(damage);
+		if (!target.isConscious()) {
+			ActionList dropActions = new ActionList();
+			// drop all items
+			for (Item item : target.getInventory())
+				dropActions.add(item.getDropAction(actor));
+			for (Action drop : dropActions)
+				drop.execute(target, map);
+			// remove actor
+			map.removeActor(target);
+			result += System.lineSeparator() + target + " is killed.";
+		}
+
+		return result;
+	}
+
+	@Override
+	public String menuDescription(Actor actor) {
+		return actor + " attacks " + target + " at " + direction;
 	}
 }
