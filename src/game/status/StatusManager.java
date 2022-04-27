@@ -85,6 +85,7 @@ public class StatusManager {
             this.actorStatusDurationMap.get(actor).put(status, duration);
         } else {                                                            // remove status 
             this.removeStatus(actor, status);
+            actor.removeCapability(status);
         }
 
     }
@@ -128,7 +129,7 @@ public class StatusManager {
                 try {
                     this.updateStatusDuration(actor, status_duration.getKey(), status_duration.getValue()-1);
                 } catch (Exception e) {
-                    System.out.println(e + "StatusManager.tick() is faulty :(");
+                    System.out.println(e + "StatusManager.updateStatusDuration() is faulty :(");
                 }
                 
             }
