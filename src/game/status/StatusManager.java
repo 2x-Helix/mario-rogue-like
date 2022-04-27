@@ -22,6 +22,7 @@ public class StatusManager {
     public static StatusManager getStatusManager() {
         if (statusManager == null) {
             statusManager = new StatusManager();
+            statusManager.actorStatusDurationMap = new HashMap<>();
         }
         return statusManager;
     }
