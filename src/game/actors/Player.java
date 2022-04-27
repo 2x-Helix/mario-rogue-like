@@ -33,7 +33,9 @@ public class Player extends Friendly {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-		StatusManager.getStatusManager().tick();	// tick for statuses
+		StatusManager statusManager = StatusManager.getStatusManager();
+		
+		statusManager.tick();	// tick for statuses
 
 		// TODO: fix this stinky poopo
 		for (Item item : this.getInventory()) {
@@ -45,6 +47,16 @@ public class Player extends Friendly {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+
+		if (this.capabilitiesList().contains(Status.IMMUNITY)) {
+			String cout = "Mario consumes Power Star - " + statusManager.getStatusDuration(this, Status.IMMUNITY);
+			if (statusManager.getStatusDuration(this, Status.IMMUNITY) > 1) {
+				cout += " turns remaining";
+			} else {
+				cout += " turn remaining";
+			}
+			System.out.println(cout);
+		}
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
