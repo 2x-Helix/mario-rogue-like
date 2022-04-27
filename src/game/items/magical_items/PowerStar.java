@@ -23,7 +23,7 @@ public class PowerStar extends MagicalItem {
      */
     public PowerStar() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
-        this.duration = 10;     // 10 turns
+        this.duration = 10;                                 // 10 turns
         this.addCapability(Status.HIGHER_GROUND);
         this.addCapability(Status.DESTROY_HIGHER_GROUND);
         this.addCapability(Status.IMMUNITY);
