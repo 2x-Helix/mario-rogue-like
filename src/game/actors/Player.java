@@ -4,9 +4,11 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
-import edu.monash.fit2099.engine.displays.Menu;
+import game.actions.ConsumeAction;
 
 /**
  * Class representing the Player.
@@ -29,6 +31,14 @@ public class Player extends Friendly {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+		// TODO: fix this stinky poopo
+		for (Item item : this.getInventory()) {
+			if (item.getClass().getSuperclass().getSimpleName() == "MagicalItem") {
+				actions.add(new ConsumeAction(item));
+			}
+		}
+		
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();

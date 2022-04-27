@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.magical_items.PowerStar;
 
 public class ConsumeAction extends Action{
     
@@ -22,7 +21,7 @@ public class ConsumeAction extends Action{
     }
 
     /**
-     * Actor consumes the items
+     * Actor consumes the item from the inventory/the ground
      * 
      * @param actor The actor performing the action.
 	 * @param map The map the actor is on.
@@ -33,10 +32,14 @@ public class ConsumeAction extends Action{
         for (Enum<?> capability : item.capabilitiesList()) {
             actor.addCapability(capability);
         }
-        if (!(this.item instanceof PowerStar)) {
-            actor.removeItemFromInventory(this.item);
+        
+        if (actor.getInventory().contains(this.item)) {                 // Actor consumes item from the inventory
+            actor.removeItemFromInventory(item);
+            return this.menuDescription(actor);
+        } else {                                                        // Actor consumes item from the ground, without picking it up
+            map.locationOf(actor).removeItem(this.item);
+            return this.menuDescription(actor);
         }
-        return this.menuDescription(actor);
     }
 
     /**
@@ -46,7 +49,11 @@ public class ConsumeAction extends Action{
 	 */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " consumes " + item;
+        if (actor.getInventory().contains(this.item)) {
+            return actor + " consumes " + item + " in the inventory";
+        } else {
+            return actor + " consumes " + item + " on the ground";
+        }
     }
 
 }
