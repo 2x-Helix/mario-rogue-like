@@ -1,7 +1,5 @@
 package game.items.magical_items;
 
-import game.Status;
-
 /**
  * TODO: Implement this class
  */
@@ -16,9 +14,6 @@ public class SuperMushroom extends MagicalItem{
      */
     public SuperMushroom() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
-        addCapability(Status.INCREASED_MAX_HP);
-        addCapability(Status.TALL);
-        addCapability(Status.EASY_JUMP);
     }
 
 }
