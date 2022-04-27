@@ -1,7 +1,8 @@
 package game.status;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
@@ -11,9 +12,9 @@ import edu.monash.fit2099.engine.actors.Actor;
  */
 public class StatusManager {
 
-    private static StatusManager statusManager = null;                          // the singleton object
-    private HashMap<Actor, HashMap<Status, Integer>> actorStatusDurationMap;    // a Map with Actor as key, a Map as value, which
-                                                                                    // uses Status as key, Int(Duration) as value
+    private static StatusManager statusManager = null;                                  // the singleton object
+    private HashMap<Actor, ConcurrentHashMap<Status, Integer>> actorStatusDurationMap;  // a Map with Actor as key, a Map as value, which uses Status as key, Int(Duration) as value
+                                                                                        // Concurrent to avoid java.util.ConcurrentModificationException
     private StatusManager() {}
 
     /**
@@ -29,16 +30,16 @@ public class StatusManager {
     }
 
     /**
-     * Return a Status-Duration map of the given actor
-     * Return an empty HashMap if the actor doesn't have any status
+     * Return the duration of a given status of a given actor
+     * Return 0 if the actor doesn't have any status
      * @param actor is the key of the map
      * @return a HashMap<Status, Integer> 
      */
-    public HashMap<Status, Integer> getStatusDuration(Actor actor) {
+    public Integer getStatusDuration(Actor actor, Status status) {
         if (this.actorStatusDurationMap.containsKey(actor)) {
-            return this.actorStatusDurationMap.get(actor);
+            return this.actorStatusDurationMap.get(actor).get(status);
         }
-        return new HashMap<Status, Integer>();
+        return 0;
     }
 
     /**
@@ -58,7 +59,7 @@ public class StatusManager {
         if (this.actorStatusDurationMap.containsKey(actor)) {
             this.actorStatusDurationMap.get(actor).put(status, duration);
         } else {
-            this.actorStatusDurationMap.put(actor, new HashMap<Status, Integer>());
+            this.actorStatusDurationMap.put(actor, new ConcurrentHashMap<Status, Integer>());
             this.actorStatusDurationMap.get(actor).put(status, duration);
         }
     }
@@ -81,9 +82,9 @@ public class StatusManager {
             throw new Exception("Actor is not affected by this status");
         }
 
-        if (duration > 0) {                                                // update status with new duration
+        if (duration > 0) {                                                 // update status with new duration
             this.actorStatusDurationMap.get(actor).put(status, duration);
-        } else {                                                            // remove status 
+        } else {                                                            // remove expired status
             this.removeStatus(actor, status);
         }
 
@@ -124,15 +125,21 @@ public class StatusManager {
      * Reduce all statuses' duration by 1, remove statuses if durations become 0
      */
     public void tick() {
+
+        Iterator<Status> statusIterator;    // to avoid java.util.ConcurrentModificationException
+
         for (Actor actor : this.actorStatusDurationMap.keySet()) {
-            for (Entry<Status, Integer> status_duration : this.actorStatusDurationMap.get(actor).entrySet()) {
+            statusIterator = this.actorStatusDurationMap.get(actor).keySet().iterator();
+            while (statusIterator.hasNext()) {
+                Status status = statusIterator.next();
+                Integer duration = this.actorStatusDurationMap.get(actor).get(status) - 1;
                 try {
-                    this.updateStatusDuration(actor, status_duration.getKey(), status_duration.getValue()-1);
+                    this.updateStatusDuration(actor, status, duration);
                 } catch (Exception e) {
-                    System.out.println(e + "StatusManager.updateStatusDuration() is faulty :(");
+                    e.printStackTrace();
                 }
-                
             }
         }
+
     }
 }
