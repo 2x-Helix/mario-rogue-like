@@ -31,6 +31,12 @@ We can then randomly select one of the **FERTILE** locations and replace its **G
 * Additional code required to implement abstract class.
 * Requires **Mature** to handle setting ground of **FERTILE** at location.
 
+### Assignment 2 updates
+* Added class Utils for random number generation for spawning and growing events.
+    This is to follow the *Single Responsibility Principle* by having dedicated class
+    responsible for random number generation (RNG) as opposed to Tree and its subclasses implement their own RNG.
+* Added abstract method .spawn() to Tree. This requires subclasses of tree to handle spawning
+    of either enemies or items at each turn.
 <br>
 
 ## REQ2: Jump
