@@ -81,11 +81,10 @@ public class StatusManager {
             throw new Exception("Actor is not affected by this status");
         }
 
-        if (duration >= 1) {                                                // update status with new duration
+        if (duration > 0) {                                                // update status with new duration
             this.actorStatusDurationMap.get(actor).put(status, duration);
         } else {                                                            // remove status 
             this.removeStatus(actor, status);
-            actor.removeCapability(status);
         }
 
     }
@@ -108,6 +107,7 @@ public class StatusManager {
         }
 
         this.actorStatusDurationMap.get(actor).remove(status);
+        actor.removeCapability(status);
     }
     
     /**
@@ -121,7 +121,7 @@ public class StatusManager {
 
     /**
      * Informs the manage the passage of time
-     * Reduce all statuses' duration by 1
+     * Reduce all statuses' duration by 1, remove statuses if durations become 0
      */
     public void tick() {
         for (Actor actor : this.actorStatusDurationMap.keySet()) {
