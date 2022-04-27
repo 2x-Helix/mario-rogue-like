@@ -1,6 +1,7 @@
 package game.status;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
@@ -115,5 +116,22 @@ public class StatusManager {
      */
     public void removeActor(Actor actor) {
         this.actorStatusDurationMap.remove(actor);
+    }
+
+    /**
+     * Informs the manage the passage of time
+     * Reduce all statuses' duration by 1
+     */
+    public void tick() {
+        for (Actor actor : this.actorStatusDurationMap.keySet()) {
+            for (Entry<Status, Integer> status_duration : this.actorStatusDurationMap.get(actor).entrySet()) {
+                try {
+                    this.updateStatusDuration(actor, status_duration.getKey(), status_duration.getValue()-1);
+                } catch (Exception e) {
+                    System.out.println(e + "StatusManager.tick() is faulty :(");
+                }
+                
+            }
+        }
     }
 }
