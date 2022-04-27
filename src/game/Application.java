@@ -12,7 +12,7 @@ import game.actors.Goomba;
 import game.actors.friendly.Player;
 import game.ground.Dirt;
 import game.ground.Floor;
-import game.ground.Tree;
+import game.ground.trees.Tree;
 import game.ground.Wall;
 
 /**
