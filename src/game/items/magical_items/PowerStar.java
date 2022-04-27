@@ -3,6 +3,7 @@ package game.items.magical_items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import game.status.Status;
+import game.status.StatusManager;
 
 /**
  * PowerStar is one of the magical items that can be consumed by the players
@@ -64,6 +65,30 @@ public class PowerStar extends MagicalItem {
             currentLocation.removeItem(this);
         }
 	}
+
+    /**
+     * Call this function when PowerStar are consumed
+     */
+    @Override
+    public void onConsume(Actor actor) {
+
+        // add all statuses, with duration or not
+        for (Enum<?> capability : this.capabilitiesList()) {
+            actor.addCapability(capability);
+        }
+
+        // add statuses with duration to be managed 
+        StatusManager statusManager = StatusManager.getStatusManager();
+        try {
+            for (Enum<?> capability : this.capabilitiesList()) {
+                statusManager.insertStatusDuration(actor, (Status)capability, this.getRemainingDuration());
+            }
+        } catch (Exception e) {
+            System.out.println(e + "; Something is wrong with PowerStar.tick :/");
+        }
+
+        actor.heal(200);
+    }
 
     @Override
 	public String toString() {

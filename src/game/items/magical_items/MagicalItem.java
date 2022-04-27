@@ -1,5 +1,6 @@
 package game.items.magical_items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
 
@@ -24,6 +25,14 @@ public abstract class MagicalItem extends Item{
      */
     protected ConsumeAction getConsumeAction() {
         return new ConsumeAction(this);
+    }
+
+    /**
+     * Intended to be override by child classess
+     * Call this function when MagicalItems are consumed, to provide statuses and effects
+     */
+    public void onConsume(Actor actor) {
+
     }
 
 }

@@ -1,5 +1,6 @@
 package game.items.magical_items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import game.status.Status;
 
 /**
@@ -22,6 +23,17 @@ public class SuperMushroom extends MagicalItem{
         this.addCapability(Status.TALL);
         this.addCapability(Status.INCREASED_MAX_HP);
         this.addCapability(Status.EASY_JUMP);
+    }
+
+    /**
+     * Call this function when SuperMushroom are consumed
+     */
+    @Override
+    public void onConsume(Actor actor) {
+        for (Enum<?> capability : this.capabilitiesList()) {
+            actor.addCapability(capability);
+        }
+        actor.increaseMaxHp(50);
     }
 
 }
