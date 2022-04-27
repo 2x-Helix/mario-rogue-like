@@ -16,6 +16,7 @@ public abstract class MagicalItem extends Item{
      */
     protected MagicalItem(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
+        this.addAction(this.getConsumeAction());
     }
 
     /**
@@ -24,5 +25,5 @@ public abstract class MagicalItem extends Item{
     protected ConsumeAction getConsumeAction() {
         return new ConsumeAction(this);
     }
-    
+
 }
