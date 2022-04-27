@@ -44,4 +44,15 @@ public class HighGround extends Ground {
             }
         }
     }
+
+    /**
+     * Basically override to execute onWalk when its necessary
+     */
+    @Override
+    public void tick(Location location) {
+        if (location.containsAnActor()) {
+            this.onWalk(location, location.getActor());
+        }
+    }
+
 }
