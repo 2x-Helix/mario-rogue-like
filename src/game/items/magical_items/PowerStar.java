@@ -26,7 +26,7 @@ public class PowerStar extends MagicalItem {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.duration = 10;                                 // 10 turns
         this.addCapability(Status.HIGHER_GROUND);
-        this.addCapability(Status.DESTROY_HIGHER_GROUND);
+        this.addCapability(Status.COIN_FROM_DESTROYED_GROUND);
         this.addCapability(Status.IMMUNITY);
         this.addCapability(Status.INSTA_KILL);
     }
