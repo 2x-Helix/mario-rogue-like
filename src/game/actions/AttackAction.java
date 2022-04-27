@@ -52,9 +52,9 @@ public class AttackAction extends Action {
 		}
 
 		int damage;
-		if (actor.hasCapability(Status.INSTA_KILL)) {
+		if (actor.hasCapability(Status.INSTA_KILL)) {			// Mario consumes POWERSTAR and can insta kill enemies(target)
 			damage = Integer.MAX_VALUE;
-		} else if (target.hasCapability(Status.IMMUNITY)) {
+		} else if (target.hasCapability(Status.IMMUNITY)) {		// Mario(target) consumes POWERSTAR and have immunity against enemies'(actor) attacks
 			damage = 0;
 		} else {
 			damage = weapon.damage();
