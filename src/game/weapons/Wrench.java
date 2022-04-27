@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 /**
  * Class representing items that can be used as a weapon.
  */
-public abstract class Wrench extends Item implements Weapon {
+public class Wrench extends Item implements Weapon {
 
 	private final int damage;
 	private final int hitRate;
@@ -14,17 +14,12 @@ public abstract class Wrench extends Item implements Weapon {
 
 	/** Constructor.
 	 *
-	 * @param name name of the item
-	 * @param displayChar character to use for display when item is on the ground
-	 * @param damage amount of damage this weapon does
-	 * @param verb verb to use for this weapon, e.g. "hits", "zaps"
-	 * @param hitRate the probability/chance to hit the target.
 	 */
-	public Wrench(String name, char displayChar, int damage, String verb, int hitRate) {
-		super(name, displayChar, true);
-		this.damage = damage;
-		this.verb = verb;
-		this.hitRate = hitRate;
+	public Wrench() {
+		super("Wrench", 'w', true);
+		this.damage = 50;
+		this.verb = "smashes";
+		this.hitRate = 80;
 	}
 
 	/**
