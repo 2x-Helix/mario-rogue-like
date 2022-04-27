@@ -1,6 +1,6 @@
 package game.items.magical_items;
 
-import game.Status;
+import game.status.Status;
 
 /**
  * SuperMushroom is one of the magical items that can be consumed by the players
