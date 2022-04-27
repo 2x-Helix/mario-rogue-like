@@ -7,8 +7,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
 import game.actions.ConsumeAction;
+import game.status.Status;
+import game.status.StatusManager;
 
 /**
  * Class representing the Player.
@@ -32,6 +33,8 @@ public class Player extends Friendly {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
+		StatusManager.getStatusManager().tick();	// tick for statuses
+
 		// TODO: fix this stinky poopo
 		for (Item item : this.getInventory()) {
 			if (item.getClass().getSuperclass().getSimpleName() == "MagicalItem") {
@@ -51,4 +54,5 @@ public class Player extends Friendly {
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
+
 }
