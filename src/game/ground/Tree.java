@@ -1,14 +1,12 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.positions.Ground;
-
-public class Tree extends Ground {
+public class Tree extends HighGround {
 
     /**
-     * Constructor.
-     *
+     * Constructor
      */
     public Tree() {
         super('+');
     }
+
 }
