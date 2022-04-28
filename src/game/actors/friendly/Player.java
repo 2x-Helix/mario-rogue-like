@@ -29,6 +29,11 @@ public class Player extends Friendly {
 	}
 
 	@Override
+	public char getDisplayChar(){
+		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+	}
+
+	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
 		StatusManager.getStatusManager().tick();	// tick for statuses
@@ -41,11 +46,6 @@ public class Player extends Friendly {
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
-	}
-
-	@Override
-	public char getDisplayChar(){
-		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
 
 	/**
