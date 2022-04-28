@@ -114,7 +114,7 @@ The **PowerStar** item will be given the **FADING** status. This counter for its
 stored as part of the **PowerStar** item, decreasing every tick until its removal.
 
 High ground may check to see if the **Player** is standing on it and has the **INVINCIBLE** effect.
-If so, it will convert to dirt and drop a coin. 
+If so, it will convert to dirt and drop a coin.
 Upon taking damage, we check the **Player** has the **INVINCIBLE** status to see if we are dealt damage.
 
 The **AttackAction** may also check for the **INVINCIBLE** status of the actor
@@ -128,6 +128,27 @@ to instantly kill a target when attacking after checking that **Player** success
 ### Cons
 * Increased code sized
 * Potentially harder to debug
+
+## REQ4 A2 Update:
+
+For the **PowerStar**, its effect, instead of just 1, is divided into 4 statuses:
+
+* **HIGHER_GROUND**: allow actors to move onto higher ground without jumping and destroy that ground
+* **COIN_FROM_DESTROYED_GROUND**: every destroyed higher ground drop $5
+* **IMMUNITY**: actors receive no damage
+* **INSTA_KILL**: actors can kill an enemy instantly upon a successful attack
+  
+By sepearting a compound effect into individual atomic statuses, it will be clearer to us what effect(s) a status provides.
+
+For example, the **INVINCIBLE** status from the initial design carries similar meaning with **IMMUNITY**, but it doesn't carries meanings of "Killing enemies instantly" nor "Walk to Higher Ground and Destroy it" etc.
+
+It would be more future-proof, as we may have new items providing lesser effects, maybe just **IMMUNITY** and **INSTA_KILL**.
+
+The same rationale also applies to **SuperMushroom**, which inital status **TALL** is divided into **TALL** and **EASY_JUMP**.
+
+A **ConsumeAction** class is created for **MagicalItem** to provide actions for the players, which is actually required and was missing in the inital design. 
+
+A **StatusManager** singleton class is introduced to manage all actors' effects with duration. This is done to avoid modifying the based code of Actor and writing smelly code.
 
 <br>
 
@@ -147,6 +168,9 @@ attribute to represent its value and 1 static String attribute to represent its 
 Integer attribute representing how much the player have.
 * Requires other classes to implement class attribute to store total amount of currency.
 *(currently, this is exclusive to player)*.
+
+## REQ5 A2 Update:
+ 
 
 <br>
 
