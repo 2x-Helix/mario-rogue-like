@@ -4,70 +4,46 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
-import game.Utils;
-import game.actors.Player;
-import game.ground.Jumpable;
-import game.ground.Wall;
-import game.ground.trees.*;
+import game.ground.HighGround;
 
+/**
+ * Allows players to jump
+ * @author James Huynh
+ * @author ChunKau Mok
+ * @version 2.0
+ */
 public class JumpActorAction extends MoveActorAction {
-    // Constructor for JumpActorAction
+    
+    /**
+     * Constructor for JumpActorAction
+     * @param moveToLocation is the location actor tries to jump to
+     * @param direction is the direction the actor jumping
+     * @param hotKey is the hot key for this action
+     */
     public JumpActorAction(Location moveToLocation, String direction, String hotKey) {
         super(moveToLocation, direction, hotKey);
     }
 
+    /**
+     * Execute whenever player tries to jump
+     * @return a menu description of the result of the jump action
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
-        // Check if  Actor is Player before allowing jump action
-        if(actor instanceof Player) {
-            // Check if target ground is jumpable:
-            if(moveToLocation.getGround() instanceof Jumpable) {
-                // Cases before allowing player to jump:
-                // Case 1: Player has a Super Mushroom status, 100% success:
-                if (actor.hasCapability(Status.EASY_JUMP)) {
-                    map.moveActor(actor, moveToLocation);
-                    return menuDescription(actor);
-                }
-                // Case 2: The jumpable ground is a wall, 80% success rate, 20 fall damage
-                if (moveToLocation.getGround().equals(new Wall())) {
-                    if (Utils.nextChance() <= 80) {
-                        map.moveActor(actor, moveToLocation);
-                        return menuDescription(actor);
-                    } else {
-                        actor.hurt(20);
-                    }
-                }
-                // Case 3: The jumpable ground is a sprout, 90% success rate, 10 fall damage
-                if (moveToLocation.getGround().equals(new Sprout())) {
-                    if (Utils.nextChance() <= 90) {
-                        map.moveActor(actor, moveToLocation);
-                        return menuDescription(actor);
-                    } else {
-                        actor.hurt(10);
-                    }
-                }
-                // Case 4: The jumpable ground is a sapling, 80% success rate, 20 fall damage
-                if (moveToLocation.getGround().equals(new Sapling())) {
-                    if (Utils.nextChance() <= 80) {
-                        map.moveActor(actor, moveToLocation);
-                        return menuDescription(actor);
-                    } else {
-                        actor.hurt(20);
-                    }
-                }
-                // Case 5: The jumpable ground is a mature tree, 70% success rate,  30 fall damage
-                if (moveToLocation.getGround().equals(new Mature())) {
-                    if (Utils.nextChance() <= 70) {
-                        map.moveActor(actor, moveToLocation);
-                        return menuDescription(actor);
-                    } else {
-                        actor.hurt(30);
-                    }
-                }
+
+        // FIXME: Stinky
+        if (moveToLocation.getGround() instanceof HighGround) {
+            HighGround downCast = (HighGround) moveToLocation.getGround();
+            if (downCast.onJump(actor)) {
+                map.moveActor(actor, moveToLocation);
+                return this.menuDescription(actor);
+            } else {
+                return actor + " fails to jump, takes " + downCast.getFallDamage().toString() + "fall damage.";
             }
+        } else {
+            return this.menuDescription(actor);
         }
-        return actor + " cannot jump " + direction;
+
     }
 
     /**
@@ -80,6 +56,5 @@ public class JumpActorAction extends MoveActorAction {
     public String menuDescription(Actor actor) {
         return actor + " jumps " + direction;
     }
-
 
 }

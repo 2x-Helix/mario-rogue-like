@@ -11,12 +11,16 @@ import game.status.Status;
  */
 public class HighGround extends Ground {
 
+    protected Integer fallDamage, successThreshhold;    // successThreshhold = chance to jump * 100 : 0.8 -> 80
+
     /**
      * 
      * @param displayChar is the char to be displayed in the terminal
      */
-    public HighGround(char displayChar) {
+    public HighGround(char displayChar, Integer successThreshhold, Integer fallDamage) {
         super(displayChar);
+        this.successThreshhold = successThreshhold;
+        this.fallDamage = fallDamage;
     }
 
 	/**
@@ -30,12 +34,12 @@ public class HighGround extends Ground {
     /**
      * Called whenever actor "walk" on this ground
      * Actor should have Status.HIGHER_GROUND to do so
-     * @param location is where this Tree at
+     * @param location is where this ground at
      * @param actor is whom walks on this ground
      */
     public void onWalk(Location location, Actor actor) {
         // Convert to Dirt
-        if (actor.hasCapability(Status.HIGHER_GROUND)) {
+        if (actor.hasCapability(Status.HIGHER_GROUND)) {    // canActorEnter == true omitted
             location.setGround(new Dirt());
             
             // Drop $5
@@ -46,6 +50,15 @@ public class HighGround extends Ground {
     }
 
     /**
+     * Called whenever actor tries to jump on this ground
+     * @param location is where this ground at
+     * @param actor is whom tries to jump on this ground
+     */
+    public boolean onJump(Actor actor) {
+        return actor.hasCapability(Status.EASY_JUMP);
+    }
+
+    /**
      * Basically override to execute onWalk when its necessary
      */
     @Override
@@ -53,6 +66,10 @@ public class HighGround extends Ground {
         if (location.containsAnActor()) {
             this.onWalk(location, location.getActor());
         }
+    }
+
+    public Integer getFallDamage() {
+        return this.fallDamage;
     }
 
 }
