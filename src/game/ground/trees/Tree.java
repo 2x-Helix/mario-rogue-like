@@ -1,8 +1,8 @@
 package game.ground.trees;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ground.HighGround;
 
 /**
  * Tree is a Ground that grows after a set period of time and
@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.positions.Location;
  * @author Matthew Siegenthaler
  * @version 1.0
  */
-public abstract class Tree extends Ground {
+public abstract class Tree extends HighGround {
     private Integer growthCounter;
 
     /**
@@ -19,8 +19,8 @@ public abstract class Tree extends Ground {
      * @param growthCounter Number of turns tree grows for.
      * @throws IllegalArgumentException growthCounter must be > 0.
      */
-    public Tree(char displayChar, Integer growthCounter) throws IllegalArgumentException {
-        super(displayChar);
+    protected Tree(char displayChar, Integer growthCounter, Integer successThreshold, Integer fallDamage) throws IllegalArgumentException {
+        super(displayChar, successThreshold, fallDamage);
 
         if (!(setGrowthCounter(growthCounter))) {
             throw new IllegalArgumentException("growthCounter must be between > 0");

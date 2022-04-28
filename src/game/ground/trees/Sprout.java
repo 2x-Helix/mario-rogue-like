@@ -2,19 +2,20 @@ package game.ground.trees;
 
 import edu.monash.fit2099.engine.positions.Location;
 import game.Utils;
-import game.actors.Goomba;
+import game.actors.enemies.Goomba;
 
 /**
  * Sprout has 10% chance to spawn Goombas and takes 10 turns to grow.
  * @author Matthew Siegenthaler
- * @version 1.0
+ * @author ChunKau Mok (Peter)
+ * @version 2.0
  */
 public final class Sprout extends Tree {
     /**
      * Sprout constructor
      */
     public Sprout() {
-        super('+', 10);
+        super('+', 10, 90, 10);
     }
 
     /**
