@@ -1,21 +1,44 @@
 package game.ground;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Ground;
+import game.Utils;
+import game.status.Status;
 
-public class Wall extends Ground {
+/**
+ * A type of HighGround
+ * @author ChunKau Mok (Peter)
+ * @version 2.0
+ */
+public class Wall extends HighGround {
 
+	/**
+	 * Public constructor for this object
+	 */
 	public Wall() {
-		super('#');
+		super('#', 80, 20);
 	}
 	
-	@Override
-	public boolean canActorEnter(Actor actor) {
-		return false;
-	}
-	
+	/**
+	 * @return if this can block thrown objects
+	 */
 	@Override
 	public boolean blocksThrownObjects() {
 		return true;
 	}
+
+	/**
+	 * Called whenever an actor tries to jump on this
+	 * @param actor is the actor trying to jump on this
+	 * @return if the actor successfully jump on this or not
+	 */
+	@Override
+    public boolean onJump(Actor actor) {
+		if (actor.hasCapability(Status.EASY_JUMP) || Utils.nextChance() <= this.successThreshhold) {
+			return true;
+		} else {
+			actor.hurt(this.fallDamage);
+			return false;
+		}
+	}
+
 }

@@ -14,6 +14,8 @@ import game.ground.Dirt;
 import game.ground.Floor;
 import game.ground.trees.Tree;
 import game.ground.Wall;
+import game.items.magical_items.PowerStar;
+import game.items.magical_items.SuperMushroom;
 
 /**
  * The main class for the Mario World game.
@@ -56,6 +58,10 @@ public class Application {
 
 			// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());
+
+			// Spawn these 2 items at the spawn point of Mario
+			gameMap.locationOf(mario).addItem(new SuperMushroom());
+			gameMap.locationOf(mario).addItem(new PowerStar());
 
 			world.run();
 
