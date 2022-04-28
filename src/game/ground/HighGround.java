@@ -1,13 +1,17 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.JumpActorAction;
 import game.items.Coin;
 import game.status.Status;
 
 /**
- * 
+ * A ground type to represent ground that Players need to Jump to move onto it
+ * @author ChunKau Mok (Peter)
+ * @version 1.0
  */
 public class HighGround extends Ground {
 
@@ -22,6 +26,20 @@ public class HighGround extends Ground {
         this.successThreshhold = successThreshhold;
         this.fallDamage = fallDamage;
     }
+
+	/**
+	 * Returns an Action list for HighGround ground type
+	 * @param actor the Actor acting
+	 * @param location the current Location
+	 * @param direction the direction of the Ground from the Actor
+	 * @return a new ActionList with only JumpAction in it
+	 */
+    @Override
+	public ActionList allowableActions(Actor actor, Location location, String direction) {
+        ActionList actionList = new ActionList();
+        actionList.add(new JumpActorAction(location, direction, null));
+		return actionList;
+	}
 
 	/**
 	 * Actors can enter having the Status HIGH_GROUND from PowerStar
