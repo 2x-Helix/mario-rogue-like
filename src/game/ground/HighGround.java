@@ -37,7 +37,9 @@ public class HighGround extends Ground {
     @Override
 	public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actionList = new ActionList();
-        actionList.add(new JumpActorAction(location, direction, null));
+        if (!actor.hasCapability(Status.HIGHER_GROUND)) {   // no need to jump is player consumed PowerStar
+            actionList.add(new JumpActorAction(location, direction, null));
+        }
 		return actionList;
 	}
 
