@@ -25,7 +25,6 @@ public class Player extends Actor  {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
-		this.addCapability(Status.HOSTILE_TO_ENEMY);
 	}
 
 	@Override
