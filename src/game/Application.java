@@ -8,13 +8,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Goomba;
-import game.actors.Player;
-import game.actors.Toad;
+import game.actors.enemies.Goomba;
+import game.actors.friendly.Player;
 import game.ground.Dirt;
 import game.ground.Floor;
-import game.ground.trees.Sprout;
 import game.ground.Wall;
+import game.ground.trees.Sprout;
 import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
 
@@ -59,7 +58,6 @@ public class Application {
 
 			// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());
-			gameMap.at(43, 9).addActor(new Toad());
 
 			// Spawn these 2 items at the spawn point of Mario
 			gameMap.locationOf(mario).addItem(new SuperMushroom());
