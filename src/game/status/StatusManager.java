@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 /**
  * A singleton to manage statuses with duration for all actors
  * @author ChunKau Mok
+ * @version 1.0
  */
 public class StatusManager {
 

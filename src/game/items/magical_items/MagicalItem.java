@@ -5,7 +5,9 @@ import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
 
 /**
- * TODO: Implement this class
+ * A class of Item that is consummable by Players (and possibly all actors)
+ * @author ChunKau Mok (Peter)
+ * @version 1.0
  */
 public abstract class MagicalItem extends Item{
     

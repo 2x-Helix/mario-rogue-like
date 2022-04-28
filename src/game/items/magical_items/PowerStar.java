@@ -67,7 +67,7 @@ public class PowerStar extends MagicalItem {
 	}
 
     /**
-     * Call this function when PowerStar are consumed
+     * Call this function when PowerStar are consumed by a player
      */
     @Override
     public void onConsume(Actor actor) {
@@ -90,14 +90,19 @@ public class PowerStar extends MagicalItem {
         actor.heal(200);
     }
 
+    /**
+     * @return the remaining duration of this item before it de-spawn
+     */
+    public Integer getRemainingDuration() {
+        return this.duration;
+    }
+
+    /**
+     * @return a description of this item, including the remaining duration
+     */
     @Override
 	public String toString() {
 		return PowerStar.NAME + " - " + this.duration.toString() + " turns remaining";
 	}
 
-    public Integer getRemainingDuration() {
-        return this.duration;
-    }
-
 }
-
