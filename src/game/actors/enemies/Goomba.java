@@ -1,6 +1,5 @@
 package game.actors.enemies;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
