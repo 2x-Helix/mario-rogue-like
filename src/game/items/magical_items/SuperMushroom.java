@@ -22,7 +22,6 @@ public class SuperMushroom extends MagicalItem implements Purchasable{
     public SuperMushroom() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.addCapability(Status.TALL);
-        this.addCapability(Status.INCREASED_MAX_HP);
         this.addCapability(Status.EASY_JUMP);
     }
 
