@@ -6,6 +6,11 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.magical_items.MagicalItem;
 
+/**
+ * Allow consummable items to be consumed
+ * @author ChunKau Mok (Peter)
+ * @version 1.0
+ */
 public class ConsumeAction extends Action{
     
     /**
@@ -31,7 +36,7 @@ public class ConsumeAction extends Action{
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        // FIXME: i've made it less stinky already, but it still is
+        // FIXME: Stinky
         if (this.item instanceof MagicalItem) {
             MagicalItem downCasting = (MagicalItem) item;               
             downCasting.onConsume(actor);

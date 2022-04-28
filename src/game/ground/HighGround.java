@@ -18,10 +18,10 @@ public class HighGround extends Ground {
     protected Integer fallDamage, successThreshhold;    // successThreshhold = chance to jump * 100 : 0.8 -> 80
 
     /**
-     * 
+     * Constructor for its child
      * @param displayChar is the char to be displayed in the terminal
      */
-    public HighGround(char displayChar, Integer successThreshhold, Integer fallDamage) {
+    protected HighGround(char displayChar, Integer successThreshhold, Integer fallDamage) {
         super(displayChar);
         this.successThreshhold = successThreshhold;
         this.fallDamage = fallDamage;
@@ -86,6 +86,9 @@ public class HighGround extends Ground {
         }
     }
 
+    /**
+     * @return the fall damage of this high ground
+     */
     public Integer getFallDamage() {
         return this.fallDamage;
     }

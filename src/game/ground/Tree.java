@@ -1,5 +1,11 @@
 package game.ground;
 
+/**
+ * A ground type that represent all kinds of trees
+ * @author Matt FIXME: enter your full name here
+ * @author ChunKau Mok (Peter)
+ * @version 2.0
+ */
 public class Tree extends HighGround {
 
     /**
