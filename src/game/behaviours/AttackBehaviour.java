@@ -6,7 +6,13 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
-import game.actors.Player;
+
+/**
+ * A class that figures an opportunity to attack a target Actor.
+ * @author James Huynh
+ * @version 1.0
+ */
+
 
 public class AttackBehaviour implements Behaviour{
     private final Actor target;
@@ -27,13 +33,10 @@ public class AttackBehaviour implements Behaviour{
         for (Exit exit : here.getExits()) {
             // check if an exit contains an actor
             if(exit.getDestination().containsAnActor()) {
-                // check if the actor is Player
-                if(exit.getDestination().getActor() instanceof Player) {
-                    // check if actor can enter the exit's area
-                    if(exit.getDestination().canActorEnter(actor)) {
-                        // current actor calls AttackAction on the target actor
-                        return new AttackAction(target, exit.getName());
-                    }
+                // check if actor can enter the exit's area
+                if(exit.getDestination().canActorEnter(actor)) {
+                    // current actor calls AttackAction on the target actor
+                    return new AttackAction(target, exit.getName());
                 }
             }
         }
