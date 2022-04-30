@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.ItemManager;
+import game.items.magical_items.PowerStar;
+import game.items.magical_items.SuperMushroom;
 import game.wallet.WalletManager;
 
 /**
@@ -43,6 +45,8 @@ public class PurchaseAction extends Action{
                 walletManager.addCredit(seller, itemPrice);
                 seller.removeItemFromInventory(this.item);
                 buyer.addItemToInventory(this.item);
+                if (this.item instanceof PowerStar || this.item instanceof SuperMushroom)   // FIXME: stinky, undroppable after purchased
+                    this.item.togglePortability();  
                 return this.menuDescription(buyer);
             } else {
                 return "You don't have enough coins!";
