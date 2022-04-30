@@ -169,6 +169,12 @@ extensibility of the code in the long-term.
 e.g, **Player** must close enough in coordinates to **Toad** for **SpeakAction** to be available in console 
 (could be a possible way for Toad to directly call **SpeakAction**).
 
+### Assignment 2 changes:
+* Implement interface **Talkable** to handle monologue for an object. 
+This is to follow the *Single Responsibility Principle* and *Interface Segregation Principle*
+so only the **Talkable** object **Toad** requires to implement the monologue. The interface separates
+is solely responsible for ensuring implementation of available monologues 
+
 <br>
 
 ## REQ7: Reset Game
