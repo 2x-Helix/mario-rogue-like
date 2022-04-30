@@ -1,19 +1,11 @@
 package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.WanderBehaviour;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * An abstract class representing the Enemy actors in the game.
- * @author James Huynh
- * @version 2.0
+ * @TODO: Implment this class
  */
 public abstract class Enemy extends Actor{
-    protected Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
      *
@@ -23,8 +15,6 @@ public abstract class Enemy extends Actor{
      */
     protected Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.behaviours.put(0, new AttackBehaviour());
-        this.behaviours.put(10, new WanderBehaviour());
-
     }
+    
 }
