@@ -1,4 +1,4 @@
-package game.actors.enemy;
+package game.actors.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.status.Status;
 import game.reset.Resettable;
 
-public class Enemy extends Actor implements Resettable {
+public abstract class Enemy extends Actor implements Resettable {
 
     /**
      * Constructor.

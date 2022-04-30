@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-public class Koopa extends Actor{
+public class Koopa extends Enemy{
 
 
     public Koopa() {
