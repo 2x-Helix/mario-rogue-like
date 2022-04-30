@@ -227,4 +227,12 @@ to fully heal **Player**.
 
 ### Cons
 * Increased code size and complexity
-  
+
+### Assignment 2
+- For Coins and Trees, we require to remove/change them at their location.
+However, the **resetInstance()** method does not receive the location as a parameter.
+Our workaround to uphold the polymorphism of the method is to give the Tree/Coins the capability **RESET** 
+to mark them for reset. Upon **tick()** being called, we may then remove/update them from their location as we 
+receive it as a parameter there. This is also the case for **Enemy** where it is removed during 
+the **playTurn()** method being called. 
+
