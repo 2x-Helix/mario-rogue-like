@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.status.Status;
 import game.status.StatusManager;
+import game.wallet.WalletManager;
 
 /**
  * Class representing the Player.
@@ -25,6 +26,7 @@ public class Player extends Actor  {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
+		WalletManager.getInstance().createWallet(this);
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class Player extends Actor  {
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
 		StatusManager.getInstance().tick();	// tick for statuses
-
+		
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
