@@ -19,7 +19,7 @@ public abstract class Enemy extends Actor implements Resettable {
      */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        registerInstance();  // Register as resettable
+        registerResettable();  // Register as resettable
     }
 
     @Override
