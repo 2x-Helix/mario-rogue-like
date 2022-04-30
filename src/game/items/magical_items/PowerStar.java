@@ -2,6 +2,7 @@ package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.ItemManager;
 import game.status.Status;
 import game.status.StatusManager;
 
@@ -29,6 +30,7 @@ public class PowerStar extends MagicalItem {
         this.addCapability(Status.COIN_FROM_DESTROYED_GROUND);
         this.addCapability(Status.IMMUNITY);
         this.addCapability(Status.INSTA_KILL);
+        ItemManager.getInstance().insertPrice(this, 600);   // 600 is the default price of this item
     }
     
     /**
@@ -104,5 +106,16 @@ public class PowerStar extends MagicalItem {
 	public String toString() {
 		return PowerStar.NAME + " - " + this.duration.toString() + " turns remaining";
 	}
+
+    /** 
+     * @return the price of this item, should not return null at all
+     */
+    public Integer getPrice() {
+        try {
+            return ItemManager.getInstance().getPrice(this);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }
