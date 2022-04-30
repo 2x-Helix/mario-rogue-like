@@ -35,7 +35,7 @@ public class Player extends Friendly {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-		StatusManager.getStatusManager().tick();	// tick for statuses
+		StatusManager.getInstance().tick();	// tick for statuses
 
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
@@ -51,19 +51,7 @@ public class Player extends Friendly {
 	 * @return a description of statuses this player has
 	 */
 	private String statusDescription() {
-
-		StatusManager statusManager = StatusManager.getStatusManager();
-
-		if (this.capabilitiesList().contains(Status.IMMUNITY)) {
-			String cout = "Mario consumes Power Star - " + statusManager.getStatusDuration(this, Status.IMMUNITY);
-			if (statusManager.getStatusDuration(this, Status.IMMUNITY) > 1) {
-				cout += " turns  \n";
-			} else {
-				cout += " turn remaining \n";
-			}
-			return cout;
-		}
-		return "";
+		return StatusManager.getInstance().getDescription(this);
 	}
 
 }
