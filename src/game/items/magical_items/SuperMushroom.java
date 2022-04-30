@@ -24,6 +24,8 @@ public class SuperMushroom extends MagicalItem {
         this.addCapability(Status.TALL);
         this.addCapability(Status.EASY_JUMP);
         ItemManager.getInstance().insertPrice(this, 400);   // 400 is the default price of this item
+        ItemManager manager = ItemManager.getInstance();
+        System.out.println("test");
     }
 
     /**

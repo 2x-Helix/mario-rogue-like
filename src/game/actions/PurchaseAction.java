@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.friendly.ShopOwner;
 import game.items.ItemManager;
 import game.wallet.WalletManager;
 
@@ -21,11 +20,11 @@ public class PurchaseAction extends Action{
     /**
      * Public constructor of this action
      * @param item is the item to be sold/bought
-     * @param seller is the actor selling the item
+     * @param actor the seller of the item
      */
-    public PurchaseAction(Item item, ShopOwner seller) {
+    public PurchaseAction(Item item, Actor actor) {
         this.item = item;
-        this.seller = seller;
+        this.seller = actor;
     }
 
     /**
