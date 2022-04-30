@@ -1,11 +1,12 @@
 package game.items.weapon_items;
 
-import game.items.ItemManager;
-
+/**
+ * TODO: Implement this class
+ */
 public class Wrench extends WeaponItem {
     
     private static final String NAME = "Wrench";
-    private static final char DISPLAY_CHAR = 'W';
+    private static final char DISPLAY_CHAR = 'W';   // Peter: not sure 
     private static final boolean PORTABLE = false;
 
     /**
@@ -13,7 +14,6 @@ public class Wrench extends WeaponItem {
      */
     public Wrench() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
-        ItemManager.getInstance().insertPrice(this, 200);   // 200 is the default price of this item
     }
 
 }

@@ -1,7 +1,6 @@
 package game.actors.friendly;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.status.Status;
 
 /**
  * @TODO: Implment this class
@@ -17,7 +16,6 @@ public abstract class Friendly extends Actor{
      */
     protected Friendly(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.addCapability(Status.HOSTILE_TO_ENEMY);
     }
     
 }
