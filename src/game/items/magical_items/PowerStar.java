@@ -15,7 +15,8 @@ public class PowerStar extends MagicalItem {
 
     private static final String NAME = "Power Star";
     private static final char DISPLAY_CHAR = '*';
-    private static final boolean PORTABLE = true;   // default is droppable
+    private static final boolean PORTABLE = true;
+    private static final Integer MAX_DURATION = 10;
 
     private Integer duration;   // active duration
 
@@ -25,7 +26,7 @@ public class PowerStar extends MagicalItem {
      */
     public PowerStar() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
-        this.duration = 10;                                 // 10 turns
+        this.duration = MAX_DURATION;                               // 10 turns
         this.addCapability(Status.HIGHER_GROUND);
         this.addCapability(Status.COIN_FROM_DESTROYED_GROUND);
         this.addCapability(Status.IMMUNITY);

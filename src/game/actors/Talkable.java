@@ -14,4 +14,10 @@ public interface Talkable {
      * @return Monologue spoken by the implementer of Talkable.
      */
     String getMonologue(Actor actor);
+
+    /**
+     * Gets the name of the implementer
+     * @return Name of speaker
+     */
+    String getSpeaker();
 }

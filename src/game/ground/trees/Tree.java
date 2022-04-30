@@ -2,7 +2,11 @@ package game.ground.trees;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Utils;
+import game.ground.Dirt;
 import game.ground.HighGround;
+import game.reset.Resettable;
+import game.status.Status;
 
 /**
  * Tree is a Ground that grows after a set period of time and
@@ -10,7 +14,7 @@ import game.ground.HighGround;
  * @author Matthew Siegenthaler
  * @version 1.0
  */
-public abstract class Tree extends HighGround {
+public abstract class Tree extends HighGround implements Resettable {
     private Integer growthCounter;
 
     /**
@@ -25,6 +29,7 @@ public abstract class Tree extends HighGround {
         if (!(setGrowthCounter(growthCounter))) {
             throw new IllegalArgumentException("growthCounter must be between > 0");
         }
+        registerResettable();
     }
 
     /* Setters */
@@ -51,11 +56,17 @@ public abstract class Tree extends HighGround {
      */
     @Override
     public void tick(Location location) {
-        this.growthCounter--;
-        this.spawn(location);
+        // If reset, set Tree to dirt
+        if (this.hasCapability(Status.RESET)){
+            location.setGround(new Dirt());
+        } else {
+            // Grow tree
+            this.growthCounter--;
+            this.spawn(location);
 
-        if (growthCounter == 0)
-            this.grow(location);
+            if (growthCounter == 0)
+                this.grow(location);
+        }
     }
 
     /**
@@ -87,5 +98,15 @@ public abstract class Tree extends HighGround {
     @Override
     public boolean blocksThrownObjects() {
         return true;
+    }
+
+    /**
+     * Tree has a 50% chance of turning to Dirt upon reset.
+     */
+    @Override
+    public void resetInstance() {
+        if (Utils.nextChance() <= 50) {
+            this.addCapability(Status.RESET);
+        }
     }
 }

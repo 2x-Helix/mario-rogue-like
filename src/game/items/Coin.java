@@ -3,14 +3,15 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.wallet.WalletManager;
+import game.status.Status;
+import game.reset.Resettable;
 
 /**
  * A class for the currency in this game
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class Coin extends Item{
+public class Coin extends Item implements Resettable {
 
     public static final String NAME = "Coin";
     public static final char DISPLAY_CHAR = '$';
@@ -28,6 +29,7 @@ public class Coin extends Item{
     public Coin(Integer value) {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.value = value;
+        registerResettable();  // Add instance to ResetManager
     }
 
     /**
