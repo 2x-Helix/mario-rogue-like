@@ -169,6 +169,13 @@ extensibility of the code in the long-term.
 e.g, **Player** must close enough in coordinates to **Toad** for **SpeakAction** to be available in console 
 (could be a possible way for Toad to directly call **SpeakAction**).
 
+### Assignment 2
+- To allow for a NPC to talk, we have decided to use the interface **Talkable**. 
+This requires the implementer to have the method **getMonologue()** which is responsible for
+getting the monologue spoken by the implementer. This meets the SOLID principles *Interface Segregation Principle*
+as it separates the single action of monologuing as its own interface.
+- 
+
 <br>
 
 ## REQ7: Reset Game
