@@ -1,11 +1,8 @@
 package game.items.weapon_items;
 
-import game.items.Purchasable;
+import game.items.ItemManager;
 
-/**
- * TODO: Implement this class
- */
-public class Wrench extends WeaponItem implements Purchasable{
+public class Wrench extends WeaponItem {
     
     private static final String NAME = "Wrench";
     private static final char DISPLAY_CHAR = 'W';
@@ -16,13 +13,7 @@ public class Wrench extends WeaponItem implements Purchasable{
      */
     public Wrench() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
-    }
-
-    /**
-     * @return the price of this item in Toad's store
-     */
-    public Integer getPrice() {
-        return 200;
+        ItemManager.getInstance().insertPrice(this, 200);   // 200 is the default price of this item
     }
 
 }
