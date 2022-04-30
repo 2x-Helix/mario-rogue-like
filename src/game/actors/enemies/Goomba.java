@@ -16,7 +16,7 @@ import game.status.Status;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor {
+public class Goomba extends Enemy {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
 	/**
