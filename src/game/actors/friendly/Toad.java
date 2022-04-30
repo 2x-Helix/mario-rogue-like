@@ -89,4 +89,13 @@ public class Toad extends Friendly implements Talkable {
         int indexMonologue = Utils.nextInt(0, monologueOptions.size());
         return monologueOptions.get(indexMonologue);
     }
+
+    /**
+     * Return Toads name
+     * @return name Toad as String
+     */
+    @Override
+    public String getSpeaker() {
+        return this.toString();
+    }
 }

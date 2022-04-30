@@ -15,6 +15,7 @@ public class PowerStar extends MagicalItem {
     private static final String NAME = "Power Star";
     private static final char DISPLAY_CHAR = '*';
     private static final boolean PORTABLE = true;
+    private static final Integer MAX_DURATION = 10;
 
     private Integer duration;   // active duration
 
@@ -24,7 +25,7 @@ public class PowerStar extends MagicalItem {
      */
     public PowerStar() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
-        this.duration = 10;                                 // 10 turns
+        this.duration = MAX_DURATION;                               // 10 turns
         this.addCapability(Status.HIGHER_GROUND);
         this.addCapability(Status.COIN_FROM_DESTROYED_GROUND);
         this.addCapability(Status.IMMUNITY);
@@ -81,7 +82,7 @@ public class PowerStar extends MagicalItem {
         StatusManager statusManager = StatusManager.getStatusManager();
         try {
             for (Enum<?> capability : this.capabilitiesList()) {
-                statusManager.insertStatusDuration(actor, (Status)capability, this.getRemainingDuration());
+                statusManager.insertStatusDuration(actor, (Status)capability, MAX_DURATION);
             }
         } catch (Exception e) {
             System.out.println(e + "; Something is wrong with PowerStar.tick :/");
