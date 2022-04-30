@@ -12,12 +12,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 public class WalletManager {
     
     private static WalletManager manager = null;
-    private HashMap<Actor, Wallet> mapper;
+    private HashMap<Actor, Wallet> mapper;;
 
     /**
      * Private constructor for this singleton
      */
-    private WalletManager() { 
+    private WalletManager() {
         mapper = new HashMap<>();
     }
 

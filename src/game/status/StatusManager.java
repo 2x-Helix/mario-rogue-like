@@ -16,7 +16,9 @@ public class StatusManager {
     private static StatusManager manager = null;                                  // the singleton object
     private HashMap<Actor, ConcurrentHashMap<Status, Integer>> mapper;  // a Map with Actor as key, a Map as value, which uses Status as key, Int(Duration) as value
                                                                                         // Concurrent to avoid java.util.ConcurrentModificationException
-    private StatusManager() {}
+    private StatusManager() {
+        mapper = new HashMap<>();
+    }
 
     /**
      * Static method to get the StatusManager
@@ -25,7 +27,6 @@ public class StatusManager {
     public static StatusManager getInstance() {
         if (manager == null) {
             manager = new StatusManager();
-            manager.mapper = new HashMap<>();
         }
         return manager;
     }

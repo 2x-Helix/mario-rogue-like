@@ -17,7 +17,9 @@ public class ItemManager {
     /**
      * Private constructor for getInstance()
      */
-    private ItemManager() {}
+    private ItemManager() {
+        mapper = new HashMap<>();
+    }
 
     /**
      * Factory method for this class
