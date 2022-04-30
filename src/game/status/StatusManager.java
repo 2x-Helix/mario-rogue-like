@@ -136,7 +136,7 @@ public class StatusManager {
         String cout = "";
         for (Enum<?> capability : actor.capabilitiesList()) {
             status = (Status) capability;
-            if (this.mapper.get(actor).contains(status)) {  // status with duration
+            if (this.mapper.get(actor).containsKey(status)) {  // status with duration
                 cout += actor + " is affected by " + status + "; " + this.getDuration(actor, status);
                 cout += (this.getDuration(actor, status) > 1) ? "turns" : "turn";
                 cout += " remaining \n";
