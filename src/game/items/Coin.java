@@ -1,20 +1,21 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.wallet.WalletManager;
+import game.status.Status;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 
 /**
  * A class for the currency in this game
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class Coin extends Item{
+public class Coin extends Item implements Resettable {
 
     public static final String NAME = "Coin";
     public static final char DISPLAY_CHAR = '$';
-    public static final boolean PORTABLE = true; 
+    public static final boolean PORTABLE = true;
 
     /**
      * Value of the coin holds
@@ -28,6 +29,7 @@ public class Coin extends Item{
     public Coin(Integer value) {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.value = value;
+        registerInstance();  // Add instance to ResetManager
     }
 
     /**
@@ -38,22 +40,20 @@ public class Coin extends Item{
     }
 
     /**
-     * Inform this item of the passage of time.
-     * Reduce the active duration remaining on the actor by 1 turn
-     * Remove this item from actor's inventory if remaining duration is 0
-     * 
-     * This method is called once per turn, if the Item is being carried.
-     * @param currentLocation The location of the actor carrying this Item.
-     * @param actor The actor carrying this Item.
+     *
+     * @param currentLocation The location of the ground on which we lie.
      */
     @Override
-    public void tick(Location currentLocation, Actor actor) {
-        try {
-            WalletManager.getInstance().addCredit(actor, this.value);
-            actor.removeItemFromInventory(this);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void tick(Location currentLocation) {
+        // Remove coin from location upon reset
+        if (hasCapability(Status.RESET)) {
+            currentLocation.removeItem(this);
+            return;
         }
     }
 
+    @Override
+    public void resetInstance() {
+        addCapability(Status.RESET);
+    }
 }
