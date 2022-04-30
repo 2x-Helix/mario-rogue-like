@@ -13,8 +13,8 @@ import edu.monash.fit2099.engine.actors.Actor;
  */
 public class StatusManager {
 
-    private static StatusManager statusManager = null;                                  // the singleton object
-    private HashMap<Actor, ConcurrentHashMap<Status, Integer>> actorStatusDurationMap;  // a Map with Actor as key, a Map as value, which uses Status as key, Int(Duration) as value
+    private static StatusManager manager = null;                                  // the singleton object
+    private HashMap<Actor, ConcurrentHashMap<Status, Integer>> mapper;  // a Map with Actor as key, a Map as value, which uses Status as key, Int(Duration) as value
                                                                                         // Concurrent to avoid java.util.ConcurrentModificationException
     private StatusManager() {}
 
@@ -22,25 +22,12 @@ public class StatusManager {
      * Static method to get the StatusManager
      * @return the StatusManager singleton
      */
-    public static StatusManager getStatusManager() {
-        if (statusManager == null) {
-            statusManager = new StatusManager();
-            statusManager.actorStatusDurationMap = new HashMap<>();
+    public static StatusManager getInstance() {
+        if (manager == null) {
+            manager = new StatusManager();
+            manager.mapper = new HashMap<>();
         }
-        return statusManager;
-    }
-
-    /**
-     * Return the duration of a given status of a given actor
-     * Return 0 if the actor doesn't have any status
-     * @param actor is the key of the map
-     * @return a HashMap<Status, Integer> 
-     */
-    public Integer getStatusDuration(Actor actor, Status status) {
-        if (this.actorStatusDurationMap.containsKey(actor)) {
-            return this.actorStatusDurationMap.get(actor).get(status);
-        }
-        return 0;
+        return manager;
     }
 
     /**
@@ -51,17 +38,17 @@ public class StatusManager {
      * @param duration is the duration of the status
      * @throws Exception if the duration is less then 1
      */
-    public void insertStatusDuration(Actor actor, Status status, Integer duration) throws Exception {
+    public void insertDuration(Actor actor, Status status, Integer duration) throws Exception {
 
         if (duration < 1) {
             throw new Exception("duration should be at least 1");
         }  
 
-        if (this.actorStatusDurationMap.containsKey(actor)) {
-            this.actorStatusDurationMap.get(actor).put(status, duration);
+        if (this.mapper.containsKey(actor)) {
+            this.mapper.get(actor).put(status, duration);
         } else {
-            this.actorStatusDurationMap.put(actor, new ConcurrentHashMap<Status, Integer>());
-            this.actorStatusDurationMap.get(actor).put(status, duration);
+            this.mapper.put(actor, new ConcurrentHashMap<Status, Integer>());
+            this.mapper.get(actor).put(status, duration);
         }
     }
 
@@ -73,22 +60,35 @@ public class StatusManager {
      * @param duration is the new duration
      * @throws Exception if Actor is not affected by any statuses or the given status
      */
-    public void updateStatusDuration(Actor actor, Status status, Integer duration) throws Exception {
+    public void updateDuration(Actor actor, Status status, Integer duration) throws Exception {
 
-        if (!this.actorStatusDurationMap.containsKey(actor)) {
+        if (!this.mapper.containsKey(actor)) {
             throw new Exception("Actor is not affected by any statuses");
         }
 
-        if (!this.actorStatusDurationMap.get(actor).containsKey(status)) {
+        if (!this.mapper.get(actor).containsKey(status)) {
             throw new Exception("Actor is not affected by this status");
         }
 
         if (duration > 0) {                                                 // update status with new duration
-            this.actorStatusDurationMap.get(actor).put(status, duration);
+            this.mapper.get(actor).put(status, duration);
         } else {                                                            // remove expired status
             this.removeStatus(actor, status);
         }
 
+    }
+
+    /**
+     * Return the duration of a given status of a given actor
+     * Return 0 if the actor doesn't have any status
+     * @param actor is the key of the map
+     * @return a HashMap<Status, Integer> 
+     */
+    public Integer getDuration(Actor actor, Status status) {
+        if (this.mapper.containsKey(actor) && this.mapper.get(actor).containsKey(status)) {
+            return this.mapper.get(actor).get(status);
+        }
+        return 0;
     }
 
     /**
@@ -100,15 +100,15 @@ public class StatusManager {
      */
     public void removeStatus(Actor actor, Status status) throws Exception {
 
-        if (!this.actorStatusDurationMap.containsKey(actor)) {
+        if (!this.mapper.containsKey(actor)) {
             throw new Exception("Actor is not affected by any statuses");
         }
 
-        if (!this.actorStatusDurationMap.get(actor).containsKey(status)) {
+        if (!this.mapper.get(actor).containsKey(status)) {
             throw new Exception("Actor is not affected by this status");
         }
 
-        this.actorStatusDurationMap.get(actor).remove(status);
+        this.mapper.get(actor).remove(status);
         actor.removeCapability(status);
     }
     
@@ -118,24 +118,51 @@ public class StatusManager {
      * @param actor is the unconscious actor
      */
     public void removeActor(Actor actor) {
-        this.actorStatusDurationMap.remove(actor);
+        this.mapper.remove(actor);
     }
 
     /**
-     * Informs the manage the passage of time
+     * Get a description of all statuses on a given actor
+     * @param actor the target query actor
+     * @return a descriptive string
+     */
+    public String getDescription(Actor actor) {
+
+        if (!this.mapper.containsKey(actor)) {
+            return "";
+        }
+
+        Status status;
+        String cout = "";
+        for (Enum<?> capability : actor.capabilitiesList()) {
+            status = (Status) capability;
+            if (this.mapper.get(actor).containsKey(status)) {  // status with duration
+                cout += actor + " is affected by " + status + "; " + this.getDuration(actor, status);
+                cout += (this.getDuration(actor, status) > 1) ? "turns" : "turn";
+                cout += " remaining \n";
+            } else {                                                        // status without duration
+                cout += actor + " is affected by " + status + "\n";
+            }
+        }
+        
+        return cout;
+    }
+
+    /**
+     * Informs the manager the passage of time
      * Reduce all statuses' duration by 1, remove statuses if durations become 0
      */
     public void tick() {
 
         Iterator<Status> statusIterator;    // to avoid java.util.ConcurrentModificationException
 
-        for (Actor actor : this.actorStatusDurationMap.keySet()) {
-            statusIterator = this.actorStatusDurationMap.get(actor).keySet().iterator();
+        for (Actor actor : this.mapper.keySet()) {
+            statusIterator = this.mapper.get(actor).keySet().iterator();
             while (statusIterator.hasNext()) {
                 Status status = statusIterator.next();
-                Integer duration = this.actorStatusDurationMap.get(actor).get(status) - 1;
+                Integer duration = this.mapper.get(actor).get(status) - 1;
                 try {
-                    this.updateStatusDuration(actor, status, duration);
+                    this.updateDuration(actor, status, duration);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -37,5 +37,6 @@ public class SpeakAction extends Action {
     public String menuDescription(Actor actor) {
         return actor + " listens to " + speaker.getSpeaker();
     }
+
 }
 

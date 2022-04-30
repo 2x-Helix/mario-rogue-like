@@ -1,6 +1,7 @@
 package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.items.ItemManager;
 import game.status.Status;
 
 /**
@@ -8,11 +9,11 @@ import game.status.Status;
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class SuperMushroom extends MagicalItem{
+public class SuperMushroom extends MagicalItem {
     
     private static final String NAME = "Super Mushroom";
     private static final char DISPLAY_CHAR = '^';
-    private static final boolean PORTABLE = true;
+    private static final boolean PORTABLE = true;   // default is droppable
 
     /**
      * SuperMushroom constructor
@@ -21,8 +22,8 @@ public class SuperMushroom extends MagicalItem{
     public SuperMushroom() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.addCapability(Status.TALL);
-        this.addCapability(Status.INCREASED_MAX_HP);
         this.addCapability(Status.EASY_JUMP);
+        ItemManager.getInstance().insertPrice(this, 400);   // 400 is the default price of this item
     }
 
     /**
