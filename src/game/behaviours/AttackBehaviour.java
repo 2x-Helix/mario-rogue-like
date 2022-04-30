@@ -8,24 +8,16 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
 
 /**
- * A class that figures an opportunity to attack a target Actor.
+ * A class that automatically calls AttackAction on the actor's surroundings if there is another actor.
  * @author James Huynh
  * @version 1.0
  */
 
 
-public class AttackBehaviour implements Behaviour{
-    private final Actor target;
-    public AttackBehaviour(Actor subject) {
-        this.target = subject;
-    }
+public class AttackBehaviour implements Behaviour {
 
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        // check if map contains the target
-        if(!map.contains(target) || !map.contains(actor))
-            return null;
-
         // get location of current actor
         Location here = map.locationOf(actor);
 
@@ -35,8 +27,8 @@ public class AttackBehaviour implements Behaviour{
             if(exit.getDestination().containsAnActor()) {
                 // check if actor can enter the exit's area
                 if(exit.getDestination().canActorEnter(actor)) {
-                    // current actor calls AttackAction on the target actor
-                    return new AttackAction(target, exit.getName());
+                    // current actor calls AttackAction on the other actor
+                    return new AttackAction(exit.getDestination().getActor(), exit.getName());
                 }
             }
         }
