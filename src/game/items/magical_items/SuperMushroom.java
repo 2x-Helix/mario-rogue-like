@@ -1,6 +1,7 @@
 package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.items.Purchasable;
 import game.status.Status;
 
 /**
@@ -8,7 +9,7 @@ import game.status.Status;
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class SuperMushroom extends MagicalItem{
+public class SuperMushroom extends MagicalItem implements Purchasable{
     
     private static final String NAME = "Super Mushroom";
     private static final char DISPLAY_CHAR = '^';
@@ -21,7 +22,6 @@ public class SuperMushroom extends MagicalItem{
     public SuperMushroom() {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.addCapability(Status.TALL);
-        this.addCapability(Status.INCREASED_MAX_HP);
         this.addCapability(Status.EASY_JUMP);
     }
 
@@ -34,6 +34,13 @@ public class SuperMushroom extends MagicalItem{
             actor.addCapability(capability);
         }
         actor.increaseMaxHp(50);
+    }
+
+    /**
+     * @return the price of this item in Toad's store
+     */
+    public Integer getPrice() {
+        return 400;
     }
 
 }

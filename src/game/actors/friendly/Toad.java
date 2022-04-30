@@ -28,10 +28,13 @@ public class Toad extends Friendly implements Talkable {
     private static final char DISPLAY_CHAR = 'O';
 
     /**
-     * Constructor
+     * Public constructor for toad
      */
     public Toad() {
-        super(NAME, DISPLAY_CHAR, Integer.MAX_VALUE);   // Toad should have practically infinity HP right? unless we do a lil bit of trolling..
+        super(NAME, DISPLAY_CHAR, Integer.MAX_VALUE);   // Toad have practically infinity HP
+        this.addItemToInventory(new Wrench());
+        this.addItemToInventory(new SuperMushroom());
+        this.addItemToInventory(new PowerStar());
     }
 
     /**

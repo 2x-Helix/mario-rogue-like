@@ -2,6 +2,7 @@ package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.Purchasable;
 import game.status.Status;
 import game.status.StatusManager;
 
@@ -10,7 +11,7 @@ import game.status.StatusManager;
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class PowerStar extends MagicalItem {
+public class PowerStar extends MagicalItem implements Purchasable {
 
     private static final String NAME = "Power Star";
     private static final char DISPLAY_CHAR = '*';
@@ -95,6 +96,13 @@ public class PowerStar extends MagicalItem {
      */
     public Integer getRemainingDuration() {
         return this.duration;
+    }
+
+    /**
+     * @return the price of this item in Toad's store
+     */
+    public Integer getPrice() {
+        return 600;
     }
 
     /**
