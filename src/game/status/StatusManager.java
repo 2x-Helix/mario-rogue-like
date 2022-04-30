@@ -16,9 +16,7 @@ public class StatusManager {
     private static StatusManager manager = null;                                  // the singleton object
     private HashMap<Actor, ConcurrentHashMap<Status, Integer>> mapper;  // a Map with Actor as key, a Map as value, which uses Status as key, Int(Duration) as value
                                                                                         // Concurrent to avoid java.util.ConcurrentModificationException
-    private StatusManager() {
-        mapper = new HashMap<>();
-    }
+    private StatusManager() {}
 
     /**
      * Static method to get the StatusManager
@@ -27,6 +25,7 @@ public class StatusManager {
     public static StatusManager getInstance() {
         if (manager == null) {
             manager = new StatusManager();
+            manager.mapper = new HashMap<>();
         }
         return manager;
     }
@@ -142,7 +141,7 @@ public class StatusManager {
                 cout += (this.getDuration(actor, status) > 1) ? "turns" : "turn";
                 cout += " remaining \n";
             } else {                                                        // status without duration
-                cout += actor + " is affected by " + status;
+                cout += actor + " is affected by " + status + "\n";
             }
         }
         
