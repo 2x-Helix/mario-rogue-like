@@ -88,7 +88,7 @@ public class Toad extends Actor implements Talkable{
             monologueOptions.add("You might need a wrench to smash Koopa's hard shells.");
         }
         // Display if Player doesn't have powerstar status:
-        if(!(actor.hasCapability(Status.IMMUNITY) && actor.hasCapability(Status.INSTA_KILL))){
+        if(!(actor.hasCapability(Status.IMMUNITY))){
             monologueOptions.add("You better get back to finding the Power Stars.");
         }
         // Options added by default
