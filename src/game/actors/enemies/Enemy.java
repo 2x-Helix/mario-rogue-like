@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.status.Status;
 import game.reset.Resettable;
 
@@ -20,21 +19,14 @@ public abstract class Enemy extends Actor implements Resettable {
      */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        registerResettable();  // Register as resettable
+        registerInstance();  // Register as resettable
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        // If marked for reset, remove from map,
-        if (hasCapability(Status.RESET)){
-            map.removeActor(this);
-        }
         return null;
     }
 
-    /**
-     * Mark enemy for reset, hurt if implementation is drop items on death
-     */
     @Override
     public void resetInstance() {
         addCapability(Status.RESET);
