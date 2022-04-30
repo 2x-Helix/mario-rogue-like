@@ -38,7 +38,7 @@ public class JumpActorAction extends MoveActorAction {
                 map.moveActor(actor, moveToLocation);
                 return this.menuDescription(actor);
             } else {
-                return actor + " fails to jump, takes " + downCast.getFallDamage().toString() + "fall damage.";
+                return actor + " fails to jump, takes " + downCast.getFallDamage().toString() + " fall damage.";
             }
         } else {
             return this.menuDescription(actor);
