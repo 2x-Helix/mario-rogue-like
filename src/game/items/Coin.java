@@ -3,6 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.status.Status;
+import game.reset.ResetManager;
 import game.reset.Resettable;
 
 /**
@@ -28,7 +29,7 @@ public class Coin extends Item implements Resettable {
     public Coin(Integer value) {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.value = value;
-        registerResettable();  // Add instance to ResetManager
+        registerInstance();  // Add instance to ResetManager
     }
 
     /**

@@ -5,8 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.actions.ResetAction;
-import game.items.magical_items.PowerStar;
+import game.reset.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -30,7 +29,7 @@ public class Player extends Actor implements Resettable {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
-		registerResettable();
+		registerInstance();
 	}
 
 	@Override
@@ -58,16 +57,11 @@ public class Player extends Actor implements Resettable {
 	}
 
 	/**
-	 * Upon reset: Reset duration of powerstar, Heals to max hp
+	 * Upon reset: Reset duration of effects, Heals to max hp
 	 */
 	@Override
 	public void resetInstance() {
 		heal(getMaxHp());  // Heal to max hp
-
-		// Reset Powerstar duration if under the effects
-		if (hasCapability(Status.IMMUNITY)) {
-			new PowerStar().onConsume(this);
-		}
 	}
 
 	/**
