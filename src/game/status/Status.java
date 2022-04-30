@@ -12,5 +12,6 @@ public enum Status {
     HIGHER_GROUND,          // indicates actor can just walk to higher ground, and destroy it
     COIN_FROM_DESTROYED_GROUND,  // destroyed ground drop $5 
     IMMUNITY,               // indicates actor takes 0 damage when attacked by enemies
-    INSTA_KILL              // indicates actor instantly kill enemies if the attack is successful
+    INSTA_KILL,              // indicates actor instantly kill enemies if the attack is successful
+    RESET,                  // indicates object is to be reset next turn
 }
