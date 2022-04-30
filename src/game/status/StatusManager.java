@@ -130,7 +130,7 @@ public class StatusManager {
     public String getDescription(Actor actor) {
 
         if (!this.mapper.containsKey(actor)) {
-            return actor + " is not affected by any statuses";
+            return "";
         }
 
         Status status;
