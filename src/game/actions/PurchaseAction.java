@@ -4,8 +4,9 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.WalletManager;
-import game.items.Purchasable;
+import game.actors.friendly.ShopOwner;
+import game.items.ItemManager;
+import game.wallet.WalletManager;
 
 /**
  * Allow Purchasable items to be purchased
@@ -14,7 +15,7 @@ import game.items.Purchasable;
  */
 public class PurchaseAction extends Action{
 
-    private Purchasable item;
+    private Item item;
     private Actor seller;
 
     /**
@@ -22,7 +23,7 @@ public class PurchaseAction extends Action{
      * @param item is the item to be sold/bought
      * @param seller is the actor selling the item
      */
-    public PurchaseAction(Purchasable item, Actor seller) {
+    public PurchaseAction(Item item, ShopOwner seller) {
         this.item = item;
         this.seller = seller;
     }
@@ -37,19 +38,16 @@ public class PurchaseAction extends Action{
     public String execute(Actor buyer, GameMap map) {
         WalletManager walletManager = WalletManager.getInstance();
         try {
-            
-            Integer itemPrice = this.item.getPrice();
-
-            if (walletManager.canActorAfford(buyer, itemPrice)) {
-                walletManager.subActorCredit(buyer, itemPrice);
-                walletManager.addActorCredit(seller, itemPrice);
+            Integer itemPrice = ItemManager.getInstance().getPrice(item);
+            if (walletManager.canAfford(buyer, itemPrice)) {
+                walletManager.subCredit(buyer, itemPrice);
+                walletManager.addCredit(seller, itemPrice);
                 seller.removeItemFromInventory((Item) this.item);
                 buyer.addItemToInventory((Item) this.item);
                 return this.menuDescription(buyer);
             } else {
                 return buyer + " can not afford" + item;
             }
-
         } catch (Exception e) {
             return e.toString();
         }
@@ -61,7 +59,11 @@ public class PurchaseAction extends Action{
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " bought " + (Item) item + " from " + this.seller + " for $" + item.getPrice();
+        try {
+            return actor + " bought " + (Item) item + " from " + this.seller + " for $" + ItemManager.getInstance().getPrice(item);
+        } catch (Exception e) {
+            return e.toString();
+        }
     }
     
 }
