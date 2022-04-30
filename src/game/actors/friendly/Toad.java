@@ -18,6 +18,7 @@ import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
 import game.items.weapon_items.Wrench;
 import game.status.Status;
+import game.wallet.WalletManager;
 
 /**
  * Friendly NPC Toad who sells items and talks to the player.
@@ -37,6 +38,7 @@ public class Toad extends Actor implements Talkable{
         this.addItemToInventory(new Wrench());
         this.addItemToInventory(new SuperMushroom());
         this.addItemToInventory(new PowerStar());
+        WalletManager.getInstance().createWallet(this);
     }
 
     /**

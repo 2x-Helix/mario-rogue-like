@@ -41,11 +41,11 @@ public class PurchaseAction extends Action{
             if (walletManager.canAfford(buyer, itemPrice)) {
                 walletManager.subCredit(buyer, itemPrice);
                 walletManager.addCredit(seller, itemPrice);
-                seller.removeItemFromInventory((Item) this.item);
-                buyer.addItemToInventory((Item) this.item);
+                seller.removeItemFromInventory(this.item);
+                buyer.addItemToInventory(this.item);
                 return this.menuDescription(buyer);
             } else {
-                return buyer + " can not afford" + item;
+                return "You don't have enough coins!";
             }
         } catch (Exception e) {
             return e.toString();

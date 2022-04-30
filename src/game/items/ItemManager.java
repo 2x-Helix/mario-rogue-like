@@ -26,7 +26,10 @@ public class ItemManager {
      * @return the instance of ItemManager
      */
     public static ItemManager getInstance() {
-        return manager == null ? new ItemManager() : manager;
+        if (manager == null) {
+            manager = new ItemManager();
+        }
+        return manager;
     }
 
     /**
