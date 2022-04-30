@@ -3,7 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.WalletManager;
+import game.wallet.WalletManager;
 
 /**
  * A class for the currency in this game
@@ -49,7 +49,7 @@ public class Coin extends Item{
     @Override
     public void tick(Location currentLocation, Actor actor) {
         try {
-            WalletManager.getInstance().addActorCredit(actor, this.value);
+            WalletManager.getInstance().addCredit(actor, this.value);
             actor.removeItemFromInventory(this);
         } catch (Exception e) {
             e.printStackTrace();

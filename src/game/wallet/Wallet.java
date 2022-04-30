@@ -1,4 +1,4 @@
-package game;
+package game.wallet;
 
 /**
  * A Wallet System for Players
