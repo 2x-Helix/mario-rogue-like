@@ -13,7 +13,7 @@ public class SuperMushroom extends MagicalItem {
     
     private static final String NAME = "Super Mushroom";
     private static final char DISPLAY_CHAR = '^';
-    private static final boolean PORTABLE = true;
+    private static final boolean PORTABLE = true;   // default is droppable
 
     /**
      * SuperMushroom constructor

@@ -15,7 +15,7 @@ public class PowerStar extends MagicalItem {
 
     private static final String NAME = "Power Star";
     private static final char DISPLAY_CHAR = '*';
-    private static final boolean PORTABLE = true;
+    private static final boolean PORTABLE = true;   // default is droppable
 
     private Integer duration;   // active duration
 
