@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Utils;
 import game.actions.PurchaseAction;
-import game.actions.SpeakAction;
+import game.actors.SpeakAction;
 import game.actors.Talkable;
 import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
@@ -25,7 +25,7 @@ import game.wallet.WalletManager;
  * @author James Huynh, Matthew Siegenthaler
  * @version 1.1
  */
-public class Toad extends Actor implements Talkable{
+public class Toad extends Friendly implements Talkable {
 
     private static final String NAME = "Toad";
     private static final char DISPLAY_CHAR = 'O';
@@ -66,6 +66,8 @@ public class Toad extends Actor implements Talkable{
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);  // Get parents action list
         actions.add(new SpeakAction(this));  // Toad to perform speak action
+
+        // Add store inventory
         for (Item item : this.getInventory()) {
             actions.add(new PurchaseAction(item, this));
         }

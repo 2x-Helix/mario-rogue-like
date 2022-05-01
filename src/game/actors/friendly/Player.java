@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.actions.ResetAction;
+import game.reset.ResetAction;
 import game.items.magical_items.PowerStar;
 import game.reset.ResetManager;
 import game.reset.Resettable;
