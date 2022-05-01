@@ -3,6 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.ground.HighGround;
 
@@ -13,7 +14,7 @@ import game.ground.HighGround;
  * @version 2.0
  */
 public class JumpActorAction extends MoveActorAction {
-    
+
     /**
      * Constructor for JumpActorAction
      * @param moveToLocation is the location actor tries to jump to
@@ -30,15 +31,18 @@ public class JumpActorAction extends MoveActorAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        Ground ground = moveToLocation.getGround();
 
         // FIXME: Stinky
-        if (moveToLocation.getGround() instanceof HighGround) {
+
+        if (ground instanceof HighGround) {
             HighGround downCast = (HighGround) moveToLocation.getGround();
             if (downCast.onJump(actor)) {
                 map.moveActor(actor, moveToLocation);
-                return this.menuDescription(actor);
+                String coords = "(" + moveToLocation.x() + ", " + moveToLocation + ")";
+                return this.menuDescription(actor) + " to " + ground.toString() + coords;
             } else {
-                return actor + " fails to jump, takes " + downCast.getFallDamage().toString() + " fall damage.";
+                return actor + " fails to jump, take " + downCast.getFallDamage().toString() + " fall damage.";
             }
         } else {
             return this.menuDescription(actor);
