@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import game.status.Status;
 import game.status.StatusManager;
+import game.items.ItemManager;
 
 /**
  * PowerStar is one of the magical items that can be consumed by the players
@@ -30,6 +31,7 @@ public class PowerStar extends MagicalItem {
         this.addCapability(Status.COIN_FROM_DESTROYED_GROUND);
         this.addCapability(Status.IMMUNITY);
         this.addCapability(Status.INSTA_KILL);
+        ItemManager.getInstance().insertPrice(this, 600);   // 600 is the default price of this item
     }
     
     /**
