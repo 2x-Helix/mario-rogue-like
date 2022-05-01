@@ -42,6 +42,15 @@ public abstract class Enemy extends Actor{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        // checks if lastAction was AttackAction
+        if(lastAction instanceof AttackAction) {
+            // check if behaviours contains AttackBehaviour already
+            if(!behaviours.containsKey(1)) {
+                // adds FollowBehaviour, targeting the actor the current actor called AttackAction on
+                this.behaviours.put(1, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
+            }
+        }
+
         for(Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -54,9 +63,17 @@ public abstract class Enemy extends Actor{
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList list = super.allowableActions(otherActor, direction, map);
         list.add(new AttackAction(this, direction));
-        // After AttackAction is called on this current actor, add FollowBehaviour to this actor's list
-        // of behaviours
-        behaviours.put(1, new FollowBehaviour(otherActor));
+        // iterate through list
+        for (Action action : list) {
+            // checks if action is an AttackAction
+            if(action instanceof AttackAction) {
+                // check if behaviours list contains FollowBehaviour
+                if(!behaviours.containsKey(1)) {
+                    // adds FollowBehaviour, targeting the target Actor
+                    behaviours.put(1, new FollowBehaviour(otherActor));
+                }
+            }
+        }
         return list;
     }
 }
