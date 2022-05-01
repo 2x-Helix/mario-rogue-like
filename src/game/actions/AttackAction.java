@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.Utils;
 import game.status.Status;
 
 /**
@@ -28,11 +29,6 @@ public class AttackAction extends Action {
 	protected String direction;
 
 	/**
-	 * Random number generator
-	 */
-	protected Random rand = new Random();
-
-	/**
 	 * Constructor.
 	 * 
 	 * @param target the Actor to attack
@@ -47,7 +43,7 @@ public class AttackAction extends Action {
 
 		Weapon weapon = actor.getWeapon();
 
-		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
+		if (!(Utils.nextChance() <= weapon.chanceToHit())) {
 			return actor + " misses " + target + ".";
 		}
 

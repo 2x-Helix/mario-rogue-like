@@ -189,8 +189,11 @@ e.g, **Player** must close enough in coordinates to **Toad** for **SpeakAction**
 - To allow for a NPC to talk, we have decided to use the interface **Talkable**. 
 This requires the implementer to have the method **getMonologue()** which is responsible for
 getting the monologue spoken by the implementer. This meets the SOLID principles *Interface Segregation Principle*
-as it separates the single action of monologuing as its own interface.
-- 
+as it separates the single action of monologuing as its own interface. In addition, we are also able to uphold the
+**Open-Close Principle** as we can continue to add additional objects that can talk without modifying those that use
+the **Talkable** in their methods (**SpeakAction**). 
+- Having **Toad** store the **SpeakAction** as part of their action list isn't a con as this
+utilises the existing action system of engine which checks adjacent tiles for available actions for the **Player**.
 
 <br>
 
@@ -221,10 +224,19 @@ to fully heal **Player**.
 * Increased code size and complexity
 
 ### Assignment 2 updates
+- Use of the interface **Resettable** assists in following the **Open-Closed Principle** as this allows
+us to continue to add more things that can be reset without modifying previous implementations.
+As such, we are able to call the **resetInstance()** method of a **Resettable** without modifying the caller of the
+function (**ResetManager**).
+- The **RestManager** also follows the **Dependency Inversion Principle** by storing all **Resettable** instances
+which we may interface with to work with all implementers. This then assists us during the **ResetAction** as we 
+can iterate through to reset each entry.
 - For Coins and Trees, we require to remove/change them at their location.
 However, the **resetInstance()** method does not receive the location as a parameter.
 Our workaround to uphold the polymorphism of the method is to give the Tree/Coins the capability **RESET** 
 to mark them for reset. Upon **tick()** being called, we may then remove/update them from their location as we 
 receive it as a parameter there. This is also the case for **Enemy** where it is removed during 
 the **playTurn()** method being called. 
-
+- Inclusion of the **Utils** class which is responsible for random number generation follows the 
+**Single Responsibility Principle** as this allows other classes to call it when a random number is required,
+rather than each class storing a **Random** class as an attribute.
