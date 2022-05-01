@@ -1,4 +1,4 @@
-package game.actions;
+package game.wallet;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -31,7 +31,7 @@ public class PurchaseAction extends Action{
 
     /**
      * Called upon this action is executed
-     * @param actor is the buyer of the item
+     * @param buyer is the buyer of the item
      * @param map is the gamemap the actor on
      * @return a descriptive string of the result of this action
      */

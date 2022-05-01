@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.status.Status;
 import game.reset.Resettable;
+import game.wallet.WalletManager;
 
 /**
  * A class for the currency in this game
@@ -50,6 +51,8 @@ public class Coin extends Item implements Resettable {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
+
+
         try {
             WalletManager.getInstance().addCredit(actor, this.value);
             actor.removeItemFromInventory(this);
