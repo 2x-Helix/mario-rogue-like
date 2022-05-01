@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 /**
  * Class representing the Player.
  */
-public class Player extends Actor  {
+public class Player extends Friendly {
 
 	private final Menu menu = new Menu();
 

@@ -15,7 +15,9 @@ import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 
 /**
- * A little fungus guy.
+ * A little fungus guy, Enemy - Goomba.
+ * modified by James Huynh
+ * @version 2.0
  */
 public class Goomba extends Enemy {
 

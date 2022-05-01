@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class is an abstract class for the Enemy actors
+ * An abstract class representing the Enemy actors in the game.
  * @author James Huynh
  * @version 2.0
  */
