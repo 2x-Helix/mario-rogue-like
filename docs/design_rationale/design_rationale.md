@@ -129,6 +129,21 @@ to instantly kill a target when attacking after checking that **Player** success
 * Increased code sized
 * Potentially harder to debug
 
+### Assignment 2 updates:
+For the **PowerStar**, its effect, instead of just 1, is divided into 4 statuses:
+
+* **HIGHER_GROUND**: allow actors to move onto higher ground without jumping and destroy that ground
+* **COIN_FROM_DESTROYED_GROUND**: every destroyed higher ground drop $5
+* **IMMUNITY**: actors receive no damage
+* **INSTA_KILL**: actors can kill an enemy instantly upon a successful attack
+
+By sepearting a compound effect into individual atomic statuses, it will be clearer to us what effect(s) a status provides.
+For example, the **INVINCIBLE** status from the initial design carries similar meaning with **IMMUNITY**, but it doesn't carries meanings of "Killing enemies instantly" nor "Walk to Higher Ground and Destroy it" etc.
+It would be more future-proof, as we may have new items providing lesser effects, maybe just **IMMUNITY** and **INSTA_KILL**.
+The same rationale also applies to **SuperMushroom**, which inital status **TALL** is divided into **TALL** and **EASY_JUMP**.
+A **ConsumeAction** class is created for **MagicalItem** to provide actions for the players, which is actually required and was missing in the inital design.
+A **StatusManager** singleton class is introduced to manage all actors' effects with duration. This is done to avoid modifying the based code of Actor and writing smelly code.
+
 <br>
 
 ## REQ5: Trading
@@ -148,6 +163,7 @@ Integer attribute representing how much the player have.
 * Requires other classes to implement class attribute to store total amount of currency.
 *(currently, this is exclusive to player)*.
 
+### Assignment 2 updates
 <br>
 
 ## REQ6: Monologue
@@ -204,7 +220,7 @@ to fully heal **Player**.
 ### Cons
 * Increased code size and complexity
 
-### Assignment 2
+### Assignment 2 updates
 - For Coins and Trees, we require to remove/change them at their location.
 However, the **resetInstance()** method does not receive the location as a parameter.
 Our workaround to uphold the polymorphism of the method is to give the Tree/Coins the capability **RESET** 
