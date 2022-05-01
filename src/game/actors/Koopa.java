@@ -12,7 +12,6 @@ import game.actions.AttackAction;
 import game.actions.SmashShellAction;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
-import game.items.magical_items.SuperMushroom;
 import game.items.weapon_items.Wrench;
 
 
@@ -28,12 +27,14 @@ public class Koopa extends Enemy {
         return new IntrinsicWeapon(30, "punches");
     }
 
-    public void becomeDormant() {
-        this.addCapability(Status.DORMANT);;
-    }
-
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        // check if Koopa is not conscious
+        if(this.isConscious()) {
+            this.addCapability(Status.DORMANT);
+            this.setDisplayChar('D');
+        }
+
         // check if Koopa IS NOT dormant
         if(!this.hasCapability(Status.DORMANT)) {
             // checks if lastAction was AttackAction
@@ -77,18 +78,6 @@ public class Koopa extends Enemy {
             if(otherActor.getWeapon() instanceof Wrench) {
                 // allow SmashShellAction
                 list.add(new SmashShellAction(this));
-            }
-        }
-
-        // iterate through list
-        for (Action action : list) {
-            // checks if action is an AttackAction
-            if(action instanceof AttackAction) {
-                // check if behaviours list contains FollowBehaviour
-                if(!behaviours.containsKey(1)) {
-                    // adds FollowBehaviour, targeting the target Actor
-                    behaviours.put(1, new FollowBehaviour(otherActor));
-                }
             }
         }
         return list;

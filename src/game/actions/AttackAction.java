@@ -66,10 +66,6 @@ public class AttackAction extends Action {
 				map.removeActor(target);
 				result += System.lineSeparator() + target + " is killed.";
 			}
-			else {
-				// if target is indestructible but not conscious, then it is dormant
-				target.addCapability(Status.DORMANT);
-			}
 		}
 		return result;
 	}
