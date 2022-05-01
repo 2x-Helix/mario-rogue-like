@@ -2,7 +2,6 @@ package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.ConsumeAction;
 
 /**
  * A class of Item that is consummable by Players (and possibly all actors)
@@ -13,9 +12,9 @@ public abstract class MagicalItem extends Item{
     
     /**
      * Protected contructor of this class
-     * @param name
-     * @param displayChar
-     * @param portable
+     * @param name name of magical item
+     * @param displayChar character to display item on the ground
+     * @param portable can the magical item be moved?
      */
     protected MagicalItem(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);

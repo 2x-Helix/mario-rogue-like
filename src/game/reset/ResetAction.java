@@ -1,9 +1,8 @@
-package game.actions;
+package game.reset;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.reset.ResetManager;
 
 /**
  * Resets all resettable objects on the map.
@@ -11,10 +10,6 @@ import game.reset.ResetManager;
  * @version 1.0
  */
 public class ResetAction extends Action {
-    public ResetAction() {
-
-    }
-
     /**
      * Calls ResetManager to perform the reset on all resettable items.
      * @param actor The actor performing the action.

@@ -7,15 +7,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Utils;
-import game.actions.SpeakAction;
+import game.actors.SpeakAction;
 import game.actors.Talkable;
-import game.items.magical_items.PowerStar;
 import game.items.weapon_items.Wrench;
 import game.status.Status;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Friendly NPC Toad who sells items and talks to the player.
