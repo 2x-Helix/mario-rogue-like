@@ -1,6 +1,7 @@
 package game.items.weapon_items;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.items.ItemManager;
 
 /**
  * Wrench weapon used to smash Koopa shells.
@@ -20,5 +21,6 @@ public class Wrench extends WeaponItem {
      */
     public Wrench() {
         super(NAME, DISPLAY_CHAR, DAMAGE, VERB, HIT_RATE);
+        ItemManager.getInstance().insertPrice(this, 200);
     }
 }
