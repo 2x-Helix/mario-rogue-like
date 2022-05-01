@@ -63,7 +63,7 @@ public class PurchaseAction extends Action{
     @Override
     public String menuDescription(Actor actor) {
         try {
-            return actor + " bought " + (Item) item + " from " + this.seller + " for $" + ItemManager.getInstance().getPrice(item);
+            return actor + " buys " + item + " from " + this.seller + " for $" + ItemManager.getInstance().getPrice(item);
         } catch (Exception e) {
             return e.toString();
         }
