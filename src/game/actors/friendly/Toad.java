@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Utils;
-import game.actions.PurchaseAction;
+import game.wallet.PurchaseAction;
 import game.actors.SpeakAction;
 import game.actors.Talkable;
 import game.items.magical_items.PowerStar;
