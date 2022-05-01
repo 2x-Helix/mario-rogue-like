@@ -3,21 +3,17 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
-import game.reset.ResetManager;
+import game.status.Status;
 import game.reset.Resettable;
 import game.wallet.WalletManager;
 
 /**
  * A class for the currency in this game
+ * @author ChunKau Mok (Peter)
+ * @version 1.0
  */
 public class Coin extends Item implements Resettable {
 
-    /**
-     * public to skip all the getter
-     * static as the values are the same for all object in this class
-     * final as the values don't change
-     */
     public static final String NAME = "Coin";
     public static final char DISPLAY_CHAR = '$';
     public static final boolean PORTABLE = true; 
@@ -34,7 +30,7 @@ public class Coin extends Item implements Resettable {
     public Coin(Integer value) {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.value = value;
-        registerInstance();  // Add instance to ResetManager
+        registerResettable();  // Add instance to ResetManager
     }
 
     /**
@@ -55,13 +51,8 @@ public class Coin extends Item implements Resettable {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        // Remove coin from location upon reset
-        if (hasCapability(Status.RESET)) {
-            currentLocation.removeItem(this);
-            return;
-        }
 
-        // Add coins to wallet upon game update
+
         try {
             WalletManager.getInstance().addCredit(actor, this.value);
             actor.removeItemFromInventory(this);
@@ -70,8 +61,4 @@ public class Coin extends Item implements Resettable {
         }
     }
 
-    @Override
-    public void resetInstance() {
-        addCapability(Status.RESET);
-    }
 }
