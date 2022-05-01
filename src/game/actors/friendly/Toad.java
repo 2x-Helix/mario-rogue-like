@@ -1,19 +1,24 @@
 package game.actors.friendly;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Utils;
+import game.wallet.PurchaseAction;
 import game.actors.SpeakAction;
 import game.actors.Talkable;
+import game.items.magical_items.PowerStar;
+import game.items.magical_items.SuperMushroom;
 import game.items.weapon_items.Wrench;
 import game.status.Status;
-
-import java.util.ArrayList;
-import java.util.List;
+import game.wallet.WalletManager;
 
 /**
  * Friendly NPC Toad who sells items and talks to the player.
@@ -26,10 +31,14 @@ public class Toad extends Friendly implements Talkable {
     private static final char DISPLAY_CHAR = 'O';
 
     /**
-     * Constructor
+     * Public constructor for toad
      */
     public Toad() {
-        super(NAME, DISPLAY_CHAR, Integer.MAX_VALUE);   // Toad should have practically infinity HP right? unless we do a lil bit of trolling..
+        super(NAME, DISPLAY_CHAR, Integer.MAX_VALUE);   // Toad have practically infinity HP
+        this.addItemToInventory(new Wrench());
+        this.addItemToInventory(new SuperMushroom());
+        this.addItemToInventory(new PowerStar());
+        WalletManager.getInstance().createWallet(this);
     }
 
     /**
@@ -57,6 +66,11 @@ public class Toad extends Friendly implements Talkable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);  // Get parents action list
         actions.add(new SpeakAction(this));  // Toad to perform speak action
+
+        // Add store inventory
+        for (Item item : this.getInventory()) {
+            actions.add(new PurchaseAction(item, this));
+        }
 
         return actions;
     }

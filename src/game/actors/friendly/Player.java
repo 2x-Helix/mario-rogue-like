@@ -12,6 +12,7 @@ import game.reset.Resettable;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.status.Status;
 import game.status.StatusManager;
+import game.wallet.WalletManager;
 
 /**
  * Class representing the Player.
@@ -30,6 +31,7 @@ public class Player extends Actor implements Resettable {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		WalletManager.getInstance().createWallet(this);
 		registerResettable();
 	}
 

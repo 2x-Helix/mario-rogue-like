@@ -1,6 +1,7 @@
 package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.items.ItemManager;
 import game.status.Status;
 
 /**
@@ -23,6 +24,7 @@ public class SuperMushroom extends MagicalItem{
         this.addCapability(Status.TALL);
         this.addCapability(Status.INCREASED_MAX_HP);
         this.addCapability(Status.EASY_JUMP);
+        ItemManager.getInstance().insertPrice(this, 400);   // 400 is the default price of this item
     }
 
     /**
