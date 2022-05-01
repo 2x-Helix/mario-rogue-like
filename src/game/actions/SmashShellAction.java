@@ -3,19 +3,24 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
+import game.items.magical_items.SuperMushroom;
+import game.items.weapon_items.Wrench;
 
 public class SmashShellAction extends Action {
 	private Actor target;
 
 	/**
 	 * Constructor
+	 * @param target the actor being targeted
 	 */
-	public void SmashShellAction(Actor target){
+	public SmashShellAction(Actor target) {
 		this.target = target;
 	}
 
 	/**
-	 * Perform the Action.
+	 * Performs SmashShellAction
 	 *
 	 * @param actor The actor performing the action.
 	 * @param map   The map the actor is on.
@@ -23,7 +28,18 @@ public class SmashShellAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		return null;
+		// check if actor carries a Wrench
+		if(actor.getWeapon() instanceof Wrench) {
+			// check if target is in dormant state
+			if(target.hasCapability(Status.DORMANT)) {
+				// drop SuperMushroom
+				map.locationOf(target).addItem(new SuperMushroom());
+				// instantly destroy target
+				map.removeActor(target);
+				return menuDescription(actor);
+			}
+		}
+		return menuDescription(actor);
 	}
 
 	/**
@@ -34,6 +50,6 @@ public class SmashShellAction extends Action {
 	 */
 	@Override
 	public String menuDescription(Actor actor) {
-		return actor + " smashes the shell of " + target;
+		return actor + " destroys " + target;
 	}
 }
