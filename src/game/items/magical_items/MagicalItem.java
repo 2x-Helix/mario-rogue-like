@@ -32,8 +32,5 @@ public abstract class MagicalItem extends Item{
      * Intended to be override by child classess
      * Call this function when MagicalItems are consumed, to provide statuses and effects
      */
-    public void onConsume(Actor actor) {
-
-    }
-
+    public abstract void onConsume(Actor actor);
 }
