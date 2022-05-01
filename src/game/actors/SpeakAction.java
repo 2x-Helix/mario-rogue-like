@@ -1,9 +1,8 @@
-package game.actions;
+package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.Talkable;
 
 public class SpeakAction extends Action {
 
