@@ -3,11 +3,15 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.items.magical_items.SuperMushroom;
 import game.items.weapon_items.Wrench;
 
+/**
+ * Class implementing the ability to Smash an actor's shell if they have a shell.
+ * @author James Huynh
+ * @version 1.0
+ */
 public class SmashShellAction extends Action {
 	private Actor target;
 

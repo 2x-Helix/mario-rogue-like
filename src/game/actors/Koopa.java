@@ -15,9 +15,13 @@ import game.behaviours.FollowBehaviour;
 import game.items.magical_items.SuperMushroom;
 import game.items.weapon_items.Wrench;
 
+/**
+ * Class implementing the Enemy - Koopa actor.
+ * @author James Huynh
+ * @version 1.0
+ */
 
 public class Koopa extends Enemy {
-
     // Constructor
     public Koopa() {
         super("Koopa", 'K', 100);

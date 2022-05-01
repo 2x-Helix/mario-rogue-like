@@ -17,7 +17,7 @@ import game.wallet.WalletManager;
 /**
  * Class representing the Player.
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Friendly implements Resettable {
 
 	private final Menu menu = new Menu();
 
