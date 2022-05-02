@@ -1,8 +1,7 @@
-package game.actors.friendly;
+package game.actors.friendlies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -16,8 +15,9 @@ import game.wallet.WalletManager;
 
 /**
  * Class representing the Player.
+ * Modified by: Chun Mok
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Friendly implements Resettable {
 
 	private final Menu menu = new Menu();
 

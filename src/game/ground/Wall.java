@@ -25,20 +25,4 @@ public class Wall extends HighGround {
 	public boolean blocksThrownObjects() {
 		return true;
 	}
-
-	/**
-	 * Called whenever an actor tries to jump on this
-	 * @param actor is the actor trying to jump on this
-	 * @return if the actor successfully jump on this or not
-	 */
-	@Override
-    public boolean onJump(Actor actor) {
-		if (actor.hasCapability(Status.EASY_JUMP) || Utils.nextChance() <= this.successThreshhold) {
-			return true;
-		} else {
-			actor.hurt(this.fallDamage);
-			return false;
-		}
-	}
-
 }

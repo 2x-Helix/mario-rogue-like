@@ -9,7 +9,7 @@ import game.items.ItemManager;
  * @version 2.0
  */
 public class Wrench extends WeaponItem {
-    
+
     private static final String NAME = "Wrench";
     private static final char DISPLAY_CHAR = 'W';
     private static final int DAMAGE = 50;
