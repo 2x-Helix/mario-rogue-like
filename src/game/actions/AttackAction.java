@@ -1,12 +1,10 @@
 package game.actions;
 
-import java.util.Random;
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Utils;
 import game.status.Status;
@@ -14,7 +12,7 @@ import game.status.Status;
 /**
  * Special Action for attacking other Actors.
  * modified by: James Huynh
- * @version 2.0
+ * @version 3.0
  */
 public class AttackAction extends Action {
 
@@ -71,10 +69,6 @@ public class AttackAction extends Action {
 				// remove actor
 				map.removeActor(target);
 				result += System.lineSeparator() + target + " is killed.";
-			}
-			else {
-				// if target is indestructible but not conscious, then it is dormant
-				target.addCapability(Status.DORMANT);
 			}
 		}
 		return result;

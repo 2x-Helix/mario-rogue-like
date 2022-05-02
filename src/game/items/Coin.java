@@ -16,7 +16,7 @@ public class Coin extends Item implements Resettable {
 
     public static final String NAME = "Coin";
     public static final char DISPLAY_CHAR = '$';
-    public static final boolean PORTABLE = true; 
+    public static final boolean PORTABLE = true;
 
     /**
      * Value of the coin holds
@@ -44,15 +44,20 @@ public class Coin extends Item implements Resettable {
      * Inform this item of the passage of time.
      * Reduce the active duration remaining on the actor by 1 turn
      * Remove this item from actor's inventory if remaining duration is 0
-     * 
+     *
      * This method is called once per turn, if the Item is being carried.
      * @param currentLocation The location of the actor carrying this Item.
      * @param actor The actor carrying this Item.
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
+        // Remove coin from location upon reset
+        if (hasCapability(Status.RESET)) {
+            currentLocation.removeItem(this);
+            return;
+        }
 
-
+        // Add coins to wallet upon game update
         try {
             WalletManager.getInstance().addCredit(actor, this.value);
             actor.removeItemFromInventory(this);
@@ -61,4 +66,8 @@ public class Coin extends Item implements Resettable {
         }
     }
 
+    @Override
+    public void resetInstance() {
+        addCapability(Status.RESET);
+    }
 }

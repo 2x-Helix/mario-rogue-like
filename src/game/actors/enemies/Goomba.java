@@ -17,7 +17,7 @@ import game.status.Status;
 /**
  * A little fungus guy, Enemy - Goomba.
  * modified by James Huynh
- * @version 2.2
+ * @version 3.0
  */
 public class Goomba extends Enemy {
 

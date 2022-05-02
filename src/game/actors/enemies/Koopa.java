@@ -18,7 +18,7 @@ import game.status.Status;
 /**
  * Class implementing the Enemy - Koopa actor.
  * @author James Huynh
- * @version 2.0
+ * @version 3.0
  */
 
 public class Koopa extends Enemy {
