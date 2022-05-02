@@ -78,13 +78,4 @@ public class Goomba extends Enemy {
 		}
 		return list;
 	}
-
-	/**
-	 * Mark enemy for reset, hurt if implementation is drop items on death
-	 */
-	@Override
-	public void resetInstance() {
-		addCapability(Status.RESET);
-		hurt(getMaxHp());  // Kill enemy (response within playTurn)
-	}
 }

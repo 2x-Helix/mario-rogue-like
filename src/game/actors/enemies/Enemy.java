@@ -1,6 +1,13 @@
 package game.actors.enemies;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.Utils;
+import game.actions.SuicideAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
@@ -33,13 +40,14 @@ public abstract class Enemy extends Actor implements Resettable {
         this.behaviours.put(10, new WanderBehaviour());
     }
 
-    @Override
+
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // If marked for reset, remove from map,
         if (hasCapability(Status.RESET)){
-            map.removeActor(this);
+            return new SuicideAction();
+        } else {
+            return new DoNothingAction();
         }
-        return null;
     }
 
     /**
@@ -48,6 +56,5 @@ public abstract class Enemy extends Actor implements Resettable {
     @Override
     public void resetInstance() {
         addCapability(Status.RESET);
-        hurt(getMaxHp());  // Kill enemy (response within playTurn)
     }
 }

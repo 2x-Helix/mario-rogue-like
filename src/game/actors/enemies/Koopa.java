@@ -93,14 +93,4 @@ public class Koopa extends Enemy {
         }
         return list;
     }
-
-    /**
-     * Mark enemy for reset, hurt if implementation is drop items on death
-     */
-    @Override
-    public void resetInstance() {
-        addCapability(Status.RESET);
-        removeCapability(Status.INDESTRUCTIBLE); // Removes INDESTRUCTIBLE status
-        hurt(getMaxHp());  // Kill enemy (response within playTurn)
-    }
 }
