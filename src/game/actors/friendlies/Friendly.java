@@ -1,4 +1,4 @@
-package game.actors;
+package game.actors.friendlies;
 
 import edu.monash.fit2099.engine.actors.Actor;
 

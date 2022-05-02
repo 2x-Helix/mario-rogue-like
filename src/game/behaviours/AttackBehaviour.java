@@ -25,11 +25,8 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exit : here.getExits()) {
             // check if an exit contains an actor
             if(exit.getDestination().containsAnActor()) {
-                // check if actor can enter the exit's area
-                if(exit.getDestination().canActorEnter(actor)) {
-                    // current actor calls AttackAction on the other actor
-                    return new AttackAction(exit.getDestination().getActor(), exit.getName());
-                }
+                // current actor calls AttackAction on the other actor
+                return new AttackAction(exit.getDestination().getActor(), exit.getName());
             }
         }
         // no action is called

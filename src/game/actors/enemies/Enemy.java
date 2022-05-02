@@ -1,14 +1,22 @@
 package game.actors.enemies;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
-import game.status.Status;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
 import game.reset.Resettable;
 
+import java.util.HashMap;
+import java.util.Map;
+/**
+ * An abstract class representing the Enemy actors in the game.
+ * @author Matthew Siegenthaler
+ * @author James Huynh
+ * @version 3.0
+ */
+
 public abstract class Enemy extends Actor implements Resettable {
+    protected Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
      * Constructor.
@@ -19,17 +27,8 @@ public abstract class Enemy extends Actor implements Resettable {
      */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        registerInstance();  // Register as resettable
-    }
-
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return null;
-    }
-
-    @Override
-    public void resetInstance() {
-        addCapability(Status.RESET);
-        hurt(getMaxHp());  // Kill enemy (response within playTurn)
+        registerResettable();  // Register as resettable
+        this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(10, new WanderBehaviour());
     }
 }

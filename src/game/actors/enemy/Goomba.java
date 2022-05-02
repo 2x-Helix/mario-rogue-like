@@ -1,23 +1,23 @@
-package game.actors;
+package game.actors.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
 import game.actions.AttackAction;
-import game.Status;
 import game.actions.SuicideAction;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
+import game.status.Status;
 
 /**
  * A little fungus guy, Enemy - Goomba.
  * modified by James Huynh
- * @version 2.0
+ * @version 2.2
  */
 public class Goomba extends Enemy {
 
@@ -33,6 +33,11 @@ public class Goomba extends Enemy {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		// If marked for reset, remove from map via suicide.
+		if (hasCapability(Status.RESET)){
+			return new SuicideAction();
+		}
+
 		// Chance to self-destruct, 10%
 		if(Utils.nextChance() <= 10) {
 			return new SuicideAction();
@@ -41,9 +46,9 @@ public class Goomba extends Enemy {
 		// checks if lastAction was AttackAction
 		if(lastAction instanceof AttackAction) {
 			// check if behaviours contains AttackBehaviour already
-			if(!behaviours.containsKey(1)) {
+			if(!behaviours.containsKey(2)) {
 				// adds FollowBehaviour, targeting the actor the current actor called AttackAction on
-				this.behaviours.put(1, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
+				this.behaviours.put(2, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
 			}
 		}
 
@@ -62,7 +67,7 @@ public class Goomba extends Enemy {
 	 * @param direction  String representing the direction of the other Actor
 	 * @param map        current GameMap
 	 * @return list of actions
-	 * @see Status#HOSTILE_TO_ENEMY
+	 * @see Status #HOSTILE_TO_ENEMY
 	 */
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
@@ -72,5 +77,14 @@ public class Goomba extends Enemy {
 			list.add(new AttackAction(this,direction));
 		}
 		return list;
+	}
+
+	/**
+	 * Mark enemy for reset, hurt if implementation is drop items on death
+	 */
+	@Override
+	public void resetInstance() {
+		addCapability(Status.RESET);
+		hurt(getMaxHp());  // Kill enemy (response within playTurn)
 	}
 }

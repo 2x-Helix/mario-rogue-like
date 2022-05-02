@@ -6,9 +6,9 @@ import java.util.List;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Utils;
-import game.actors.enemies.Koopa;
 import game.ground.Dirt;
 import game.ground.GroundCapabilities;
+import game.actors.enemies.Koopa;
 
 /**
  * Mature tree has a 15% chance to spawn Koopa,
