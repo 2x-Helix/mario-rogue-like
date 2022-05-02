@@ -129,7 +129,7 @@ to instantly kill a target when attacking after checking that **Player** success
 * Increased code sized
 * Potentially harder to debug
 
-### Assignment 2 updates:
+### Assignment 2
 For the **PowerStar**, its effect, instead of just 1, is divided into 4 statuses:
 
 * **HIGHER_GROUND**: allow actors to move onto higher ground without jumping and destroy that ground
@@ -158,12 +158,13 @@ attribute to represent its value and 1 static String attribute to represent its 
 * No additional class to manage currency of only **Player**.
 
 ### Cons
-* Not as simple as each item having an Integer attribute representing its cost/player having an 
-Integer attribute representing how much the player have.
+* Not as simple as each item having an Integer attribute representing its cost/player having an Integer attribute representing how much the player have. 
 * Requires other classes to implement class attribute to store total amount of currency.
-*(currently, this is exclusive to player)*.
+* (currently, this is exclusive to player).
 
-### Assignment 2 updates
+### Assignment 2
+**Wallet** class is created for managing credit of actors, and **WalletManager** singleton class are created for managing wallets of actors.
+**Item** no longer has **Coin** as attribute.
 <br>
 
 ## REQ6: Monologue
