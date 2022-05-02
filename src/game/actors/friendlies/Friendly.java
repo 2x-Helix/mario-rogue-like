@@ -1,12 +1,13 @@
-package game.actors.friendly;
+package game.actors.friendlies;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
 /**
- * @TODO: Implment this class
+ * Abstract class representing the friendly actors in the game.
+ * @author James Huynh
+ * @version 1.0
  */
-// Peter: I think it's better to change this class into an interface
-public abstract class Friendly extends Actor{
+public abstract class Friendly extends Actor {
     
     /**
      * 

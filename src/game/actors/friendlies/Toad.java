@@ -1,4 +1,4 @@
-package game.actors.friendly;
+package game.actors.friendlies;
 
 import java.util.ArrayList;
 import java.util.List;

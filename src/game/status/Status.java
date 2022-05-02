@@ -13,5 +13,7 @@ public enum Status {
     COIN_FROM_DESTROYED_GROUND,  // destroyed ground drop $5 
     IMMUNITY,               // indicates actor takes 0 damage when attacked by enemies
     INSTA_KILL,              // indicates actor instantly kill enemies if the attack is successful
-    RESET,                  // indicates object is to be reset next turn
+    INDESTRUCTIBLE,      // indicates actor cannot be removed when hp is less than or equal to 0
+    DORMANT,             // indicates actor cannot attack, follow or wander around
+    RESET                  // indicates object is to be reset next turn
 }
