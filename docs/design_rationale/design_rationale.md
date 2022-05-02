@@ -101,14 +101,14 @@ two Actors with different methods.
 * Cannot override the hit rate of **IntrinsicWeapon** for future enemy implementations as it is default to 50%.
 
 ### Assignment 2 updates
-**Main implementations:**
+**Main implementations**
 * **FollowBehaviour** is added to enemies only when they call **AttackAction** in their last turn, through checking the parameter lastAction. I found this was
 the most optimal way enemies follow other actors as they already engage in fights with any actor close in proximity.
 * Used **Utils** static method **nextChance()** to create 10% chance of Goomba calling **SuicideAction** to be removed from GameMap.
 * Koopa cannot be removed from map due to creation of **INDESTRUCTIBLE** status
 * Koopa becomes **DORMANT** (Status): **AttackBehaviour**, **FollowBehaviour**, **WanderBehaviour** behaviours are stripped from Koopa.
 
-**Changes:**
+**Changes**
 * Removed **StationaryBehaviour**
 * Enemy and Friendly, along with their subclasses have been divided into two packages, Friendlies and Enemies.
 * New Action **SuicideAction** implemented, results in removal of Actor from GameMap.
