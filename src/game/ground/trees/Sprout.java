@@ -11,11 +11,17 @@ import game.actors.enemies.Goomba;
  * @version 2.0
  */
 public final class Sprout extends Tree {
+    private static final char DISPLAY_CHAR = '+';
+    private static final int TURNS_TO_GROW = 10;
+    private static final int SPAWN_CHANCE = 10;  // Chance to spawn Goomba
+    private static final int JUMP_CHANCE = 90;
+    private static final int FALL_DAMAGE = 10;
+
     /**
      * Sprout constructor
      */
     public Sprout() {
-        super('+', 10, 90, 10);
+        super(DISPLAY_CHAR, TURNS_TO_GROW, JUMP_CHANCE, FALL_DAMAGE);
     }
 
     /**
@@ -33,7 +39,7 @@ public final class Sprout extends Tree {
      */
     @Override
     public void spawn(Location location) {
-        if((location.getActor() == null) && (Utils.nextChance() <= 10)) {
+        if((location.getActor() == null) && (Utils.nextChance() <= SPAWN_CHANCE)) {
             location.addActor(new Goomba());
         }
     }

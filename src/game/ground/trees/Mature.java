@@ -6,9 +6,9 @@ import java.util.List;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Utils;
+import game.actors.enemies.Koopa;
 import game.ground.Dirt;
 import game.ground.GroundCapabilities;
-import game.actors.enemies.Koopa;
 
 /**
  * Mature tree has a 15% chance to spawn Koopa,
@@ -20,11 +20,18 @@ import game.actors.enemies.Koopa;
  */
 public final class Mature extends Tree {
 
+    private static final char DISPLAY_CHAR = 'T';
+    private static final int TURNS_TO_GROW_SPROUT = 5;
+    private static final int SPAWN_CHANCE = 15;  // Chance to spawn Koopa
+    private static final int WITHER_CHANCE = 20;
+    private static final int JUMP_CHANCE = 70;
+    private static final int FALL_DAMAGE = 30;
+
     /**
      * Mature constructor
      */
     public Mature() {
-        super('T', 5, 70, 30);
+        super(DISPLAY_CHAR, TURNS_TO_GROW_SPROUT, JUMP_CHANCE, FALL_DAMAGE);
     }
 
     /**
@@ -35,7 +42,7 @@ public final class Mature extends Tree {
     @Override
     public void tick(Location location) {
         super.tick(location);               // Calls grow() and spawn()
-        if (Utils.nextChance() <= 20) {     // Chance to wither to dirt
+        if (Utils.nextChance() <= WITHER_CHANCE) {     // Chance to wither to dirt
             location.setGround(new Dirt());
         }
     }
@@ -47,7 +54,7 @@ public final class Mature extends Tree {
     @Override
     public void grow(Location location) {
         // Find all adjacent fertile locations
-        List<Location> fertileLocations = new ArrayList<Location>();
+        List<Location> fertileLocations = new ArrayList<>();
         for (Exit exit : location.getExits()) {
             Location destination = exit.getDestination();
             if (destination.getGround().hasCapability(GroundCapabilities.FERTILE)) {
@@ -61,7 +68,7 @@ public final class Mature extends Tree {
             sproutLocation.setGround(new Sprout());
         }
         // Reset growthCounter
-        setGrowthCounter(5);
+        setGrowthCounter(TURNS_TO_GROW_SPROUT);
     }
 
     /**
@@ -70,7 +77,7 @@ public final class Mature extends Tree {
      */
     @Override
     public void spawn(Location location) {
-        if ((location.getActor() == null) && (Utils.nextChance() <= 15)) {
+        if ((location.getActor() == null) && (Utils.nextChance() <= SPAWN_CHANCE)) {
             location.addActor(new Koopa());
         }
     }

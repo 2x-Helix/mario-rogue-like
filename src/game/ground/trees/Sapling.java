@@ -12,11 +12,17 @@ import game.items.Coin;
  */
 public final class Sapling extends Tree {
 
+    private static final char DISPLAY_CHAR = 't';
+    private static final int TURNS_TO_GROW = 10;
+    private static final int SPAWN_CHANCE = 10;  // Chance to spawn Coin
+    private static final int JUMP_CHANCE = 80;
+    private static final int FALL_DAMAGE = 20;
+
     /**
      * Sapling constructor
      */
     public Sapling() {
-        super('t', 10, 80, 20);
+        super(DISPLAY_CHAR, TURNS_TO_GROW, JUMP_CHANCE, FALL_DAMAGE);
     }
 
     /**
@@ -34,7 +40,7 @@ public final class Sapling extends Tree {
      */
     @Override
     public void spawn(Location location) {
-        if (Utils.nextChance() <= 10) {
+        if (Utils.nextChance() <= SPAWN_CHANCE) {
             location.addItem(new Coin(20));
         }
     }

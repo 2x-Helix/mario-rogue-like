@@ -5,6 +5,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 import game.reset.Resettable;
+import game.status.Status;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,5 +31,23 @@ public abstract class Enemy extends Actor implements Resettable {
         registerResettable();  // Register as resettable
         this.behaviours.put(1, new AttackBehaviour());
         this.behaviours.put(10, new WanderBehaviour());
+    }
+
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        // If marked for reset, remove from map,
+        if (hasCapability(Status.RESET)){
+            map.removeActor(this);
+        }
+        return null;
+    }
+
+    /**
+     * Mark enemy for reset, hurt if implementation is drop items on death
+     */
+    @Override
+    public void resetInstance() {
+        addCapability(Status.RESET);
+        hurt(getMaxHp());  // Kill enemy (response within playTurn)
     }
 }
