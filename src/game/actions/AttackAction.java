@@ -1,7 +1,5 @@
 package game.actions;
 
-import java.util.Random;
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -13,11 +11,13 @@ import game.status.Status;
 
 /**
  * Special Action for attacking other Actors.
+ * modified by: James Huynh, ChunKau Mok
+ * @version 3.0
  */
 public class AttackAction extends Action {
 
 	/**
-	 * The Actor that is to be attacked
+	 * The defender to be attacked
 	 */
 	protected Actor target;
 
@@ -29,13 +29,16 @@ public class AttackAction extends Action {
 	/**
 	 * Constructor.
 	 * 
-	 * @param target the Actor to attack
+	 * @param target the defender
 	 */
 	public AttackAction(Actor target, String direction) {
 		this.target = target;
 		this.direction = direction;
 	}
 
+	/**
+	 * @param actor the attacker
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
@@ -45,30 +48,36 @@ public class AttackAction extends Action {
 			return actor + " misses " + target + ".";
 		}
 
-		int damage;
+		int damage = weapon.damage();
 		if (actor.hasCapability(Status.INSTA_KILL)) {			// Mario consumes POWERSTAR and can insta kill enemies(target)
 			damage = Integer.MAX_VALUE;
-		} else if (target.hasCapability(Status.IMMUNITY)) {		// Mario(target) consumes POWERSTAR and have immunity against enemies'(actor) attacks
+		} else if (target.hasCapability(Status.IMMUNITY)) {        // Mario(target) consumes POWERSTAR and have immunity against enemies'(actor) attacks
 			damage = 0;
-		} else {
-			damage = weapon.damage();
-		}
-		
-		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-		target.hurt(damage);
-		if (!target.isConscious()) {
-			ActionList dropActions = new ActionList();
-			// drop all items
-			for (Item item : target.getInventory())
-				dropActions.add(item.getDropAction(actor));
-			for (Action drop : dropActions)
-				drop.execute(target, map);
-			// remove actor
-			map.removeActor(target);
-			result += System.lineSeparator() + target + " is killed.";
 		}
 
+		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+		target.hurt(damage);
+
+		if (!target.isConscious()) {
+			// check if target does not have indestructible status
+			if (!target.hasCapability(Status.INDESTRUCTIBLE)) {
+				ActionList dropActions = new ActionList();
+				// drop all items
+				for (Item item : target.getInventory())
+					dropActions.add(item.getDropAction(actor));
+				for (Action drop : dropActions)
+					drop.execute(target, map);
+				// remove actor
+				map.removeActor(target);
+				result += System.lineSeparator() + target + " is killed.";
+			}
+		}
 		return result;
+	}
+
+	// gets the target actor; the actor being attacked.
+	public Actor getTarget() {
+		return target;
 	}
 
 	@Override

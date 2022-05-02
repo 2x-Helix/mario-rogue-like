@@ -39,8 +39,8 @@ public class JumpActorAction extends MoveActorAction {
             HighGround downCast = (HighGround) moveToLocation.getGround();
             if (downCast.onJump(actor)) {
                 map.moveActor(actor, moveToLocation);
-                String coords = "(" + moveToLocation.x() + ", " + moveToLocation + ")";
-                return this.menuDescription(actor) + " to " + ground.toString() + coords;
+                String coords = "(" + moveToLocation.x() + ", " + moveToLocation.y() + ")";
+                return this.menuDescription(actor) + " to " + coords;
             } else {
                 return actor + " fails to jump, take " + downCast.getFallDamage().toString() + " fall damage.";
             }
