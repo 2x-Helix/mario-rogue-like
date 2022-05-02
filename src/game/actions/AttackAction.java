@@ -1,7 +1,5 @@
 package game.actions;
 
-import java.util.Random;
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -10,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Utils;
 import game.status.Status;
+import game.status.StatusManager;
 
 /**
  * Special Action for attacking other Actors.
@@ -17,7 +16,7 @@ import game.status.Status;
 public class AttackAction extends Action {
 
 	/**
-	 * The Actor that is to be attacked
+	 * The defender to be attacked
 	 */
 	protected Actor target;
 
@@ -29,13 +28,16 @@ public class AttackAction extends Action {
 	/**
 	 * Constructor.
 	 * 
-	 * @param target the Actor to attack
+	 * @param target the defender
 	 */
 	public AttackAction(Actor target, String direction) {
 		this.target = target;
 		this.direction = direction;
 	}
 
+	/**
+	 * @param actor the attacker
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
@@ -45,13 +47,11 @@ public class AttackAction extends Action {
 			return actor + " misses " + target + ".";
 		}
 
-		int damage;
+		int damage = weapon.damage();
 		if (actor.hasCapability(Status.INSTA_KILL)) {			// Mario consumes POWERSTAR and can insta kill enemies(target)
 			damage = Integer.MAX_VALUE;
 		} else if (target.hasCapability(Status.IMMUNITY)) {		// Mario(target) consumes POWERSTAR and have immunity against enemies'(actor) attacks
 			damage = 0;
-		} else {
-			damage = weapon.damage();
 		}
 		
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
@@ -66,6 +66,23 @@ public class AttackAction extends Action {
 			// remove actor
 			map.removeActor(target);
 			result += System.lineSeparator() + target + " is killed.";
+		} else {
+			try {
+
+				if (target.capabilitiesList().contains(Status.TALL)) {
+					target.capabilitiesList().remove(Status.TALL);
+					StatusManager.getStatusManager().removeStatus(target, Status.TALL);
+				}
+
+				if (target.capabilitiesList().contains(Status.EASY_JUMP)) {
+					target.capabilitiesList().remove(Status.EASY_JUMP);
+					StatusManager.getStatusManager().removeStatus(target, Status.EASY_JUMP);
+				}
+
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+
 		}
 
 		return result;

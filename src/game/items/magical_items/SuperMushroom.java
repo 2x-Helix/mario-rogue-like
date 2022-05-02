@@ -3,6 +3,7 @@ package game.items.magical_items;
 import edu.monash.fit2099.engine.actors.Actor;
 import game.items.ItemManager;
 import game.status.Status;
+import game.status.StatusManager;
 
 /**
  * SuperMushroom is one of the magical items that can be consumed by the players
@@ -34,6 +35,11 @@ public class SuperMushroom extends MagicalItem{
     public void onConsume(Actor actor) {
         for (Enum<?> capability : this.capabilitiesList()) {
             actor.addCapability(capability);
+            try {
+                StatusManager.getStatusManager().insertStatusDuration(actor, (Status)capability, Integer.MAX_VALUE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         actor.increaseMaxHp(50);
     }
