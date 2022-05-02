@@ -62,6 +62,9 @@ rather than the **Ground** classes that are jumpable.
 ### Cons
 * Use of abstraction - slower time complexity and more use of resources (less efficient).
 
+### Assignment 2 updates
+* Replaced **Jumpable** interface w/ abstract class **HighGround**, where **Tree** and **Wall** grounds **extend** from.
+* Removed **JumpManager** (redundant)
 <br>
 
 ## REQ3: Enemies
@@ -97,6 +100,19 @@ two Actors with different methods.
 * More space and time complexity is required for abstraction.
 * Cannot override the hit rate of **IntrinsicWeapon** for future enemy implementations as it is default to 50%.
 
+### Assignment 2 updates
+**Main implementations:**
+* **FollowBehaviour** is added to enemies only when they call **AttackAction** in their last turn, through checking the parameter lastAction. I found this was
+the most optimal way enemies follow other actors as they already engage in fights with any actor close in proximity.
+* Used **Utils** static method **nextChance()** to create 10% chance of Goomba calling **SuicideAction** to be removed from GameMap.
+* Koopa cannot be removed from map due to creation of **INDESTRUCTIBLE** status
+* Koopa becomes **DORMANT** (Status): **AttackBehaviour**, **FollowBehaviour**, **WanderBehaviour** behaviours are stripped from Koopa.
+
+**Changes:**
+* Removed **StationaryBehaviour**
+* Enemy and Friendly, along with their subclasses have been divided into two packages, Friendlies and Enemies.
+* New Action **SuicideAction** implemented, results in removal of Actor from GameMap.
+* **SmashShellAction** is now responsible for dropping SuperMushroom upon Koopa's death.
 <br>
 
 ## REQ4: Magical Items
@@ -137,7 +153,7 @@ For the **PowerStar**, its effect, instead of just 1, is divided into 4 statuses
 * **IMMUNITY**: actors receive no damage
 * **INSTA_KILL**: actors can kill an enemy instantly upon a successful attack
 
-By sepearting a compound effect into individual atomic statuses, it will be clearer to us what effect(s) a status provides.
+By separating a compound effect into individual atomic statuses, it will be clearer to us what effect(s) a status provides.
 For example, the **INVINCIBLE** status from the initial design carries similar meaning with **IMMUNITY**, but it doesn't carries meanings of "Killing enemies instantly" nor "Walk to Higher Ground and Destroy it" etc.
 It would be more future-proof, as we may have new items providing lesser effects, maybe just **IMMUNITY** and **INSTA_KILL**.
 The same rationale also applies to **SuperMushroom**, which inital status **TALL** is divided into **TALL** and **EASY_JUMP**.
@@ -150,7 +166,7 @@ A **StatusManager** singleton class is introduced to manage all actors' effects 
 Two new classes, **Toad** and **Coin**, are added in this section. **Toad** serves as the item shop in this game, and 
 **Coin** is the currency for buying items from **Toad**. **Coin** is inherited from **Item** as, 
 like all items, coins can be picked up from the ground. However, it is not inherited from either **WeaponItem** or 
-**MagicalItem**, as it can not be equiped as a weapon or consume to gain status. **Coin** should have 1 Integer 
+**MagicalItem**, as it can not be equipped as a weapon or consume to gain status. **Coin** should have 1 Integer 
 attribute to represent its value and 1 static String attribute to represent its visual to be displayed. 
 **Player** should also have an integer value tracking the amount of currency they have.
 
@@ -200,7 +216,7 @@ utilises the existing action system of engine which checks adjacent tiles for av
 
 ## REQ7: Reset Game
 A **Resettable** interface and a **ResetManager** class are created. All classes that can be reset, 
-like **Player** and **Enemy**, implments this interface. And **ResetManager** manages the reset process.
+like **Player** and **Enemy**, implements this interface. And **ResetManager** manages the reset process.
 This follows the *Dependency Inversion Principle* which depends on the *Resettable* interface.
 Classes that implement *Resettable* will only depend on it.
 
