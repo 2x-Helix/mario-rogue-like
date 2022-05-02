@@ -11,7 +11,7 @@ import game.status.Status;
 
 /**
  * Special Action for attacking other Actors.
- * modified by: James Huynh
+ * modified by: James Huynh, ChunKau Mok
  * @version 3.0
  */
 public class AttackAction extends Action {

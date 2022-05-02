@@ -15,6 +15,7 @@ import game.wallet.WalletManager;
 
 /**
  * Class representing the Player.
+ * Modified by: Chun Mok
  */
 public class Player extends Friendly implements Resettable {
 
