@@ -40,7 +40,7 @@ public class HighGround extends Ground {
         ActionList actionList = new ActionList();
         // no need to jump is player consumed PowerStar, or actor at current location
         if (!actor.hasCapability(Status.HIGHER_GROUND) && !(location.containsAnActor())) {
-            actionList.add(new JumpActorAction(location, direction, null));
+            actionList.add(new JumpActorAction(this, location, direction));
         }
 		return actionList;
 	}

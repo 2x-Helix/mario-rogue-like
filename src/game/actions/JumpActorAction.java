@@ -1,5 +1,6 @@
 package game.actions;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -13,41 +14,35 @@ import game.ground.HighGround;
  * @author ChunKau Mok
  * @version 2.0
  */
-public class JumpActorAction extends MoveActorAction {
+public class JumpActorAction extends Action {
+
+    private final HighGround highGround;
+    private final Location moveToLocation;
+    private final String direction;
 
     /**
      * Constructor for JumpActorAction
-     * @param moveToLocation is the location actor tries to jump to
-     * @param direction is the direction the actor jumping
-     * @param hotKey is the hot key for this action
+     * @param highGround is the ground actor tries to jump to
      */
-    public JumpActorAction(Location moveToLocation, String direction, String hotKey) {
-        super(moveToLocation, direction, hotKey);
+    public JumpActorAction(HighGround highGround, Location moveToLocation, String direction) {
+        this.highGround = highGround;
+        this.moveToLocation = moveToLocation;
+        this.direction = direction;
     }
 
     /**
      * Execute whenever player tries to jump
      * @return a menu description of the result of the jump action
      */
-    @Override
     public String execute(Actor actor, GameMap map) {
-        Ground ground = moveToLocation.getGround();
 
-        // FIXME: Stinky
-
-        if (ground instanceof HighGround) {
-            HighGround downCast = (HighGround) moveToLocation.getGround();
-            if (downCast.onJump(actor)) {
-                map.moveActor(actor, moveToLocation);
-                String coords = "(" + moveToLocation.x() + ", " + moveToLocation.y() + ")";
-                return this.menuDescription(actor) + " to " + coords;
-            } else {
-                return actor + " fails to jump, take " + downCast.getFallDamage().toString() + " fall damage.";
-            }
+        if (highGround.onJump(actor)) {
+            map.moveActor(actor, moveToLocation);
+            String coords = "(" + moveToLocation.x() + ", " + moveToLocation.y() + ")";
+            return this.menuDescription(actor) + " to " + coords;
         } else {
-            return this.menuDescription(actor);
+            return actor + " fails to jump, take " + highGround.getFallDamage().toString() + " fall damage.";
         }
-
     }
 
     /**
@@ -56,7 +51,6 @@ public class JumpActorAction extends MoveActorAction {
      * @param actor The actor performing the action.
      * @return a String, e.g. "Player jumps east"
      */
-    @Override
     public String menuDescription(Actor actor) {
         return actor + " jumps " + direction;
     }
