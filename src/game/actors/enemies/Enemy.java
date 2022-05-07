@@ -42,6 +42,7 @@ public abstract class Enemy extends Actor implements Resettable {
         this.behaviours.put(1, new AttackBehaviour());
         this.behaviours.put(3, new DrinkBehaviour());
         this.behaviours.put(10, new WanderBehaviour());
+        this.addCapability(Status.ENEMY);  // Specifies as enemy
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
