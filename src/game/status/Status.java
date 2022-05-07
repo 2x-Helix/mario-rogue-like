@@ -15,5 +15,6 @@ public enum Status {
     INSTA_KILL,              // indicates actor instantly kill enemies if the attack is successful
     INDESTRUCTIBLE,      // indicates actor cannot be removed when hp is less than or equal to 0
     DORMANT,             // indicates actor cannot attack, follow or wander around
-    RESET                  // indicates object is to be reset next turn
+    RESET,                  // indicates object is to be reset next turn
+    ENEMY,                  // Attacks player
 }
