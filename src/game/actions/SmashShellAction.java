@@ -32,7 +32,7 @@ public class SmashShellAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		// check if actor carries a Wrench
+		// check if actor carries a Wrench has capability smash
 		if(actor.getWeapon() instanceof Wrench) {
 			// check if target is in dormant state
 			if(target.hasCapability(Status.DORMANT)) {
