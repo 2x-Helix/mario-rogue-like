@@ -14,7 +14,7 @@ public class ConsumeAction extends Action{
     /**
      * The item to be consumed
      */
-    private MagicalItem consumable;
+    private final MagicalItem consumable;
 
     /**
      * Public constructor for this class
@@ -32,13 +32,14 @@ public class ConsumeAction extends Action{
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+
+        // provides statuses to actor
         consumable.onConsume(actor);
 
-        // Remove item from the ground or inventory
-        if (actor.getInventory().contains(this.consumable)) {
-            actor.removeItemFromInventory(consumable);
-        } else {
-            map.locationOf(actor).removeItem(this.consumable);
+        // consumes from ground, actor get item for ticking, remove item from the ground
+        if (map.locationOf(actor).getItems().contains(consumable)) {
+            actor.addItemToInventory(consumable);
+            map.locationOf(actor).removeItem(consumable);
         }
 
         return this.menuDescription(actor);

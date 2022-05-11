@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.magical_items.PowerStar;
 import game.reset.ResetAction;
@@ -38,7 +39,13 @@ public class Player extends Friendly implements Resettable {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-		StatusManager.getStatusManager().tick();	// tick for statuses
+		// FIXME: temporary solution for displaying statuses on Player
+		for (Item item : this.getInventory()) {
+			if (item instanceof PowerStar) {
+				PowerStar star = (PowerStar) item;
+				System.out.println("Mario consumes Power Star - " + star.getRemainingDuration() + " turns remaining");
+			}
+		}
 
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
@@ -47,8 +54,6 @@ public class Player extends Friendly implements Resettable {
 		// Check if reset is available
 		if (ResetManager.getInstance().resetAvailable())
 			actions.add(new ResetAction());
-
-		System.out.print(this.statusDescription());
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);

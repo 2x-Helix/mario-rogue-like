@@ -1,6 +1,7 @@
 package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 
 /**
@@ -9,7 +10,10 @@ import edu.monash.fit2099.engine.items.Item;
  * @version 1.0
  */
 public abstract class MagicalItem extends Item{
-    
+
+    private ConsumeAction consumeAction = null;
+    private DropItemAction dropItemAction = null;
+
     /**
      * Protected contructor of this class
      * @param name name of magical item
@@ -22,10 +26,21 @@ public abstract class MagicalItem extends Item{
     }
 
     /**
-     * Create and return an action to consume this item
+     * @return the single ConsumeAction for this item
      */
     protected ConsumeAction getConsumeAction() {
-        return new ConsumeAction(this);
+        if (consumeAction == null) {
+            consumeAction = new ConsumeAction(this);
+        }
+        return consumeAction;
+    }
+
+    /**
+     * Remove the ConsumeAction of this item
+     * Called when player consumes this item
+     */
+    public void removeConsumeAction() {
+        this.removeAction(this.consumeAction);
     }
 
     /**

@@ -37,6 +37,7 @@ public class PowerStar extends MagicalItem {
     /**
      * Inform this item of the passage of time.
      * Reduce the active duration remaining on the actor by 1 turn
+     * Remove statuses by this item from actors
      * Remove this item from actor's inventory if remaining duration is 0
      * 
      * This method is called once per turn, if the Item is being carried.
@@ -48,6 +49,9 @@ public class PowerStar extends MagicalItem {
         if (this.duration > 0) {
             this.duration -= 1;
         } else {
+            for (Enum<?> status : this.capabilitiesList()) {
+                actor.removeCapability(status);
+            }
             actor.removeItemFromInventory(this);
         }
     }
@@ -74,23 +78,13 @@ public class PowerStar extends MagicalItem {
      */
     @Override
     public void onConsume(Actor actor) {
-
-        // add all statuses, with duration or not
         for (Enum<?> capability : this.capabilitiesList()) {
             actor.addCapability(capability);
         }
-
-        // add statuses with duration to be managed 
-        StatusManager statusManager = StatusManager.getStatusManager();
-        try {
-            for (Enum<?> capability : this.capabilitiesList()) {
-                statusManager.insertStatusDuration(actor, (Status)capability, MAX_DURATION);
-            }
-        } catch (Exception e) {
-            System.out.println(e + "; Something is wrong with PowerStar.tick :/");
-        }
-
         actor.heal(200);
+
+        this.togglePortability();   // make this item undroppable
+        this.removeAction(this.getConsumeAction()); // make this item
     }
 
     /**

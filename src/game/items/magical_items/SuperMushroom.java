@@ -35,11 +35,6 @@ public class SuperMushroom extends MagicalItem{
     public void onConsume(Actor actor) {
         for (Enum<?> capability : this.capabilitiesList()) {
             actor.addCapability(capability);
-            try {
-                StatusManager.getStatusManager().insertStatusDuration(actor, (Status)capability, Integer.MAX_VALUE);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         actor.increaseMaxHp(50);
     }
