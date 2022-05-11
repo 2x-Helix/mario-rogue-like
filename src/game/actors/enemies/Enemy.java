@@ -16,15 +16,17 @@ import game.status.Status;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * An abstract class representing the Enemy actors in the game.
  * @author Matthew Siegenthaler
  * @author James Huynh
- * @version 3.0
+ * @version 3.1
  */
 
 public abstract class Enemy extends Actor implements Resettable {
-    protected Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+    protected Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
     /**
      * Constructor.
