@@ -85,7 +85,7 @@ public class Toad extends Friendly implements Talkable {
 
         // Determine dialogue options to add to monologue list
         // Display if Player doesn't have Weapon Wrench
-        if(!(actor.getWeapon() instanceof Wrench)){
+        if(!(actor.hasCapability(Status.CAN_SMASH))){
             monologueOptions.add("You might need a wrench to smash Koopa's hard shells.");
         }
         // Display if Player doesn't have powerstar status:
