@@ -85,8 +85,8 @@ public class Koopa extends Enemy {
         }
         // check if Koopa is in DORMANT state
         else {
-            // check if otherActor has a Wrench
-            if(otherActor.getWeapon() instanceof Wrench) {
+            // check if otherActor has CAN_SMASH capability
+            if(otherActor.hasCapability(Status.CAN_SMASH)) {
                 // allow SmashShellAction
                 list.add(new SmashShellAction(this));
             }
