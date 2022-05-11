@@ -3,6 +3,7 @@ package game.items.magical_items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.Tickable;
 
 /**
  * Allow consummable items to be consumed
@@ -36,10 +37,15 @@ public class ConsumeAction extends Action{
         // provides statuses to actor
         consumable.onConsume(actor);
 
-        // consumes from ground, actor get item for ticking, remove item from the ground
+        // consumes from ground, remove item from the ground
         if (map.locationOf(actor).getItems().contains(consumable)) {
-            actor.addItemToInventory(consumable);
             map.locationOf(actor).removeItem(consumable);
+
+        }
+
+        // add item to inventory for ticking
+        if (consumable instanceof Tickable) {
+            actor.addItemToInventory(consumable);
         }
 
         return this.menuDescription(actor);

@@ -12,7 +12,6 @@ import edu.monash.fit2099.engine.items.Item;
 public abstract class MagicalItem extends Item{
 
     private ConsumeAction consumeAction = null;
-    private DropItemAction dropItemAction = null;
 
     /**
      * Protected contructor of this class
@@ -36,16 +35,9 @@ public abstract class MagicalItem extends Item{
     }
 
     /**
-     * Remove the ConsumeAction of this item
-     * Called when player consumes this item
-     */
-    public void removeConsumeAction() {
-        this.removeAction(this.consumeAction);
-    }
-
-    /**
      * Intended to be override by child classess
      * Call this function when MagicalItems are consumed, to provide statuses and effects
      */
     public abstract void onConsume(Actor actor);
+
 }

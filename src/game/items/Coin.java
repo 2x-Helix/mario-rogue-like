@@ -3,9 +3,9 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.friendlies.Player;
 import game.status.Status;
 import game.reset.Resettable;
-import game.wallet.WalletManager;
 
 /**
  * A class for the currency in this game
@@ -21,7 +21,7 @@ public class Coin extends Item implements Resettable {
     /**
      * Value of the coin holds
      */
-    private Integer value;
+    private final Integer value;
 
     /**
      * Public Constructor for this class
@@ -58,12 +58,9 @@ public class Coin extends Item implements Resettable {
         }
 
         // Add coins to wallet upon game update
-        try {
-            WalletManager.getInstance().addCredit(actor, this.value);
-            actor.removeItemFromInventory(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Player player = (Player) actor;
+        player.getWallet().addCredit(this.value);
+        actor.removeItemFromInventory(this);
     }
 
     @Override

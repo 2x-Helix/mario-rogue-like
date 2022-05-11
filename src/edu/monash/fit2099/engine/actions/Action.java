@@ -2,6 +2,7 @@ package edu.monash.fit2099.engine.actions;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.friendlies.Player;
 
 /**
  * Base class for Actions. These represent things that the actor can do.
@@ -16,7 +17,7 @@ public abstract class Action {
 	 * @return a description of what happened that can be displayed to the user.
 	 */
 	public abstract String execute(Actor actor, GameMap map);
-	
+
 	/**
 	 * Returns a descriptive string
 	 * @param actor The actor performing the action.
@@ -28,7 +29,7 @@ public abstract class Action {
 	 * Returns the key used in the menu to trigger this Action.
 	 *
 	 * There's no central management system for this, so you need to be careful not to use the same one twice.
-	 * See https://en.wikipedia.org/wiki/Connascence
+	 * See <a href="https://en.wikipedia.org/wiki/Connascence">https://en.wikipedia.org/wiki/Connascence</a>
 	 *
 	 * @return The key we use for this Action in the menu, or null to have it assigned for you.
 	 */

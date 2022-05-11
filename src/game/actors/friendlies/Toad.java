@@ -11,14 +11,14 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Utils;
-import game.wallet.PurchaseAction;
+import game.items.Purchasable;
+import game.actions.PurchaseAction;
 import game.actors.SpeakAction;
 import game.actors.Talkable;
 import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
 import game.items.weapon_items.Wrench;
 import game.status.Status;
-import game.wallet.WalletManager;
 
 /**
  * Friendly NPC Toad who sells items and talks to the player.
@@ -38,7 +38,6 @@ public class Toad extends Friendly implements Talkable {
         this.addItemToInventory(new Wrench());
         this.addItemToInventory(new SuperMushroom());
         this.addItemToInventory(new PowerStar());
-        WalletManager.getInstance().createWallet(this);
     }
 
     /**
@@ -69,7 +68,7 @@ public class Toad extends Friendly implements Talkable {
 
         // Add store inventory
         for (Item item : this.getInventory()) {
-            actions.add(new PurchaseAction(item, this));
+            actions.add(new PurchaseAction( (Purchasable) item, this));
         }
 
         return actions;

@@ -2,16 +2,16 @@ package game.items.magical_items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.Purchasable;
+import game.items.Tickable;
 import game.status.Status;
-import game.status.StatusManager;
-import game.items.ItemManager;
 
 /**
  * PowerStar is one of the magical items that can be consumed by the players
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class PowerStar extends MagicalItem {
+public class PowerStar extends MagicalItem implements Purchasable, Tickable {
 
     private static final String NAME = "Power Star";
     private static final char DISPLAY_CHAR = '*';
@@ -31,7 +31,6 @@ public class PowerStar extends MagicalItem {
         this.addCapability(Status.COIN_FROM_DESTROYED_GROUND);
         this.addCapability(Status.IMMUNITY);
         this.addCapability(Status.INSTA_KILL);
-        ItemManager.getInstance().insertPrice(this, 600);   // 600 is the default price of this item
     }
     
     /**
@@ -46,9 +45,8 @@ public class PowerStar extends MagicalItem {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        if (this.duration > 0) {
-            this.duration -= 1;
-        } else {
+        this.tick();
+        if (duration == 0) {
             for (Enum<?> status : this.capabilitiesList()) {
                 actor.removeCapability(status);
             }
@@ -66,12 +64,22 @@ public class PowerStar extends MagicalItem {
      */
     @Override
 	public void tick(Location currentLocation) {
-        if (this.duration > 0) {
-            this.duration -= 1;
-        } else {
+        this.tick();
+        if (this.duration == 0) {
             currentLocation.removeItem(this);
         }
 	}
+
+    /**
+     * Override the tick() from Tickable
+     * Inform this item the passage of time
+     */
+    @Override
+    public void tick() {
+        if (duration > 0) {
+            duration -= 1;
+        }
+    }
 
     /**
      * Call this function when PowerStar are consumed by a player
@@ -83,8 +91,9 @@ public class PowerStar extends MagicalItem {
         }
         actor.heal(200);
 
-        this.togglePortability();   // make this item undroppable
-        this.removeAction(this.getConsumeAction()); // make this item
+        // keep this item in the inventory for ticking, but remove all its actions
+        this.togglePortability();
+        this.removeAction(this.getConsumeAction());
     }
 
     /**
@@ -93,6 +102,12 @@ public class PowerStar extends MagicalItem {
     public Integer getRemainingDuration() {
         return this.duration;
     }
+
+    /**
+     * @return the price of this item
+     */
+    @Override
+    public Integer getPrice() { return 600; }
 
     /**
      * @return a description of this item, including the remaining duration
