@@ -24,7 +24,7 @@ public class PrincessPeach extends Friendly {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);  // Get parents action list
         if(this.hasCapability(Status.LOCKED) && otherActor.hasCapability(Status.HAS_KEY)){
-            actions.add(new RescueAction(this));  // If otherActor has a key, can use UnlockAction on Peach
+            actions.add(new RescueAction(this));  // If otherActor has a key, can use RescueAction on Peach
         }
         return actions;
     }
