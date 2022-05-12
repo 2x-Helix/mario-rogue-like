@@ -13,10 +13,12 @@ public enum Status {
     COIN_FROM_DESTROYED_GROUND,  // destroyed ground drop $5 
     IMMUNITY,               // indicates actor takes 0 damage when attacked by enemies
     INSTA_KILL,              // indicates actor instantly kill enemies if the attack is successful
-    INDESTRUCTIBLE,         // indicates actor cannot be removed when hp is less than or equal to 0
-    DORMANT,                // indicates actor cannot attack, follow or wander around
+    INDESTRUCTIBLE,      // indicates actor cannot be removed when hp is less than or equal to 0
+    DORMANT,             // indicates actor cannot attack, follow or wander around
+    FLY,                    // indicates actor can fly above trees and walls
     CAN_SMASH,              // indicates actor can use SmashShellAction
-    RESET,                  // indicates object is to be reset next turn
+    LOCKED,                 // indicates actor cannot move, attack or be attacked
+    RESET                  // indicates object is to be reset next turn
     POWERFUL,               // base attack damage +15 (NOT WEAPON DAMAGE)
     GREATER_HEAL,           // heal amount +50
     ENEMY,                  // Attacks player
