@@ -15,6 +15,8 @@ public enum Status {
     INSTA_KILL,              // indicates actor instantly kill enemies if the attack is successful
     INDESTRUCTIBLE,      // indicates actor cannot be removed when hp is less than or equal to 0
     DORMANT,             // indicates actor cannot attack, follow or wander around
+    FLY,                    // indicates actor can fly above trees and walls
     CAN_SMASH,              // indicates actor can use SmashShellAction
+    LOCKED,                 // indicates actor cannot move, attack or be attacked
     RESET                  // indicates object is to be reset next turn
 }

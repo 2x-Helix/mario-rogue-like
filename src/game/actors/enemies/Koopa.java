@@ -12,6 +12,7 @@ import game.actions.SmashShellAction;
 import game.actions.SuicideAction;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
+import game.items.magical_items.SuperMushroom;
 import game.items.weapon_items.Wrench;
 import game.status.Status;
 
@@ -25,6 +26,7 @@ public class Koopa extends Enemy {
     // Constructor
     public Koopa() {
         super("Koopa", 'K', 100);
+        this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.INDESTRUCTIBLE);
     }
 
