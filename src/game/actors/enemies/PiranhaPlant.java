@@ -1,6 +1,6 @@
 package game.actors.enemies;
 
-public class PiranhaPlant extends Enemy{
+public class PiranhaPlant extends Enemy {
     // Constants
     private static final String NAME = "Piranha Plant";
     private static final char DISPLAY_CHAR = 'Y';
