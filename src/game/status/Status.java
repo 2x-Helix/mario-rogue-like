@@ -18,6 +18,7 @@ public enum Status {
     FLY,                    // indicates actor can fly above trees and walls
     CAN_SMASH,              // indicates actor can use SmashShellAction
     LOCKED,                 // indicates actor cannot move, attack or be attacked
+    ON_FIRE,                // indicates ground is on fire
     RESET                  // indicates object is to be reset next turn
     POWERFUL,               // base attack damage +15 (NOT WEAPON DAMAGE)
     GREATER_HEAL,           // heal amount +50
