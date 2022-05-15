@@ -44,15 +44,15 @@ public class HighGround extends Ground implements Flammable {
         ActionList actionList = new ActionList();
         // no need to jump is player consumed PowerStar, or actor at current location
         if (!actor.hasCapability(Status.HIGHER_GROUND) && !(location.containsAnActor())) {
-            // iterate through all current actor's exits
+            // iterate through all ground's exits
             for (Exit exit : location.getExits()) {
                 // check if an exit contains an actor
                 if(exit.getDestination().containsAnActor()) {
-                    // current actor calls AttackAction on the other actor
+                    // if actor is standing on a HighGround, then actor can use MoveActorAction
                     if(exit.getDestination().getGround() instanceof HighGround){
                         actionList.add(new MoveActorAction(location, direction));
                     }
-                    else {
+                    else { // Otherwise actor must use JumpActorAction to jump onto HighGround
                         actionList.add(new JumpActorAction(this, location, direction));
                     }
                 }
