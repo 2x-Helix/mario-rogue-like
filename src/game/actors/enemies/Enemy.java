@@ -10,6 +10,7 @@ import game.Utils;
 import game.actions.SuicideAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.DrinkBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.reset.Resettable;
 import game.status.Status;
@@ -39,9 +40,9 @@ public abstract class Enemy extends Actor implements Resettable {
         super(name, displayChar, hitPoints);
         registerResettable();  // Register as resettable
         this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(3, new DrinkBehaviour());
         this.behaviours.put(10, new WanderBehaviour());
     }
-
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // If marked for reset, remove from map,
