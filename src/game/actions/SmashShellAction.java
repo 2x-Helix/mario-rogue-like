@@ -4,8 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.status.Status;
-import game.items.magical_items.SuperMushroom;
-import game.items.weapon_items.Wrench;
 
 /**
  * Class implementing the ability to Smash an actor's shell if they have a shell.
