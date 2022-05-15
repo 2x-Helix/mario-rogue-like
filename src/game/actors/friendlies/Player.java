@@ -5,8 +5,8 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.magical_items.PowerStar;
-import game.items.magical_items.bottles.Bottle;
 import game.reset.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
@@ -15,7 +15,6 @@ import game.Wallet;
 
 /**
  * Class representing the Player.
- * Modified by: Chun Mok
  */
 public class Player extends Friendly implements Resettable {
 
@@ -60,7 +59,21 @@ public class Player extends Friendly implements Resettable {
 	public Wallet getWallet() { return this.wallet;}
 
 	/**
-	 * Upon reset: Reset duration of powerstar, Heals to max hp
+	 * Creates and returns an intrinsic weapon.
+	 * If player has the status POWERFUL, base attack damage +15
+	 *
+	 * @return a freshly-instantiated IntrinsicWeapon
+	 */
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		if (this.capabilitiesList().contains(Status.POWERFUL))
+			return new IntrinsicWeapon(super.getIntrinsicWeapon().damage()+15,super.getIntrinsicWeapon().verb());
+
+		return super.getIntrinsicWeapon();
+	}
+
+	/**
+	 * Upon reset: Reset duration of PowerStar, Heals to max hp
 	 */
 	@Override
 	public void resetInstance() {

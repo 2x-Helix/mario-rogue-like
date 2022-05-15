@@ -17,6 +17,7 @@ public class PowerFountain extends Fountain {
     }
 
     /**
+     * FIXME: violates the DRY principle
      * Called whenever actor fills its bottle
      * @param actor the actor that fills the water bottle
      */
