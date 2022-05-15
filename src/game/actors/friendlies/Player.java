@@ -66,7 +66,7 @@ public class Player extends Friendly implements Resettable {
 	 */
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
-		if (this.capabilitiesList().contains(Status.POWERFUL))
+		if (this.hasCapability(Status.POWERFUL))
 			return new IntrinsicWeapon(super.getIntrinsicWeapon().damage()+15,super.getIntrinsicWeapon().verb());
 
 		return super.getIntrinsicWeapon();
