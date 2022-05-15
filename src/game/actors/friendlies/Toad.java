@@ -11,12 +11,14 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Utils;
+import game.actions.GiveAction;
 import game.items.Purchasable;
 import game.actions.PurchaseAction;
 import game.actors.SpeakAction;
 import game.actors.Talkable;
 import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
+import game.items.magical_items.bottles.Bottle;
 import game.items.weapon_items.Wrench;
 import game.status.Status;
 
@@ -38,6 +40,7 @@ public class Toad extends Friendly implements Talkable {
         this.addItemToInventory(new Wrench());
         this.addItemToInventory(new SuperMushroom());
         this.addItemToInventory(new PowerStar());
+        this.addItemToInventory(new Bottle());
     }
 
     /**
@@ -68,7 +71,10 @@ public class Toad extends Friendly implements Talkable {
 
         // Add store inventory
         for (Item item : this.getInventory()) {
-            actions.add(new PurchaseAction( (Purchasable) item, this));
+            if (item instanceof Purchasable)
+                actions.add(new PurchaseAction( (Purchasable) item, this));
+            else
+                actions.add(new GiveAction(item, this));    // the bottle
         }
 
         return actions;
