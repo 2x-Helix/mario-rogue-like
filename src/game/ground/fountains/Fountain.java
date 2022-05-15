@@ -137,11 +137,12 @@ public abstract class Fountain extends Ground {
      */
     @Override
     public void tick(Location location) {
-        doRefill = isEmpty();                       // start refilling when fountain is empty
-        if (doRefill) {
-            System.out.println("WHAT");
-            volume += refillVolume;
-            doRefill = !volume.equals(capacity);    // keep refilling till volume == capacity
+        if (!doRefill)                              // if not refilling,
+            doRefill = isEmpty();                   // start refilling when fountain is empty
+
+        if (doRefill) {                             // if refilling
+            volume += refillVolume;                 // refill and
+            doRefill = !volume.equals(capacity);          // keep refilling till volume == capacity
         }
     }
 
