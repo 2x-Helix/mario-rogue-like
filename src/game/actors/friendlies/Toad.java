@@ -73,8 +73,8 @@ public class Toad extends Friendly implements Talkable {
         for (Item item : this.getInventory()) {
             if (item instanceof Purchasable)
                 actions.add(new PurchaseAction( (Purchasable) item, this));
-            else
-                actions.add(new GiveAction(item, this));    // the bottle
+            else if (item instanceof Bottle)
+                actions.add(new GiveAction(item, this));
         }
 
         return actions;
