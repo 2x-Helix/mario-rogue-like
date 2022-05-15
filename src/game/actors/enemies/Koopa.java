@@ -21,7 +21,7 @@ import game.status.Status;
  * @version 3.0
  */
 
-public class Koopa extends Enemy implements Shell {
+public class Koopa extends Enemy {
     // Constructor
     public Koopa() {
         super("Koopa", 'K', 100);

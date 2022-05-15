@@ -1,4 +1,4 @@
 package game.actors.enemies;
 
-public interface Shell {
+public interface Shell{
 }
