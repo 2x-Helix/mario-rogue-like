@@ -13,6 +13,7 @@ import game.actors.friendlies.Toad;
 import game.ground.Dirt;
 import game.ground.Floor;
 import game.ground.Wall;
+import game.ground.fountains.PowerFountain;
 import game.ground.trees.Sprout;
 import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
@@ -27,7 +28,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(), new PowerFountain());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -38,7 +39,7 @@ public class Application {
 				"................................................#...............................",
 				".................+................................#.............................",
 				".................................................##.............................",
-				"................................................##..............................",
+				"...........................................A....##..............................",
 				".........+..............................+#____####.................+............",
 				".......................................+#_____###++.............................",
 				".......................................+#______###..............................",

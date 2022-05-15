@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.magical_items.PowerStar;
+import game.items.magical_items.bottles.Bottle;
 import game.reset.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
@@ -32,7 +33,6 @@ public class Player extends Friendly implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.wallet = new Wallet();
-		this.wallet.addCredit(100000);
 		registerResettable();
 	}
 

@@ -1,7 +1,6 @@
 package game.items.magical_items.bottles;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import game.items.magical_items.PowerStar;
+import game.status.Status;
 
 public class PowerBottle extends Bottle {
 
@@ -10,9 +9,7 @@ public class PowerBottle extends Bottle {
 
     public PowerBottle() {
         super(NAME, PORTABLE);
+        this.addCapability(Status.POWERFUL);
     }
-    @Override
-    public void onConsume(Actor actor) {
 
-    }
 }
