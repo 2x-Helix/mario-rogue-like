@@ -1,10 +1,14 @@
 package game.ground;
 
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Utils;
+import game.actions.AttackAction;
 import game.actions.JumpActorAction;
 import game.items.Coin;
 import game.status.Status;
@@ -14,10 +18,10 @@ import game.status.Status;
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class HighGround extends Ground {
+public class HighGround extends Ground implements Flammable {
 
     protected Integer fallDamage, successThreshhold;    // successThreshhold = chance to jump * 100 : 0.8 -> 80
-
+    protected GameMap map; // store GameMap here
     /**
      * Constructor for its child
      * @param displayChar is the char to be displayed in the terminal
@@ -40,7 +44,19 @@ public class HighGround extends Ground {
         ActionList actionList = new ActionList();
         // no need to jump is player consumed PowerStar, or actor at current location
         if (!actor.hasCapability(Status.HIGHER_GROUND) && !(location.containsAnActor())) {
-            actionList.add(new JumpActorAction(this, location, direction));
+            // iterate through all current actor's exits
+            for (Exit exit : location.getExits()) {
+                // check if an exit contains an actor
+                if(exit.getDestination().containsAnActor()) {
+                    // current actor calls AttackAction on the other actor
+                    if(exit.getDestination().getGround() instanceof HighGround){
+                        actionList.add(new MoveActorAction(location, direction));
+                    }
+                    else {
+                        actionList.add(new JumpActorAction(this, location, direction));
+                    }
+                }
+            }
         }
 		return actionList;
 	}
@@ -50,7 +66,10 @@ public class HighGround extends Ground {
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
-		return actor.hasCapability(Status.HIGHER_GROUND);
+		if(actor.hasCapability(Status.HIGHER_GROUND) || actor.hasCapability(Status.CAN_FLY)){
+            return true;
+        }
+        return false;
 	}
 
     /**
@@ -82,6 +101,10 @@ public class HighGround extends Ground {
             actor.hurt(this.fallDamage);
             return false;
         }
+    }
+
+    public void setMap(GameMap map) {
+        this.map = map;
     }
 
     /**

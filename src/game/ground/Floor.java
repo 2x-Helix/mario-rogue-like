@@ -8,7 +8,7 @@ import game.status.Status;
 /**
  * A class that represents the floor inside a building.
  */
-public class Floor extends Ground {
+public class Floor extends Ground implements Flammable {
 	public Floor() {
 		super('_');
 	}
