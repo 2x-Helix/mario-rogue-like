@@ -77,6 +77,7 @@ public abstract class Fountain extends Ground {
     /**
      * Provided only when !isEmpty()
      * @return the single FillWaterAction for this fountain
+     * @throws Exception when the fountain is empty
      */
     public FillWaterAction getFillWaterAction() throws Exception {
         if (isEmpty())
@@ -91,6 +92,7 @@ public abstract class Fountain extends Ground {
     /**
      * Provided only when !isEmpty()
      * @return the single DrinkAction for this fountain
+     * @throws Exception when the fountain is empty
      */
     public DrinkAction getDrinkAction() throws Exception {
         if (isEmpty())
