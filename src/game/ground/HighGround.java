@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Utils;
-import game.actions.AttackAction;
 import game.actions.JumpActorAction;
 import game.items.Coin;
 import game.status.Status;
