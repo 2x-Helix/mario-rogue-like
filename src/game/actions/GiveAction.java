@@ -45,6 +45,6 @@ public class GiveAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return this.giver + " gives " + actor + " a " + item;
+        return actor + " receives a " + item + " from " + giver;
     }
 }

@@ -40,7 +40,6 @@ public class ConsumeAction extends Action{
         // consumes from ground, remove item from the ground
         if (map.locationOf(actor).getItems().contains(consumable)) {
             map.locationOf(actor).removeItem(consumable);
-
         }
 
         // add item to inventory for ticking
@@ -58,11 +57,7 @@ public class ConsumeAction extends Action{
 	 */
     @Override
     public String menuDescription(Actor actor) {
-        if (actor.getInventory().contains(this.consumable)) {
-            return actor + " consumes " + consumable + " in the inventory";
-        } else {
-            return actor + " consumes " + consumable + " on the ground";
-        }
+        return actor + " consumes " + consumable;
     }
 
 }
