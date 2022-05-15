@@ -28,6 +28,8 @@ public class Goomba extends Enemy {
 
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
+		if (this.hasCapability(Status.POWERFUL))
+			return new IntrinsicWeapon(25, "kicks");
 		return new IntrinsicWeapon(10, "kicks");
 	}
 
@@ -43,13 +45,10 @@ public class Goomba extends Enemy {
 			return new SuicideAction();
 		}
 
-		// checks if lastAction was AttackAction
-		if(lastAction instanceof AttackAction) {
-			// check if behaviours contains AttackBehaviour already
-			if(!behaviours.containsKey(2)) {
-				// adds FollowBehaviour, targeting the actor the current actor called AttackAction on
-				this.behaviours.put(2, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
-			}
+		// checks if lastAction was AttackAction and behaviours doesn't contain FollowBehaviour already
+		if(lastAction instanceof AttackAction && !behaviours.containsKey(2)) {
+			// adds FollowBehaviour, targeting the actor the current actor called AttackAction on
+			this.behaviours.put(2, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
 		}
 
 		for(Behaviour behaviour : behaviours.values()) {
@@ -57,6 +56,7 @@ public class Goomba extends Enemy {
 			if (action != null)
 				return action;
 		}
+
 		return new DoNothingAction();
 	}
 
