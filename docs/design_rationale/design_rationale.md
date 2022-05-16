@@ -257,3 +257,12 @@ the **playTurn()** method being called.
 - Inclusion of the **Utils** class which is responsible for random number generation follows the 
 **Single Responsibility Principle** as this allows other classes to call it when a random number is required,
 rather than each class storing a **Random** class as an attribute.
+
+### ASSIGNMENT 3 ###
+## REQ 2: More allies and enemies
+## Changes from assignment 2:
+* Modified behaviours such that enemies only attack friendlies, and this does NOT break the **open-close principle**, as behaviours could still
+be used by friendlies, e.g we can add another check: if actor has status HOSTILE_TO_ENEMY and target does NOT have status HOSTILE_TO_ENEMY, and vice versa (implement both checks),
+so if both actors have the same status or both don't, they won't attack eachother.
+* Removed instanceof checking for Wrench with status check: CAN_SMASH
+* Replaced Hashmap with Treemap, as it auto sorts based on priority of behaviour.
