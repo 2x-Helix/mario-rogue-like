@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.items.equipments.BFG;
 import game.items.magical_items.PowerStar;
 import game.reset.ResetAction;
 import game.reset.ResetManager;
@@ -32,6 +33,7 @@ public class Player extends Friendly implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.wallet = new Wallet();
+		this.addItemToInventory(new BFG());
 		registerResettable();
 	}
 

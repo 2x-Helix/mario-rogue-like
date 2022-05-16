@@ -12,11 +12,13 @@ public enum Status {
     HIGHER_GROUND,          // indicates actor can just walk to higher ground, and destroy it
     COIN_FROM_DESTROYED_GROUND,  // destroyed ground drop $5 
     IMMUNITY,               // indicates actor takes 0 damage when attacked by enemies
-    INSTA_KILL,              // indicates actor instantly kill enemies if the attack is successful
+    INSTA_KILL,             // indicates actor instantly kill enemies if the attack is successful
     INDESTRUCTIBLE,         // indicates actor cannot be removed when hp is less than or equal to 0
     DORMANT,                // indicates actor cannot attack, follow or wander around
     CAN_SMASH,              // indicates actor can use SmashShellAction
     RESET,                  // indicates object is to be reset next turn
     POWERFUL,               // base attack damage +15 (NOT WEAPON DAMAGE)
-    GREATER_HEAL            // heal amount +50
+    GREATER_HEAL,           // heal amount +50
+    ON_FIRE,                // indicates ground is on fire, deals damage to actors
+    FROZEN                  // indicates ground can't be set on fire, put off fire on the ground
 }
