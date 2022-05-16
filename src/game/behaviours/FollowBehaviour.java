@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
+import game.status.Status;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -27,7 +28,7 @@ public class FollowBehaviour implements Behaviour {
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		if(!map.contains(target) || !map.contains(actor))
+		if(!map.contains(target) || !map.contains(actor) || !target.hasCapability(Status.HOSTILE_TO_ENEMY))
 			return null;
 		
 		Location here = map.locationOf(actor);
