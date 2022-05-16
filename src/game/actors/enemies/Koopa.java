@@ -12,7 +12,6 @@ import game.actions.SmashShellAction;
 import game.actions.SuicideAction;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
-import game.items.weapon_items.Wrench;
 import game.status.Status;
 
 /**
@@ -30,6 +29,8 @@ public class Koopa extends Enemy {
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
+        if (this.hasCapability(Status.POWERFUL))
+            return new IntrinsicWeapon(45, "punches");
         return new IntrinsicWeapon(30, "punches");
     }
 
@@ -48,20 +49,15 @@ public class Koopa extends Enemy {
 
         // check if Koopa IS NOT dormant
         if(!this.hasCapability(Status.DORMANT)) {
-            // checks if lastAction was AttackAction
-            if(lastAction instanceof AttackAction) {
-                // check if behaviours contains AttackBehaviour already
-                if(!behaviours.containsKey(2)) {
-                    // adds FollowBehaviour, targeting the actor the current actor called AttackAction on
-                    this.behaviours.put(2, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
-                }
+
+            // checks if lastAction was AttackAction and behaviours doesn't contain FollowBehaviour
+            if(lastAction instanceof AttackAction && !behaviours.containsKey(2)) {
+                // adds FollowBehaviour, targeting the actor the current actor called AttackAction on
+                this.behaviours.put(2, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
             }
-        }
-        // Koopa is dormant
-        else {
-            behaviours.remove(1); // remove AttackBehaviour
-            behaviours.remove(2); // remove FollowBehaviour
-            behaviours.remove(10); // remove WanderBehaviour
+
+        } else {
+            behaviours.clear();                         // Koopa is dormant
         }
 
         for(Behaviour behaviour : behaviours.values()) {
