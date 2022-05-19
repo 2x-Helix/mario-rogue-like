@@ -67,6 +67,9 @@ public class Application {
 			gameMap.locationOf(mario).addItem(new SuperMushroom());
 			gameMap.locationOf(mario).addItem(new PowerStar());
 
+			// Spawn 1 Mimic and 1 Chest
+
+
 			world.run();
 
 	}
