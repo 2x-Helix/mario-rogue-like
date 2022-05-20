@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
 import game.items.ItemPool;
@@ -20,6 +21,11 @@ public class DisguisedChest extends Enemy {
         super("DisguisedChest", 'C', 100);
         behaviours.remove(10); // remove WanderBehaviour
         this.addItemToInventory(itemPool.rollItem()); // roll a random item
+    }
+
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(50, "bites");
     }
 
     @Override
