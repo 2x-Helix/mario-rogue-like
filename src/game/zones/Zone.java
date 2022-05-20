@@ -36,14 +36,15 @@ public abstract class Zone extends GameMap{
      * @param chance Chance of replacing oldGround
      * @param map Map to replace ground of
      */
-    protected void randomizeGround(Ground oldGround, Ground newGround, int chance, GameMap map) {
+    public void randomizeGround(Ground oldGround, Ground newGround, int chance, GameMap map) {
         FancyGroundFactory groundFactory = new FancyGroundFactory(newGround);
         for (int x : map.getXRange()) {
             for (int y : map.getYRange()) {
                 // If old ground
                 if (map.at(x, y).getGround().getDisplayChar() == oldGround.getDisplayChar()
                         && Utils.nextChance() <= chance)
-                    map.at(x, y).setGround(groundFactory.newGround(newGround.getDisplayChar()));
+                    //map.at(x, y).setGround(groundFactory.newGround(newGround.getDisplayChar()));
+                    map.at(x, y).setGround(newGround);
             }
         }
     }

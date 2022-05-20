@@ -35,9 +35,9 @@ public class WarpPipe extends HighGround implements Resettable {
     public WarpPipe(Location destination, WarpPipe exitPipe, String direction) {
         super(DISPLAY_CHAR, JUMP_SUCCESS_RATE, FALL_DAMAGE);
         setExit(destination, exitPipe);  //  direction
-        this.destination = destination;
+        this.direction = direction;
         registerResettable();
-//        this.addCapability(Status.RESET);  // Spawn PiranhaPlant on turn 1
+        this.addCapability(Status.RESET);  // Spawn PiranhaPlant on turn 1
     }
 
     /**
@@ -70,10 +70,9 @@ public class WarpPipe extends HighGround implements Resettable {
      * @param destination Location an actor teleports to
      * //@return Boolean if location was successfully set.
      */
-    public void setExit(Location destination, WarpPipe exitPipe) {  //String direction
+    public void setExit(Location destination, WarpPipe exitPipe) {
         this.destination = destination;
         this.exitPipe = exitPipe;
-//        this.direction = direction;
     }
 
     // Methods
@@ -89,8 +88,7 @@ public class WarpPipe extends HighGround implements Resettable {
         ActionList actions = super.allowableActions(actor, location, direction);
 
         // If actor on WarpPipe, allow them to warp
-        if (actor.equals(location.getActor())) {
-//            actions.add(new MoveActorAction(destination, "to Lava Zone"));
+        if (actor.equals(location.getActor()) && destination != null) {
             actions.add(new WarpAction(this));
         }
         return actions;
