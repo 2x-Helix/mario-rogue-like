@@ -1,7 +1,10 @@
 package game.zones;
 
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
-import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.World;
+import game.ground.Dirt;
+import game.ground.Lava;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +13,8 @@ import java.util.List;
  * @author Matthew Siegenthaler
  * @version 1.0
  */
-public class LavaZone extends GameMap {
+public class LavaZone extends Zone {
+    // Constants
     private static final List<String> strMap = Arrays.asList(
         "C......L#############L.......",
         ".......L#LLLLLLLLLLL#L.......",
@@ -27,8 +31,20 @@ public class LavaZone extends GameMap {
         "............................."
     );
 
-    public LavaZone(FancyGroundFactory groundFactory) {
-        super(groundFactory, strMap);
-        // Add actors
+    // Constructors
+    public LavaZone(World world, FancyGroundFactory groundFactory) {
+        super(world, groundFactory, strMap);
+        randomizeGround(new Dirt(), new Lava(), 5, this);
+    }
+
+    // Methods
+    @Override
+    public void addActors() {
+        // Add Bowser and Peach
+    }
+
+    @Override
+    public void addItems() {
+        // No items by default
     }
 }
