@@ -26,12 +26,18 @@ public class WarpPipe extends HighGround implements Resettable {
     private WarpPipe exitPipe;
 
     // Constructors
+    /**
+     * Warp pipe with no specified destination
+     */
     public WarpPipe() {
         super(DISPLAY_CHAR, JUMP_SUCCESS_RATE, FALL_DAMAGE);
         registerResettable();
-//        this.addCapability(Status.RESET);  // Spawn PiranhaPlant on turn 1
+        this.addCapability(Status.RESET);  // Spawn PiranhaPlant on turn 1
     }
 
+    /**
+     * Warp pipe with specified destination
+     */
     public WarpPipe(Location destination, WarpPipe exitPipe, String direction) {
         super(DISPLAY_CHAR, JUMP_SUCCESS_RATE, FALL_DAMAGE);
         setExit(destination, exitPipe);  //  direction
