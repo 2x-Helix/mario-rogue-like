@@ -71,10 +71,10 @@ public class Application {
 
 			// Spawn either a DisguisedChest or Chest (50% chance)
 			if(Utils.nextChance() <= 50) {
-				gameMap.at(40, 4).addActor(new DisguisedChest());
+				gameMap.at(40, Utils.nextInt(14,17)).addActor(new DisguisedChest());
 			}
 			else {
-				gameMap.at(40,4).setGround(new Chest());
+				gameMap.at(40, Utils.nextInt(14,17)).setGround(new Chest());
 			}
 
 			world.run();
