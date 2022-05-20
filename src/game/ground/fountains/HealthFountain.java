@@ -7,16 +7,26 @@ import game.items.magical_items.bottles.HealthBottle;
 import game.items.magical_items.bottles.PowerBottle;
 import game.status.Status;
 
+/**
+ * Fountain to heal a player
+ * @author ChunKau Mok
+ * @version 1.0
+ */
 public class HealthFountain extends Fountain {
-
+    // Constants
     public static final String NAME = "Health Fountain";
     public static final char DISPLAY_CHAR = 'H';
 
+    // Constructors
+    /**
+     * Fountain player can heal from
+     */
     public HealthFountain() {
         super(DISPLAY_CHAR);
         this.addCapability(Status.GREATER_HEAL);
     }
 
+    // Methods
     /**
      * FIXME: violates the DRY principle
      * Called whenever actor fills its bottle

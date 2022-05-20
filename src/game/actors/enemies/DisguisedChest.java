@@ -13,11 +13,16 @@ import game.items.Coin;
 import game.items.ItemPool;
 import game.status.Status;
 
+/**
+ * Enemy chest to give the player a surprise
+ * @author James Huynh
+ * @version 1.0
+ */
 public class DisguisedChest extends Enemy {
     ItemPool itemPool = new ItemPool(); // Create new itemPool for DisguisedChest instance.
 
     /**
-     * Constructor.
+     * Constructor for enemy chest
      */
     public DisguisedChest() {
         super("Disguised Chest", 'C', 100);

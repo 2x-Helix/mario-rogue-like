@@ -12,6 +12,8 @@ import game.status.Status;
 /**
  * This class Chest represents a Ground Chest, that upon proximity to Player, offers a random item generated from its ItemPool.
  * Allows actor to call OpenChestAction() to obtain a random item.
+ * @author James Huynh
+ * @version 1.0
  */
 public class Chest extends Ground implements Resettable {
 
@@ -58,7 +60,7 @@ public class Chest extends Ground implements Resettable {
 
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if(actor.getDisplayChar() == 'm' || actor.getDisplayChar() == 'M') { // only offer Player OpenChestAction
+        if(actor.toString().equals("Player")) { // only offer Player OpenChestAction
             actions.add(new OpenChestAction(this));
         }
         return actions;

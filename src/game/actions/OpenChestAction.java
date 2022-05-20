@@ -8,6 +8,11 @@ import game.actors.friendlies.Player;
 import game.ground.Chest;
 import game.status.Status;
 
+/**
+ * Action to open a chest
+ * @author James Huynh
+ * @version 1.0
+ */
 public class OpenChestAction extends Action {
     private Item item;
     private Chest chest;

@@ -6,16 +6,27 @@ import game.items.magical_items.bottles.Bottle;
 import game.items.magical_items.bottles.PowerBottle;
 import game.status.Status;
 
-public class PowerFountain extends Fountain {
 
+/**
+ * Fountain to increase a player's intrinsic damage
+ * @author ChunKau Mok
+ * @version 1.0
+ */
+public class PowerFountain extends Fountain {
+    // Constants
     public static final String NAME = "Power Fountain";
     public static final char DISPLAY_CHAR = 'A';
 
+    // Constructors
+    /**
+     * Fountain to increase a player's intrinsic damag
+     */
     public PowerFountain() {
         super(DISPLAY_CHAR);
         this.addCapability(Status.POWERFUL);
     }
 
+    // Methods
     /**
      * FIXME: violates the DRY principle
      * Called whenever actor fills its bottle
