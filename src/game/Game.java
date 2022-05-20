@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
 import game.actors.friendlies.Player;
 import game.ground.*;
+import game.ground.fountains.HealthFountain;
+import game.ground.fountains.PowerFountain;
 import game.ground.teleporters.WarpPipe;
 import game.ground.trees.Sprout;
 import game.zones.KingdomZone;
@@ -28,7 +30,8 @@ public class Game {
 
         // Generate maps
         FancyGroundFactory groundFactory = new FancyGroundFactory(
-                new Dirt(), new Wall(), new Floor(), new Sprout(), new Lava());
+                new Dirt(), new Wall(), new Floor(), new Sprout(), new Lava(),
+                new HealthFountain(), new PowerFountain());
 
         Zone kingdomMap = new KingdomZone(world, groundFactory);
         Zone lavaMap = new LavaZone(world, groundFactory);
