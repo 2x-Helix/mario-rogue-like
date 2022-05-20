@@ -74,7 +74,7 @@ public class Goomba extends Enemy {
 		ActionList list = new ActionList();
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-			list.add(new AttackAction(this,direction));
+			list.add(new AttackAction(this, direction));
 		}
 		return list;
 	}

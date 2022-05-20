@@ -3,11 +3,13 @@ package game.actors.enemies;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
 import game.items.ItemPool;
+import game.status.Status;
 
 public class DisguisedChest extends Enemy {
     ItemPool itemPool = new ItemPool(); // Create new itemPool
@@ -34,5 +36,14 @@ public class DisguisedChest extends Enemy {
         }
         // do nothing at this turn
         return new DoNothingAction();
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) { // Check if otherActor is Friendly
+            actions.add(new AttackAction(this, direction)); // Allow otherActor to call AttackAction
+        }
+        return actions;
     }
 }
