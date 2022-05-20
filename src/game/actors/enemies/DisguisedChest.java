@@ -24,7 +24,6 @@ public class DisguisedChest extends Enemy {
         behaviours.remove(10); // remove WanderBehaviour
         behaviours.remove(3); // remove DrinkBehaviour
         this.addItemToInventory(itemPool.rollItem()); // roll a random item
-        this.addItemToInventory(new Coin(200)); // carries $200
 
         // iterate through all DisguisedChest's capabilities and remove them, ensures items don't have an effect on DisguisedChest.
         for(int i=0; i<this.getInventory().get(0).capabilitiesList().size(); i++) {
