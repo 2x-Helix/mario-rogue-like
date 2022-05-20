@@ -9,10 +9,14 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
-import game.items.Coin;
 import game.items.ItemPool;
 import game.status.Status;
 
+/**
+ * This DisguisedChest class represents an Enemy actor that is disguised as a chest, however, upon proximity to a Friendly actor,
+ * will attack it, and change its display character to its undisguised form, 'G'. Upon death, the enemy will drop a random item on the actor's
+ * location.
+ */
 public class DisguisedChest extends Enemy {
     ItemPool itemPool = new ItemPool(); // Create new itemPool for DisguisedChest instance.
 

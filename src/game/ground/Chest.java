@@ -10,7 +10,7 @@ import game.reset.Resettable;
 import game.status.Status;
 
 /**
- * This class Chest represents a Ground Chest, that upon proximity to Player, offers a random item generated from its ItemPool.
+ * This class Chest represents a Ground Chest, that, upon proximity to Player, offers a random item generated from its ItemPool.
  * Allows actor to call OpenChestAction() to obtain a random item.
  */
 public class Chest extends Ground implements Resettable {
