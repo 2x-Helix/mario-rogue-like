@@ -24,7 +24,7 @@ public class Chest extends Ground implements Resettable {
      * Constructor for Chest, and sets the displayChar to 'C'.
      */
     public Chest() {
-        super('C');
+        super('c');
         registerResettable();
     }
 

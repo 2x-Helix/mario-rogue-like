@@ -31,6 +31,7 @@ public abstract class Zone extends GameMap{
 
     /**
      * Replaces a ground with a specified ground at a specified rate
+     * FIXME: Use ground factory
      * @param oldGround Ground to replace
      * @param newGround Ground to become
      * @param chance Chance of replacing oldGround
@@ -48,4 +49,8 @@ public abstract class Zone extends GameMap{
             }
         }
     }
+
+    /**
+     * TODO: generate chests/mimics method
+     */
 }
