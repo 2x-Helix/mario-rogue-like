@@ -44,7 +44,6 @@ public class KingdomZone extends Zone {
     public KingdomZone(World world, FancyGroundFactory groundFactory) {
         super(world, groundFactory, strMap);
         randomizeGround(new Dirt(), new Sprout(), 3, this);
-        randomizeGround(new Dirt(), new WarpPipe(), 1, this);
     }
 
     // Methods

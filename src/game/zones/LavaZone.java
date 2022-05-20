@@ -16,7 +16,7 @@ import java.util.List;
 public class LavaZone extends Zone {
     // Constants
     private static final List<String> strMap = Arrays.asList(
-        "C......L#############L.......",
+        ".......L#############L.......",
         ".......L#LLLLLLLLLLL#L.......",
         ".......L#LL.......LL#L.......",
         ".......L#L.........L#L.......",
