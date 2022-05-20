@@ -8,8 +8,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.enemies.DisguisedChest;
 import game.actors.friendlies.Player;
 import game.actors.friendlies.Toad;
+import game.ground.Chest;
 import game.ground.Dirt;
 import game.ground.Floor;
 import game.ground.Wall;
@@ -67,8 +69,13 @@ public class Application {
 			gameMap.locationOf(mario).addItem(new SuperMushroom());
 			gameMap.locationOf(mario).addItem(new PowerStar());
 
-			// Spawn 1 Mimic and 1 Chest
-
+			// Spawn either a DisguisedChest or Chest (50% chance)
+			if(Utils.nextChance() <= 50) {
+				gameMap.at(40, 4).addActor(new DisguisedChest());
+			}
+			else {
+				gameMap.at(40,4).setGround(new Chest());
+			}
 
 			world.run();
 
