@@ -11,7 +11,6 @@ import game.status.Status;
 public class OpenChestAction extends Action {
     private Item item;
     private Chest chest;
-    private int durability = 2; // set max opens to 2
 
     public OpenChestAction(Chest getChest) {
         chest = getChest;
@@ -30,8 +29,8 @@ public class OpenChestAction extends Action {
             // change item stored in chest
             this.item = chest.getItemPool().rollItem();
 
-            this.durability -= 1;
-            if (durability <= 0) {
+            chest.decreaseDurability();
+            if (chest.getDurability() <= 0) {
                 chest.addCapability(Status.RESET); // mark chest for reset
             }
             return menuDescription(actor);
@@ -41,6 +40,6 @@ public class OpenChestAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor +  " opens the " + chest + " for $200!";
+        return actor +  " opens the chest for $200!";
     }
 }

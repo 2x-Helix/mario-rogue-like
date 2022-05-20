@@ -9,23 +9,32 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
+import game.items.Coin;
 import game.items.ItemPool;
 import game.status.Status;
 
 public class DisguisedChest extends Enemy {
-    ItemPool itemPool = new ItemPool(); // Create new itemPool
+    ItemPool itemPool = new ItemPool(); // Create new itemPool for DisguisedChest instance.
+
     /**
      * Constructor.
      */
     public DisguisedChest() {
-        super("DisguisedChest", 'C', 100);
+        super("Disguised Chest", 'C', 100);
         behaviours.remove(10); // remove WanderBehaviour
+        behaviours.remove(3); // remove DrinkBehaviour
         this.addItemToInventory(itemPool.rollItem()); // roll a random item
+        this.addItemToInventory(new Coin(200)); // carries $200
+
+        // iterate through all DisguisedChest's capabilities and remove them, ensures items don't have an effect on DisguisedChest.
+        for(int i=0; i<this.getInventory().get(0).capabilitiesList().size(); i++) {
+            this.removeCapability(this.getInventory().get(0).capabilitiesList().get(i));
+        }
     }
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(50, "bites");
+        return new IntrinsicWeapon(15, "bites");
     }
 
     @Override
@@ -33,7 +42,7 @@ public class DisguisedChest extends Enemy {
         if(lastAction instanceof AttackAction) {
             this.setDisplayChar('G'); // After DisguisedChest attacks, it changes into its undisguised form, 'G'.
         }
-
+        // Remove effects of Items it is carrying before attacking
         // get behaviour actions
         for(Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
