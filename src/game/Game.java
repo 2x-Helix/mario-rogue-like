@@ -20,8 +20,6 @@ import game.zones.Zone;
 public class Game {
     // Attributes
     private World world;
-    private FancyGroundFactory groundFactory = new FancyGroundFactory(
-                new Dirt(), new Wall(), new Floor(), new Sprout(), new Lava(), new WarpPipe());
 
     // Constructor
     public Game(){
@@ -29,9 +27,20 @@ public class Game {
         this.world = new World(new Display());
 
         // Generate maps
+        FancyGroundFactory groundFactory = new FancyGroundFactory(
+                new Dirt(), new Wall(), new Floor(), new Sprout(), new Lava());
+
         Zone kingdomMap = new KingdomZone(world, groundFactory);
         Zone lavaMap = new LavaZone(world, groundFactory);
 
+        // Warp pipes between lava zone and kingdom map
+        Location lavaPipeLocation = lavaMap.at(0,0);
+        WarpPipe lavaPipe = new WarpPipe(null, null, "Mushroom Kingdom");
+        lavaPipeLocation.setGround(lavaPipe);
+        kingdomMap.randomizeGround(new Dirt(), new WarpPipe(lavaPipeLocation, lavaPipe, "Lava Zone"),
+                1, kingdomMap);
+
+        // Spawn player
         spawnPlayer(kingdomMap.at(42, 10));
     }
 
