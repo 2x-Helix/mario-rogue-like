@@ -9,12 +9,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
-import game.items.Coin;
 import game.items.ItemPool;
 import game.status.Status;
 
 /**
- * Enemy chest to give the player a surprise
+ * This DisguisedChest class represents an Enemy actor that is disguised as a chest, however, upon proximity to a Friendly actor,
+ * will attack it, and change its display character to its undisguised form, 'G'. Upon death, the enemy will drop a random item on the actor's
+ * location.
  * @author James Huynh
  * @version 1.0
  */
@@ -29,7 +30,6 @@ public class DisguisedChest extends Enemy {
         behaviours.remove(10); // remove WanderBehaviour
         behaviours.remove(3); // remove DrinkBehaviour
         this.addItemToInventory(itemPool.rollItem()); // roll a random item
-        this.addItemToInventory(new Coin(200)); // carries $200
 
         // iterate through all DisguisedChest's capabilities and remove them, ensures items don't have an effect on DisguisedChest.
         for(int i=0; i<this.getInventory().get(0).capabilitiesList().size(); i++) {
