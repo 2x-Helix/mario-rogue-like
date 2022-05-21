@@ -24,7 +24,7 @@ public class Lava extends Ground {
     @Override
     public void tick(Location location) {
         Actor target = location.getActor();
-        if (target != null) {
+        if (target != null && !target.hasCapability(Status.IMMUNITY) && !target.hasCapability(Status.DORMANT)) {
             target.hurt(TURN_DMG);
         }
     }
