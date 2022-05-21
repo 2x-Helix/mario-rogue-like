@@ -1,17 +1,11 @@
 package game;
 
-import java.util.Arrays;
-import java.util.List;
-
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.enemies.Bowser;
-import game.actors.enemies.PiranhaPlant;
 import game.actors.friendlies.Player;
-import game.actors.friendlies.PrincessPeach;
 import game.actors.friendlies.Toad;
 import game.ground.Dirt;
 import game.ground.Floor;
@@ -19,6 +13,9 @@ import game.ground.Wall;
 import game.ground.trees.Sprout;
 import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The main class for the Mario World game.
