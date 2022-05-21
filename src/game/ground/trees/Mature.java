@@ -6,6 +6,7 @@ import java.util.List;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Utils;
+import game.actors.enemies.FlyingKoopa;
 import game.actors.enemies.Koopa;
 import game.ground.Dirt;
 import game.ground.GroundCapabilities;
@@ -78,7 +79,13 @@ public final class Mature extends Tree {
     @Override
     public void spawn(Location location) {
         if ((location.getActor() == null) && (Utils.nextChance() <= SPAWN_CHANCE)) {
-            location.addActor(new Koopa());
+            // 50% chance of spawning either Koopa or FlyingKoopa
+            if(Utils.nextChance() <= 50) {
+                location.addActor(new Koopa()); // spawn Koopa
+            }
+            else {
+                location.addActor(new FlyingKoopa()); // spawn FlyingKoopa
+            }
         }
     }
 }

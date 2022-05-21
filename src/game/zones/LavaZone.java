@@ -2,6 +2,8 @@ package game.zones;
 
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.enemies.Bowser;
+import game.actors.friendlies.PrincessPeach;
 import game.ground.Dirt;
 import game.ground.Lava;
 
@@ -40,7 +42,8 @@ public class LavaZone extends Zone {
     // Methods
     @Override
     public void addActors() {
-        // Add Bowser and Peach
+        this.at(14,2).addActor(new PrincessPeach());
+        this.at(14, 3).addActor(new Bowser());
     }
 
     @Override

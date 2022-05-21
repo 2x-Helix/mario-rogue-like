@@ -9,9 +9,10 @@ import game.ground.Chest;
 import game.status.Status;
 
 /**
- * Action to open a chest
+ * Action which, upon assessing that actor has enough credits, takes away credits from the actor and rolls a random item from that Chest's ItemPool,
+ * dropping it onto the actor's location.
  * @author James Huynh
- * @version 1.0
+ * @version 1.1
  */
 public class OpenChestAction extends Action {
     private Item item;
