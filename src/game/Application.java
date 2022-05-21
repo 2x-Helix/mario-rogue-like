@@ -1,83 +1,13 @@
 package game;
 
-import java.util.Arrays;
-import java.util.List;
-
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.FancyGroundFactory;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.World;
-import game.actors.enemies.DisguisedChest;
-import game.actors.friendlies.Player;
-import game.actors.friendlies.Toad;
-import game.ground.Chest;
-import game.ground.Dirt;
-import game.ground.Floor;
-import game.ground.Wall;
-import game.ground.fountains.HealthFountain;
-import game.ground.fountains.PowerFountain;
-import game.ground.trees.Sprout;
-import game.items.magical_items.PowerStar;
-import game.items.magical_items.SuperMushroom;
-
 /**
  * The main class for the Mario World game.
- *
+ * @version 2.0
  */
 public class Application {
 
 	public static void main(String[] args) {
-
-			World world = new World(new Display());
-
-			FancyGroundFactory groundFactory = new FancyGroundFactory(
-					new Dirt(), new Wall(), new Floor(), new Sprout(),
-					new PowerFountain(), new HealthFountain()
-			);
-
-			List<String> map = Arrays.asList(
-				"..........................................##..........+.........................",
-				"............+............+..................#...................................",
-				"............................................#...................................",
-				"........A....................................##......................+..........",
-				"...............................................#................................",
-				"...............................H................#............A..................",
-				".................+................................#.............................",
-				".................................................##.............................",
-				"............................................A...##..............................",
-				".........+..............................+#____####..............H..+............",
-				".......................................+#_____###++.............................",
-				".......................................+#______###..............................",
-				"......H.................................+#_____###..............................",
-				"........................+...................H....##.............+...............",
-				"...................................................#............................",
-				"..............A.....................................#...........................",
-				"...................+.................................#..........................",
-				"......................................................#..................A......",
-				".......................................................##.......................");
-
-			GameMap gameMap = new GameMap(groundFactory, map);
-			world.addGameMap(gameMap);
-
-			Actor mario = new Player("Player", 'm', 100);
-			world.addPlayer(mario, gameMap.at(42, 10));
-
-			gameMap.at(44,11).addActor(new Toad());
-
-			// Spawn these 2 items at the spawn point of Mario
-			gameMap.locationOf(mario).addItem(new SuperMushroom());
-			gameMap.locationOf(mario).addItem(new PowerStar());
-
-			// Spawn either a DisguisedChest or Chest (50% chance)
-			if(Utils.nextChance() <= 50) {
-				gameMap.at(40, Utils.nextInt(14,17)).addActor(new DisguisedChest());
-			}
-			else {
-				gameMap.at(40, Utils.nextInt(14,17)).setGround(new Chest());
-			}
-
-			world.run();
-
+		Game game = new Game();
+		game.run();
 	}
 }

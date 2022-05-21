@@ -18,7 +18,7 @@ public class ItemPool { // single responsibility, open close
      */
     public ItemPool(){
         itemPool.add(new SuperMushroom());
-        itemPool.add(new PowerStar());
+//        itemPool.add(new PowerStar());  // Prevent 1-shot
         itemPool.add(new HealthBottle());
         itemPool.add(new Wrench());
         itemPool.add(new PowerBottle());

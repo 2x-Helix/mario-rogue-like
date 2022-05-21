@@ -26,7 +26,7 @@ public class DisguisedChest extends Enemy {
      * Constructor for enemy chest
      */
     public DisguisedChest() {
-        super("Disguised Chest", 'C', 100);
+        super("Disguised Chest", 'c', 100);
         behaviours.remove(10); // remove WanderBehaviour
         behaviours.remove(3); // remove DrinkBehaviour
         this.addItemToInventory(itemPool.rollItem()); // roll a random item
@@ -45,7 +45,7 @@ public class DisguisedChest extends Enemy {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(lastAction instanceof AttackAction) {
-            this.setDisplayChar('G'); // After DisguisedChest attacks, it changes into its undisguised form, 'G'.
+            this.setDisplayChar('e'); // After DisguisedChest attacks, it changes into its undisguised form, 'G'.
         }
         // Remove effects of Items it is carrying before attacking
         // get behaviour actions
