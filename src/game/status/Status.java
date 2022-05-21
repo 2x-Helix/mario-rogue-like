@@ -11,7 +11,7 @@ public enum Status {
     EASY_JUMP,              // indicates actor can jump with 100% success rate
     HIGHER_GROUND,          // indicates actor can just walk to higher ground, and destroy it
     CAN_FLY,                // indicates actor can fly/walk on higher ground
-    COIN_FROM_DESTROYED_GROUND,  // destroyed ground drop $5 
+    COIN_FROM_DESTROYED_GROUND,  // destroyed ground drop $5
     IMMUNITY,               // indicates actor takes 0 damage when attacked by enemies
     INSTA_KILL,              // indicates actor instantly kill enemies if the attack is successful
     FIRE_ATTACK,              // indicates actor's AttackAction can also drop fire on ground
