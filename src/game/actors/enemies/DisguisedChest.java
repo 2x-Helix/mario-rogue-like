@@ -14,7 +14,7 @@ import game.status.Status;
 
 /**
  * This DisguisedChest class represents an Enemy actor that is disguised as a chest, however, upon proximity to a Friendly actor,
- * will attack it, and change its display character to its undisguised form, 'G'. Upon death, the enemy will drop a random item on the actor's
+ * will attack it, and change its display character to its undisguised form, 'e'. Upon death, the enemy will drop a random item on the actor's
  * location.
  * @author James Huynh
  * @version 1.0
@@ -45,7 +45,7 @@ public class DisguisedChest extends Enemy {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(lastAction instanceof AttackAction) {
-            this.setDisplayChar('e'); // After DisguisedChest attacks, it changes into its undisguised form, 'G'.
+            this.setDisplayChar('e'); // After DisguisedChest attacks, it changes into its undisguised form, 'e'.
         }
         // Remove effects of Items it is carrying before attacking
         // get behaviour actions

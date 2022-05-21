@@ -51,7 +51,7 @@ public class HighGround extends Ground {
                     if(exit.getDestination().getGround() instanceof HighGround){
                         actionList.add(new MoveActorAction(location, direction));
                     }
-                    else { // Otherwise actor must use JumpActorAction to jump onto HighGround
+                    else { // otherwise, actor must use JumpActorAction to jump onto HighGround
                         actionList.add(new JumpActorAction(this, location, direction));
                     }
                 }
