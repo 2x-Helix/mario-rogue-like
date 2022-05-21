@@ -16,10 +16,11 @@ public class RescueAction extends Action {
     public String execute(Actor actor, GameMap map) {
         freed.removeCapability(Status.LOCKED);
         map.removeActor(actor);
-        return menuDescription(actor);
+
+        return "Congratulations, " + actor + " is victorious, " + freed + " has been saved!!!";
     }
     @Override
     public String menuDescription(Actor actor) {
-        return "Congratulations," + actor + " has freed " + freed + "!!!";
+        return actor + " frees " + freed;
     }
 }

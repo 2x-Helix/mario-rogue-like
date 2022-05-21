@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Utils;
 import game.ground.Fire;
-import game.ground.Flammable;
 import game.status.Status;
 
 /**
@@ -63,9 +62,7 @@ public class AttackAction extends Action {
 		target.hurt(damage); // decrease target's hp
 		// FIRE_ATTACK effect
 		if(actor.hasCapability(Status.FIRE_ATTACK)) {
-			if(map.locationOf(target).getGround() instanceof Flammable){
-				map.locationOf(target).setGround(new Fire(map.locationOf(target).getGround())); // Sets the ground to Fire, taking parameter of the old ground to remember
-			}
+			map.locationOf(target).setGround(new Fire(map.locationOf(target).getGround())); // Sets the ground to Fire, taking parameter of the old ground to remember
 		}
 		// target is not conscious
 		if (!target.isConscious()) {

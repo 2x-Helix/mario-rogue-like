@@ -7,7 +7,7 @@ import game.actors.enemies.Enemy;
 /**
  * A class that represents the floor inside a building.
  */
-public class Floor extends Ground implements Flammable {
+public class Floor extends Ground {
 	public Floor() {
 		super('_');
 	}
