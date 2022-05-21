@@ -10,7 +10,7 @@ import game.actions.RescueAction;
 import game.status.Status;
 
 public class PrincessPeach extends Friendly {
-    protected PrincessPeach() {
+    public PrincessPeach() {
         super("Princess Peach", 'P', Integer.MAX_VALUE);
         this.addCapability(Status.LOCKED);
     }
@@ -23,7 +23,7 @@ public class PrincessPeach extends Friendly {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);  // Get parents action list
-        if(this.hasCapability(Status.LOCKED) && otherActor.hasCapability(Status.HAS_KEY)){
+        if(this.hasCapability(Status.LOCKED) && otherActor.hasCapability(Status.CAN_UNLOCK) && otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new RescueAction(this));  // If otherActor has a key, can use RescueAction on Peach
         }
         return actions;

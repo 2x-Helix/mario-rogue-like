@@ -17,7 +17,7 @@ import game.status.Status;
  * @author ChunKau Mok (Peter)
  * @version 1.0
  */
-public class HighGround extends Ground implements Flammable {
+public class HighGround extends Ground {
 
     protected Integer fallDamage, successThreshhold;    // successThreshhold = chance to jump * 100 : 0.8 -> 80
     protected GameMap map; // store GameMap here

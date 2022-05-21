@@ -3,6 +3,7 @@ package game.ground;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.Tickable;
+import game.status.Status;
 
 
 public class Fire extends Ground implements Tickable {
@@ -27,7 +28,7 @@ public class Fire extends Ground implements Tickable {
         if (duration == 0) {
             location.setGround(previousGround);
         }
-        if(location.containsAnActor()){
+        if(location.containsAnActor() && !location.getActor().hasCapability(Status.IMMUNITY) && !location.getActor().hasCapability(Status.DORMANT)) {
             location.getActor().hurt(damage);
             System.out.println(location.getActor() + " is burned for 20 damage!!!");
         }
