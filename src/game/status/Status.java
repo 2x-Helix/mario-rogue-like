@@ -20,7 +20,7 @@ public enum Status {
     CAN_SMASH,              // indicates actor can use SmashShellAction
     LOCKED,                 // indicates actor cannot move, attack or be attacked
     CAN_UNLOCK,                // indicates actor has key, can unlock cages
-    RESET                  // indicates object is to be reset next turn
+    RESET,                  // indicates object is to be reset next turn
     POWERFUL,               // base attack damage +15 (NOT WEAPON DAMAGE)
     GREATER_HEAL,           // heal amount +50
     ENEMY,                  // Attacks player
