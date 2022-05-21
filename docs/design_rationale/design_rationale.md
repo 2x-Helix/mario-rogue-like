@@ -257,3 +257,28 @@ the **playTurn()** method being called.
 - Inclusion of the **Utils** class which is responsible for random number generation follows the 
 **Single Responsibility Principle** as this allows other classes to call it when a random number is required,
 rather than each class storing a **Random** class as an attribute.
+
+<br>
+
+## REQ8: Lava Zone
+- Abstract class **Zone** serves to define how **GameMaps** are created for our game.
+This serves to uphold the *Single Responsibility Principle* as we have an abstract class **Zone** defining how the 
+maps are instantiated with their actors and items (with associated abstract methods) rather than defining and creating 
+all maps in the **Application** class (removing its responsibility for creating the maps). 
+<br>
+This also follows the *Open Close Principle* as it allows us to create additional maps for the **Game** class with new 
+classes that extend **Zone** but do not modify the process which the maps are instantiated.
+- Class **Game** serves as the driver class for the **Application**. This initializes the zone(gamemaps) with their 
+Items, Actors, and Map. This was done following the *single responsibility principle* with a class responsible for 
+starting and initializing the maps for the game.
+- **WarpPipe** has associations with itself and **Location**. These track the location of the exit destination as well 
+as the exit **WarpPipe** instance. This allows us to update the return destination of the exit **WarpPipe** in 
+**WarpAction**.
+- **WarpAction** has an association with **WarpPipe** which is the entrance **WarpPipe** an actor is warping from. 
+This is as it contains the information of the exit **WarpPipe** and **Location** used to move an Actor.
+- Both **PiranhaPlant** and **WarpPipe** implement the interface **Resettable**, with **WarpPipe** spawning a 
+**PiranhaPlant** on reset. This continues to uphold the *Liskov's Substitution Principle* and *Open Close Principle*
+as we may have different classes implement our previous features without requiring to rewrite and disrupt our 
+implementation when adding new classes that use the interface. This is also the case with the **Lava** class which 
+extends from **Ground** (following the *Open Close Principle*) to enable us to include new terrain without breaking 
+existing functionality.
