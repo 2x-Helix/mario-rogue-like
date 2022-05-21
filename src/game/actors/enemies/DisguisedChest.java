@@ -17,10 +17,10 @@ import game.status.Status;
  * will attack it, and change its display character to its undisguised form, 'e'. Upon death, the enemy will drop a random item on the actor's
  * location.
  * @author James Huynh
- * @version 1.0
+ * @version 1.1
  */
 public class DisguisedChest extends Enemy {
-    ItemPool itemPool = new ItemPool(); // Create new itemPool for DisguisedChest instance.
+    private ItemPool itemPool = new ItemPool(); // Create new itemPool for DisguisedChest instance.
 
     /**
      * Constructor for enemy chest

@@ -10,7 +10,13 @@ import game.items.weapon_items.Wrench;
 
 import java.util.ArrayList;
 
-public class ItemPool { // single responsibility, open close
+/**
+ * @author James Huynh
+ * This class is responsible for initialising an ArrayList, adding specific items to its ArrayList, and is able to return a random item
+ * from its ArrayList upon command.
+ * @version 1.1
+ */
+public class ItemPool { // single responsibility, upholds open close principle
     private ArrayList<Item> itemPool = new ArrayList<Item>(); // initialise itemPool ArrayList.
 
     /**
