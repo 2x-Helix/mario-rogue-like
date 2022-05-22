@@ -5,47 +5,45 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.friendlies.Player;
-import game.ground.Chest;
-import game.status.Status;
+import game.ground.chests.Chest;
 
 /**
  * Action which, upon assessing that actor has enough credits, takes away credits from the actor and rolls a random item from that Chest's ItemPool,
  * dropping it onto the actor's location.
- * @author James Huynh
+ * @author James Huynh, Matthew Siegenthaler
  * @version 1.1
  */
 public class OpenChestAction extends Action {
-    private Item item;
+    // Attributes
     private Chest chest;
 
-    public OpenChestAction(Chest getChest) {
-        chest = getChest;
-        item = chest.getItemPool().rollItem();
+    /**
+     * Action to purchase and open a chest
+     * @param chest chest actor is opening
+     */
+    public OpenChestAction(Chest chest) {
+        this.chest = chest;
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        // check if actor has enough currency ($200)
+        // check if actor has enough currency
         Player buyer = (Player) actor;
-        if (buyer.getWallet().isAffordable(200)) {
-            buyer.getWallet().subCredit(200); // take away $200 from wallet
+        int cost = chest.getCost();
+
+        if (buyer.getWallet().isAffordable(cost)) {
+            buyer.getWallet().subCredit(cost); // take away cost from wallet
             // drop an item on actor
-            map.locationOf(actor).addItem(item);
+            Item itemDrop = chest.getItem();
+            map.locationOf(actor).addItem(itemDrop);
 
-            // change item stored in chest
-            this.item = chest.getItemPool().rollItem();
-
-            chest.decreaseDurability();
-            if (chest.getDurability() <= 0) {
-                chest.addCapability(Status.RESET); // mark chest for reset
-            }
             return menuDescription(actor);
         }
-        return buyer + " doesn't have enough credits to open this chest!";
+        return buyer + " doesn't have enough credits to open the " + chest.getChestType() + "!";
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor +  " opens the chest for $200!";
+        return actor + " opens the " + chest.getChestType() + " for $" + chest.getCost();
     }
 }

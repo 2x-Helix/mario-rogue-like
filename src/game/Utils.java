@@ -16,10 +16,10 @@ public class Utils {
      */
     public static int nextInt(int low, int high) throws IllegalArgumentException {
         Random r = new Random();
-        if (low <= high){
+        if (low < high){
             return (r.nextInt(high - low) + low);
         } else {
-            throw new IllegalArgumentException("Low must be less or equal to High.");
+            throw new IllegalArgumentException("Low must be less than High.");
         }
     }
 

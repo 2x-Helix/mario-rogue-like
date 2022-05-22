@@ -11,23 +11,19 @@ import game.items.weapon_items.Wrench;
 import java.util.ArrayList;
 
 /**
- * @author James Huynh
+ * @author James Huynh, Matthew Siegenthaler
  * This class is responsible for initialising an ArrayList, adding specific items to its ArrayList, and is able to return a random item
  * from its ArrayList upon command.
- * @version 1.1
+ * @version 1.2
  */
 public class ItemPool { // single responsibility, upholds open close principle
-    private ArrayList<Item> itemPool = new ArrayList<Item>(); // initialise itemPool ArrayList.
+    private ArrayList<Item> itemPool = new ArrayList<>(); // initialise itemPool ArrayList.
 
     /**
      * Constructor, automatically adds certain items to the itemPool ArrayList upon instantiating this class.
      */
-    public ItemPool(){
-        itemPool.add(new SuperMushroom());
-//        itemPool.add(new PowerStar());  // Prevent 1-shot
-        itemPool.add(new HealthBottle());
-        itemPool.add(new Wrench());
-        itemPool.add(new PowerBottle());
+    public ItemPool(ArrayList<Item> items){
+        this.itemPool.addAll(items);
     }
 
     /**
@@ -36,7 +32,12 @@ public class ItemPool { // single responsibility, upholds open close principle
      * @return returns an Item
      */
     public Item rollItem() {
-        int index = Utils.nextInt(0, itemPool.size()-1);
+        int index;
+        if (itemPool.size() == 1) {
+            index = 0;
+        } else {
+            index = Utils.nextInt(0, itemPool.size() - 1);
+        }
         return itemPool.get(index);
     }
 }

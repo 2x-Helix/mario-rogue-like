@@ -4,9 +4,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.enemies.DisguisedChest;
 import game.actors.friendlies.Toad;
-import game.ground.Chest;
+import game.ground.chests.Chest;
 import game.ground.Dirt;
-import game.ground.teleporters.WarpPipe;
+import game.ground.chests.WoodChest;
 import game.ground.trees.Sprout;
 import game.items.magical_items.PowerStar;
 import game.items.magical_items.SuperMushroom;
@@ -46,8 +46,7 @@ public class KingdomZone extends Zone {
     public KingdomZone(World world, FancyGroundFactory groundFactory) {
         super(world, groundFactory, strMap);
         randomizeGround(new Dirt(), new Sprout(), 3, this);
-
-        this.at(42, 14).setGround(new Chest());
+        randomizeGround(new Dirt(), new WoodChest(), 1, this);
     }
 
     // Methods
