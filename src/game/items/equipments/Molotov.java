@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.ground.GroundCapabilities;
+import game.ground.Lava;
 import game.status.Status;
 
 import java.util.ArrayList;
@@ -41,10 +42,10 @@ public class Molotov extends Equipment {
         for (Exit exit : map.locationOf(actor).getExits())
             locationsAffected.add(exit.getDestination());
 
-        // set the locations on fire, if they are not frozen
+        // change the locations' grounds into Lava, if they aren't frozen
         for (Location location : locationsAffected) {
             if (!location.getGround().hasCapability(GroundCapabilities.FROZEN))
-                location.getGround().addCapability(GroundCapabilities.ON_FIRE);
+                location.setGround(new Lava());
         }
     }
 

@@ -7,6 +7,5 @@ package game.ground;
  */
 public enum GroundCapabilities {
     FERTILE,
-    ON_FIRE,                // indicates ground is on fire, deals damage to actors
-    FROZEN                  // indicates ground can't be set on fire, put off fire on the ground
+    FROZEN                  // indicates ground can't be set on fire
 }

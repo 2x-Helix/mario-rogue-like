@@ -4,7 +4,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ground.Floor;
 import game.ground.GroundCapabilities;
+import game.ground.Lava;
 import game.status.Status;
 
 import java.util.ArrayList;
@@ -43,8 +45,9 @@ public class Cryotov extends Equipment {
 
         // freeze the locations;
         for (Location location : locationsAffected) {
+            if (location.getGround() instanceof Lava)
+                location.setGround(new Floor());
             location.getGround().addCapability(GroundCapabilities.FROZEN);
-            location.getGround().removeCapability(GroundCapabilities.ON_FIRE);
         }
     }
 
