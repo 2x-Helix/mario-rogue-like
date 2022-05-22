@@ -1,7 +1,7 @@
-package game.items.magical_items.bottles;
+package game.items.magicalitems.bottles;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.items.magical_items.MagicalItem;
+import game.items.magicalitems.MagicalItem;
 
 /**
  * Item which may store the effects of a fountain

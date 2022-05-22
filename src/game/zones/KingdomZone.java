@@ -4,12 +4,11 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.enemies.DisguisedChest;
 import game.actors.friendlies.Toad;
-import game.ground.chests.Chest;
 import game.ground.Dirt;
 import game.ground.chests.WoodChest;
 import game.ground.trees.Sprout;
-import game.items.magical_items.PowerStar;
-import game.items.magical_items.SuperMushroom;
+import game.items.magicalitems.PowerStar;
+import game.items.magicalitems.SuperMushroom;
 
 import java.util.Arrays;
 import java.util.List;

@@ -2,8 +2,8 @@ package game.ground.chests;
 
 import edu.monash.fit2099.engine.items.Item;
 import game.items.ItemPool;
-import game.items.magical_items.SuperMushroom;
-import game.items.weapon_items.Wrench;
+import game.items.magicalitems.SuperMushroom;
+import game.items.weaponitems.Wrench;
 
 import java.util.ArrayList;
 

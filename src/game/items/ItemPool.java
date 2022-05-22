@@ -2,11 +2,6 @@ package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
 import game.Utils;
-import game.items.magical_items.PowerStar;
-import game.items.magical_items.SuperMushroom;
-import game.items.magical_items.bottles.HealthBottle;
-import game.items.magical_items.bottles.PowerBottle;
-import game.items.weapon_items.Wrench;
 
 import java.util.ArrayList;
 

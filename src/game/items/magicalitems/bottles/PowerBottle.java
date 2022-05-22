@@ -1,4 +1,4 @@
-package game.items.magical_items.bottles;
+package game.items.magicalitems.bottles;
 
 import game.status.Status;
 

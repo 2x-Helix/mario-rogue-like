@@ -12,7 +12,7 @@ import game.actions.SmashShellAction;
 import game.actions.SuicideAction;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
-import game.items.magical_items.SuperMushroom;
+import game.items.magicalitems.SuperMushroom;
 import game.status.Status;
 
 public class FlyingKoopa extends Enemy {

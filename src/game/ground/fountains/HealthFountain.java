@@ -2,9 +2,8 @@ package game.ground.fountains;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.items.magical_items.bottles.Bottle;
-import game.items.magical_items.bottles.HealthBottle;
-import game.items.magical_items.bottles.PowerBottle;
+import game.items.magicalitems.bottles.Bottle;
+import game.items.magicalitems.bottles.HealthBottle;
 import game.status.Status;
 
 /**

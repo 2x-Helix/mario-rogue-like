@@ -16,10 +16,10 @@ import game.items.Purchasable;
 import game.actions.PurchaseAction;
 import game.actors.SpeakAction;
 import game.actors.Talkable;
-import game.items.magical_items.PowerStar;
-import game.items.magical_items.SuperMushroom;
-import game.items.magical_items.bottles.Bottle;
-import game.items.weapon_items.Wrench;
+import game.items.magicalitems.PowerStar;
+import game.items.magicalitems.SuperMushroom;
+import game.items.magicalitems.bottles.Bottle;
+import game.items.weaponitems.Wrench;
 import game.status.Status;
 
 /**
