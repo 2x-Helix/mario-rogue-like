@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.equipments.Equipment;
 import game.items.magicalitems.PowerStar;
 import game.items.magicalitems.SuperMushroom;
-import game.reset.ResetAction;
+import game.actions.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.status.Status;
