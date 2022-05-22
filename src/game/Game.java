@@ -40,8 +40,8 @@ public class Game {
         Location lavaPipeLocation = lavaMap.at(0,0);
         WarpPipe lavaPipe = new WarpPipe(null, null, "Mushroom Kingdom");
         lavaPipeLocation.setGround(lavaPipe);
-        kingdomMap.randomizeGround(new Dirt(), new WarpPipe(lavaPipeLocation, lavaPipe, "Lava Zone"),
-                1, kingdomMap);
+        WarpPipe kingdomPipe = new WarpPipe(lavaPipeLocation, lavaPipe, "Lava Zone");
+        kingdomMap.randomizePipes(new Dirt(), kingdomPipe, 1, kingdomMap);
 
         // Spawn player
         spawnPlayer(kingdomMap.at(42, 10));

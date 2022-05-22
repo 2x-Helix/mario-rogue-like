@@ -47,6 +47,18 @@ public class WarpPipe extends HighGround implements Resettable {
     }
 
     /**
+     * Private warp pipe method to be used in factory method
+     * @param pipe WarpPipe to clone.
+     */
+    private WarpPipe(WarpPipe pipe) {
+        super(DISPLAY_CHAR, JUMP_SUCCESS_RATE, FALL_DAMAGE);
+        setExit(pipe.getDestination(), pipe.getExitPipe());  //  direction
+        this.direction = pipe.getDirection();
+        registerResettable();
+        this.addCapability(Status.RESET);  // Spawn PiranhaPlant on turn 1
+    }
+
+    /**
      * Gets the Location of the exit destination.
      * @return Location exit of the warp pipe
      */
@@ -74,7 +86,6 @@ public class WarpPipe extends HighGround implements Resettable {
     /**
      * Setter for destination and direction
      * @param destination Location an actor teleports to
-     * //@return Boolean if location was successfully set.
      */
     public void setExit(Location destination, WarpPipe exitPipe) {
         this.destination = destination;
@@ -122,5 +133,13 @@ public class WarpPipe extends HighGround implements Resettable {
     @Override
     public void resetInstance() {
         this.addCapability(Status.RESET);
+    }
+
+    /**
+     * Factory method for cloning a pipe
+     * @return new WarpPipe instance with the same exit as input.
+     */
+    public WarpPipe newGround() {
+        return new WarpPipe(this);
     }
 }

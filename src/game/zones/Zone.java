@@ -2,6 +2,7 @@ package game.zones;
 
 import edu.monash.fit2099.engine.positions.*;
 import game.Utils;
+import game.ground.teleporters.WarpPipe;
 
 import java.util.List;
 
@@ -31,7 +32,6 @@ public abstract class Zone extends GameMap{
 
     /**
      * Replaces a ground with a specified ground at a specified rate
-     * FIXME: Use ground factory
      * @param oldGround Ground to replace
      * @param newGround Ground to become
      * @param chance Chance of replacing oldGround
@@ -44,8 +44,27 @@ public abstract class Zone extends GameMap{
                 // If old ground
                 if (map.at(x, y).getGround().getDisplayChar() == oldGround.getDisplayChar()
                         && Utils.nextChance() <= chance)
-                    //map.at(x, y).setGround(groundFactory.newGround(newGround.getDisplayChar()));
-                    map.at(x, y).setGround(newGround);
+                    map.at(x, y).setGround(groundFactory.newGround(newGround.getDisplayChar()));
+            }
+        }
+    }
+
+    /**
+     * Method for randomly placing pipes. Used as a replacement over the engine FancyGroundFactory
+     * @param oldGround ground type to replace
+     * @param pipe Entrance pipe to clone and place
+     * @param chance integer chance for placing a pipe
+     * @param map map to place the pipes on.
+     */
+    public void randomizePipes(Ground oldGround, WarpPipe pipe, int chance, GameMap map) {
+        for (int x : map.getXRange()) {
+            for (int y : map.getYRange()) {
+                // If old ground
+                if (map.at(x, y).getGround().getDisplayChar() == oldGround.getDisplayChar()
+                        && Utils.nextChance() <= chance) {
+                    Ground entrancePipe = pipe.newGround();  // Factory method
+                    map.at(x, y).setGround(entrancePipe);
+                }
             }
         }
     }
