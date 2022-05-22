@@ -1,4 +1,4 @@
-package game.items.weapon_items;
+package game.items.weaponitems;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.items.Purchasable;

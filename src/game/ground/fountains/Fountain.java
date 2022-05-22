@@ -9,10 +9,15 @@ import game.actions.DrinkAction;
 import game.actions.FillWaterAction;
 import game.actors.enemies.Enemy;
 import game.actors.friendlies.Player;
-import game.items.magical_items.bottles.Bottle;
+import game.items.magicalitems.bottles.Bottle;
 
+/**
+ * Fountain which player may fill their bottle to receive an effect
+ * @author ChunKau Mok
+ * @version 1.0
+ */
 public abstract class Fountain extends Ground {
-
+    // Attributes
     private final Integer capacity;     // maximum water
     private Integer volume;             // current water
 

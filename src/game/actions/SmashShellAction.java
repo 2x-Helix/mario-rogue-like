@@ -4,8 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.status.Status;
-import game.items.magical_items.SuperMushroom;
-import game.items.weapon_items.Wrench;
 
 /**
  * Class implementing the ability to Smash an actor's shell if they have a shell.
@@ -32,12 +30,10 @@ public class SmashShellAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		// check if actor carries a Wrench has capability smash
-		if(actor.getWeapon() instanceof Wrench) {
+		// check if actor carries a Wrench has capability CAN_SMASH
+		if(actor.hasCapability(Status.CAN_SMASH)) {
 			// check if target is in dormant state
 			if(target.hasCapability(Status.DORMANT)) {
-				// drop SuperMushroom
-				map.locationOf(target).addItem(new SuperMushroom());
 				// instantly destroy target
 				map.removeActor(target);
 				return menuDescription(actor);

@@ -1,4 +1,4 @@
-package game.items.magical_items;
+package game.items.magicalitems;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Utils;
+import game.actions.AttackAction;
 import game.actions.SuicideAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
@@ -42,6 +43,7 @@ public abstract class Enemy extends Actor implements Resettable {
         this.behaviours.put(1, new AttackBehaviour());
         this.behaviours.put(3, new DrinkBehaviour());
         this.behaviours.put(10, new WanderBehaviour());
+        this.addCapability(Status.ENEMY);  // Specifies as enemy
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -51,6 +53,16 @@ public abstract class Enemy extends Actor implements Resettable {
         } else {
             return new DoNothingAction();
         }
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = super.allowableActions(otherActor, direction, map);
+        // Allow player to attack enemy
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            actions.add(new AttackAction(this, direction));
+        }
+        return actions;
     }
 
     /**

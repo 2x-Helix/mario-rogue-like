@@ -2,11 +2,14 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.ground.fountains.Fountain;
-import game.items.magical_items.bottles.Bottle;
 
+/**
+ * Action to fill bottle from fountain
+ * @author ChunKau Mok
+ * @version 1.0
+ */
 public class FillWaterAction extends Action {
 
     private final Fountain fountain;

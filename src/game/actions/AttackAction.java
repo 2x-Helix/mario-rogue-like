@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Utils;
+import game.ground.Fire;
 import game.status.Status;
 
 /**
@@ -41,23 +42,29 @@ public class AttackAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
-
+		// get weapon
 		Weapon weapon = actor.getWeapon();
-
+		// chance to miss target
 		if (!(Utils.nextChance() <= weapon.chanceToHit())) {
 			return actor + " misses " + target + ".";
 		}
-
+		// POWERSTAR effect
 		int damage = weapon.damage();
 		if (actor.hasCapability(Status.INSTA_KILL)) {			// Mario consumes POWERSTAR and can insta kill enemies(target)
 			damage = Integer.MAX_VALUE;
 		} else if (target.hasCapability(Status.IMMUNITY)) {        // Mario(target) consumes POWERSTAR and have immunity against enemies'(actor) attacks
 			damage = 0;
 		}
-
+		// display result
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-		target.hurt(damage);
 
+		// damage actor
+		target.hurt(damage); // decrease target's hp
+		// FIRE_ATTACK effect
+		if(actor.hasCapability(Status.FIRE_ATTACK)) {
+			map.locationOf(target).setGround(new Fire(map.locationOf(target).getGround())); // Sets the ground to Fire, taking parameter of the old ground to remember
+		}
+		// target is not conscious
 		if (!target.isConscious()) {
 			// check if target does not have indestructible status
 			if (!target.hasCapability(Status.INDESTRUCTIBLE)) {

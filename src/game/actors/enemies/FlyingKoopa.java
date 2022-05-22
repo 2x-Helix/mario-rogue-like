@@ -15,24 +15,16 @@ import game.behaviours.FollowBehaviour;
 import game.items.magicalitems.SuperMushroom;
 import game.status.Status;
 
-/**
- * Class implementing the Enemy - Koopa actor.
- * @author James Huynh
- * @version 3.0
- */
-
-public class Koopa extends Enemy {
-    // Constructor
-    public Koopa() {
-        super("Koopa", 'K', 100);
+public class FlyingKoopa extends Enemy {
+    public FlyingKoopa() {
+        super("Flying Koopa", 'F', 150);
         this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.INDESTRUCTIBLE);
+        this.addCapability(Status.CAN_FLY);
     }
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        if (this.hasCapability(Status.POWERFUL))
-            return new IntrinsicWeapon(45, "punches");
         return new IntrinsicWeapon(30, "punches");
     }
 
@@ -51,15 +43,20 @@ public class Koopa extends Enemy {
 
         // check if Koopa IS NOT dormant
         if(!this.hasCapability(Status.DORMANT)) {
-
-            // checks if lastAction was AttackAction and behaviours doesn't contain FollowBehaviour
-            if(lastAction instanceof AttackAction && !behaviours.containsKey(2)) {
-                // adds FollowBehaviour, targeting the actor the current actor called AttackAction on
-                this.behaviours.put(2, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
+            // checks if lastAction was AttackAction
+            if(lastAction instanceof AttackAction) {
+                // check if behaviours contains AttackBehaviour already
+                if(!behaviours.containsKey(2)) {
+                    // adds FollowBehaviour, targeting the actor the current actor called AttackAction on
+                    this.behaviours.put(2, new FollowBehaviour(((AttackAction) lastAction).getTarget()));
+                }
             }
-
-        } else {
-            behaviours.clear();                         // Koopa is dormant
+        }
+        // Koopa is dormant
+        else {
+            behaviours.remove(1); // remove AttackBehaviour
+            behaviours.remove(2); // remove FollowBehaviour
+            behaviours.remove(10); // remove WanderBehaviour
         }
 
         for(Behaviour behaviour : behaviours.values()) {
