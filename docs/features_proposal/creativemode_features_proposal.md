@@ -8,9 +8,9 @@ _This requirement implements a Chest, 'c' and Disguised Chest, 'c' into the game
 
 **Explanation why it adheres to SOLID principles** (WHY):
 
-- Adheres to the **Single Responsibility Principle** as:
-  - zz
-  - zz
+- Adheres to the **Single Responsibility Principle** as though each **Chest/DisguisedChest** can have their own methods for creating their own ArrayList of items, another class, **ItemPool**, is responsible for creating the ArrayList of items, and also responsible for picking a random item from this ArrayList of items. 
+- Each **Chest/DisguisedChest** is only responsible for importing and instantiating their own **ItemPool**, (hence ItemPool is not static, following the **Open-Close Principle**) and is only responsible for carrying a random item. E.g, as **Disguised Chest** extends from Enemy, it also carries the behaviours of an **Enemy**, hence, adhering to the **Open-Close Principle**, where **Enemy** is able to be extended to many new actors in the future.
+- **DisguisedChest** is implemented such that it extends **Enemy**, carrying over the behaviours of **Enemy** further following the **Dependency Inversion Principle**.
 
 | Requirements                                                                                                            | Features (HOW) / Your Approach / Answer                                                                                                                               |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
