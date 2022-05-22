@@ -24,12 +24,11 @@ public class AttackBehaviour implements Behaviour {
 
         // iterate through all current actor's exits
         for (Exit exit : here.getExits()) {
-            // check if an exit contains an actor
-            if(exit.getDestination().containsAnActor()) {
-                if(exit.getDestination().getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                    // current actor calls AttackAction on the other actor
-                    return new AttackAction(exit.getDestination().getActor(), exit.getName());
-                }
+            // check if an exit contains an actor hostile to enemy
+            if(exit.getDestination().containsAnActor() &&
+                    exit.getDestination().getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                // current actor calls AttackAction on the other actor
+                return new AttackAction(exit.getDestination().getActor(), exit.getName());
             }
         }
         // no action is called

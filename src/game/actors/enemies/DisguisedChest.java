@@ -57,13 +57,4 @@ public class DisguisedChest extends Enemy {
         // do nothing at this turn
         return new DoNothingAction();
     }
-
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) { // Check if otherActor is Friendly
-            actions.add(new AttackAction(this, direction)); // Allow otherActor to call AttackAction
-        }
-        return actions;
-    }
 }
