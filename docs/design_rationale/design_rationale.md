@@ -308,11 +308,14 @@ from Enemies, this upholds the **Dependency Inversion Principle**, where concret
 **Enemy** class
 
 ## REQ12: Chests / DisguisedChests ##
-- Create an **OpenChestAction**, which the **Chest** allows the actor to use, this follows the **Open-Close Principle**, 
-as we could reuse this action for different types of Chests or Boxes.
-- Rather than implement **ItemPool** class as a static class, it can be instantiated, 
-(following the **Open-Close Principle**) such that each Chest can have its own **ItemPool**, 
-which rolls a random item from its ArrayList of items.
+- Chest was created as an abstract class to follow the **Open Close Principle** as this allows for additional chests to
+extend from it (each with their own item pools) whilst retaining the behaviour of chest.
+- ItemPool was created to handle the selecting a random drop from a pool of drops. This follows **Single Responsibility
+principle** and **Dependency inversion** as this class is solely responsible for selecting such an item rather than chest, 
+allowing for further extension to things such as an enemy loot pool. **Dependency inversion principle** is upheld as we 
+may add any item to the pool rather than a set poo.
+- Create an **OpenChestAction**, which the **Chest** allows the actor to use, this follows the **Single Responsibility**, 
+as this handles the menu display for the action, purchasing from the player's wallet giving the item at the location.
 - Implemented **DisguisedChest** such that it extends **Enemy**, carrying over the behaviours of **Enemy** further 
 following the **Dependency Inversion Principle**. Moreover, the **Open-Close Principle** is demonstrated here such that 
 both the **Ground Chest** and **Actor DisguisedChest**, have an **ItemPool** as their attribute, emphasizing the 

@@ -86,6 +86,7 @@ public abstract class Chest extends Ground implements Resettable {
         }
     }
 
+    @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
         if(actor.toString().equals("Player")) { // only offer Player OpenChestAction
