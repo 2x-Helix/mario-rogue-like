@@ -6,6 +6,7 @@ import game.actors.enemies.Bowser;
 import game.actors.friendlies.PrincessPeach;
 import game.ground.Dirt;
 import game.ground.Lava;
+import game.ground.chests.EquipmentChest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,7 @@ public class LavaZone extends Zone {
     public LavaZone(World world, FancyGroundFactory groundFactory) {
         super(world, groundFactory, strMap);
         randomizeGround(new Dirt(), new Lava(), 5, this);
+        randomizeGround(new Dirt(), new EquipmentChest(), 1, this);
     }
 
     // Methods
