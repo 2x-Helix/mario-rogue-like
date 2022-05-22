@@ -40,12 +40,13 @@ public class BFG extends Equipment {
         for (Exit exit : map.locationOf(actor).getExits())
             locationsAffected.add(exit.getDestination());
 
+        // TODO: killed enemies *should* drops items, but we can just say it doesnt and dont do it
         // kills the enemies
         Actor actorToBeKilled;
         for (Location location : locationsAffected) {
             actorToBeKilled = map.getActorAt(location);
             if (actorToBeKilled instanceof Enemy)
-                actorToBeKilled.hurt(Integer.MAX_VALUE);
+                map.removeActor(actorToBeKilled);
         }
     }
 
