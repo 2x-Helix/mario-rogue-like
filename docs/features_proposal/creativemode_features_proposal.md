@@ -1,3 +1,24 @@
+# Requirement 11
+
+**Title**:
+_More Items_
+
+**Description**:
+_New class of item - Equipment is added to the game. Equipments can do all sort of things, but requires cool down durations before using it again. For example, BFG instantly kills all enemies around the user and Fruit heals the users for 50HP._
+
+**Explanation why it adheres to SOLID principles** (WHY):
+
+- Single Responsibility Principle: Each equipment has its own implementation of the inherited **onUse()** function from the **Equipment** parent class, and all the effects of an equipment are implemented in that function. **onUse()** is called everytime the **UseAction** of the equipment is executed. This avoids implementing the effects of all equipments inside the class of **UseAction**, and let each equipment takes the responsibility of providing its own effects.
+- Open-Close Principle: The abstract class **Equipment** itself is inherited from **Item**, and the implementation of **Equipment** does not modify the base code of **Item**. All the actual equipments, like **BFG**, are only responsible for overriding the **onUse()** method from **Equipment** and provides their own behaviour, again, without modifying the **Equipment** base class.
+- Dependency Inversion Principle: All the equipments are inherited from **Equipment**, which is inherited from **Item**. This allows actor's inventory (List of **Item**) to store **Equipment** directly, without the need of making a new list just for storing **Equipment**.
+
+| Requirements                                                                                                            | Features (HOW) / Your Approach / Answer                                                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Must use at least two (2) classes from the engine package                                                               | _**Item** and **Action** from the engine package are used. **Equipment** is inherited from **Item**, and it provides **UseAction**, which is inherited from Action._ |
+| Must use/re-use at least one(1) existing feature (either from assignment 2 and/or fixed requirements from assignment 3) | _**Status** and **Lava** are used. **Cryotov** applies a FROZEN status to the ground, and **Molotov** converts ground into **Lava**._                                |
+| Must use existing or create new abstractions (e.g., abstract or interface, apart from the engine code)                  | _**Equipment**, the new abstract class is created, which is inherited from the existing abstract class **Item.**_                                                    |
+| Must use existing or create new capabilities                                                                            | _FROZEN is the new GroundCapability that is added for **Cryotov**, which convert **Lava** into **Floor** prevents the ground from turning into **Lava** again_       |
+
 # Requirement 12
 
 **Title**:
@@ -13,29 +34,8 @@ _This requirement implements a Chest, 'c' and Disguised Chest, 'c' into the game
 - **DisguisedChest** is implemented such that it extends **Enemy**, carrying over the behaviours of **Enemy** further following the **Dependency Inversion Principle**.
 
 | Requirements                                                                                                            | Features (HOW) / Your Approach / Answer                                                                                                                                                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Must use at least two (2) classes from the engine package                                                               | _We use two classes from the engine package: Actor and Ground. DisguisedChest extends Enemy which extends Actor, Chest extends Ground_                                                                                                                                                                |
 | Must use/re-use at least one(1) existing feature (either from assignment 2 and/or fixed requirements from assignment 3) | _We use the existing features, coin and wallet, where Chest allows the OpenChestAction, which takes credits away from actor opening the Chest. Also, DisguisedChest contains behaviours, such as AttackBehaviour. Both classes also have the ability to hold different **Item**s in their inventory._ |
 | Must use existing or create new abstractions (e.g., abstract or interface, apart from the engine code)                  | _We use the abstraction **Enemy**, which the actor **DisguisedChest** extends from. Moreover, An abstract class, **Chest** was created to allow for different types of Chests to be implemented into game._                                                                                           |
 | Must use existing or create new capabilities                                                                            | _We use the existing capability **Status.ENEMY** to identify **DisguisedChest** as an Enemy. We also added ItemPool to randomly select an item from a group of items. This was intended for use with the chest but this can be later extended to enemy loot pools._                                   |
-
----
-
-# Requirement 11
-
-**Title**:
-_More Items_
-
-**Description**:
-_write down the summary of the feature here..._
-
-**Explanation why it adheres to SOLID principles** (WHY):
-
--
-
-| Requirements                                                                                                            | Features (HOW) / Your Approach / Answer                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Must use at least two (2) classes from the engine package                                                               | _EXAMPLE (please delete this later): We use three classes from the engine package: Actor, Item, and Ground. ClassA extends Actor, ClassB and ClassC extend Item, ..._ |
-| Must use/re-use at least one(1) existing feature (either from assignment 2 and/or fixed requirements from assignment 3) |                                                                                                                                                                       |
-| Must use existing or create new abstractions (e.g., abstract or interface, apart from the engine code)                  |                                                                                                                                                                       |
-| Must use existing or create new capabilities                                                                            |                                                                                                                                                                       |
