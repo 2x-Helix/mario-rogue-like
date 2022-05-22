@@ -41,9 +41,10 @@ public class Molotov extends Equipment {
         for (Exit exit : map.locationOf(actor).getExits())
             locationsAffected.add(exit.getDestination());
 
-        // set the locations on fire;
+        // set the locations on fire, if they are not frozen
         for (Location location : locationsAffected) {
-            location.getGround().addCapability(GroundCapabilities.ON_FIRE);
+            if (!location.getGround().hasCapability(GroundCapabilities.FROZEN))
+                location.getGround().addCapability(GroundCapabilities.ON_FIRE);
         }
     }
 
