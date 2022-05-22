@@ -5,7 +5,12 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.items.Tickable;
 import game.status.Status;
 
-
+/**
+ * This class represents a Fire type of Ground, that upon being stepped on by an actor, delivers damage to the actor every
+ * turn. After some turns, this Fire class will automatically convert back into the previous ground it was on.
+ * @author James Huynh
+ * @version 1.1
+ */
 public class Fire extends Ground implements Tickable {
     private static final Integer MAX_DURATION = 3;
     private Integer duration;   // active duration
