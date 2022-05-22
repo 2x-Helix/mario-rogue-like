@@ -308,7 +308,7 @@ from Enemies, this upholds the **Dependency Inversion Principle**, where concret
 **Enemy** class
 
 ## REQ10: Magical fountain
-- An abstract class, **Fountain**, was implemented, to allow the concrete classes, **HealthFountain** and **PowerFountain** to extend from. This adheres to the **Dependency Inversion Principle** as the two concrete classes with their implementation details depend on the abstraction **Fountain**
+- An abstract class, **Fountain**, was implemented, to allow the concrete classes, **HealthFountain** and **PowerFountain** to extend from. This adheres to the **Dependency Inversion Principle** as the two concrete classes with their implementation details depend on the abstraction **Fountain**. In addition, this requirement fulfils the **Single Responsibility Principle**, where the abstract class **Fountain** is responsible for the broader functions e.g methods, getDrinkAction() and onFill(), whereas the more concrete specific classes, **HealthFountain** and **PowerFountain** have specific functions, e.g adding capability GREATER_HEAL, as this fountain is responsible for healing, and **PowerFountain** --> POWERFUL capability.
 
 ## REQ11: More items and equipment
 - An abstract class, **Equipment**, was created for the **BFG**, **Cryotov**, **Molotov**, and **Fruit** to extend from. Indeed, this adheres to the **Single Responsibility Principle**, as methods used by the concrete classes are already implemented in the abstract class **Equipment**, so that the specific classes are responsible for the more specific functions (e.g BFG kills all enemies surrounding the actor). Of course, the **Dependency Inversion Principle**, as the concrete equipment classes depend on the **Equipment** class.
