@@ -8,7 +8,9 @@ _This requirement implements a Chest, 'c' and Disguised Chest, 'c' into the game
 
 **Explanation why it adheres to SOLID principles** (WHY):
 
--
+- Adheres to the **Single Responsibility Principle** as:
+  - zz
+  - zz
 
 | Requirements                                                                                                            | Features (HOW) / Your Approach / Answer                                                                                                                               |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,12 +21,10 @@ _This requirement implements a Chest, 'c' and Disguised Chest, 'c' into the game
 
 ---
 
-# Requirement 5
-
-(for group of 3 ONLY -- please remove it before submission)
+# Requirement 11
 
 **Title**:
-_write down the title of your requirement here..._
+_More Items_
 
 **Description**:
 _write down the summary of the feature here..._
