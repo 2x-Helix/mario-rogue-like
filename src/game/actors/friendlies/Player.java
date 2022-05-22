@@ -22,7 +22,6 @@ public class Player extends Friendly implements Resettable {
 
 	private final Menu menu = new Menu();
 	private final Wallet wallet = new Wallet();
-	private Equipment equipment = null;
 
 	/**
 	 * Constructor.
@@ -48,7 +47,7 @@ public class Player extends Friendly implements Resettable {
 		if (ResetManager.getInstance().resetAvailable())
 			actions.add(new ResetAction());
 
-		// Display player's equipment info
+		// Display player's equipment info FIXME: loop inside
 		System.out.print(this.equipmentDescription());
 
 		// Display player's statuses info
@@ -78,13 +77,6 @@ public class Player extends Friendly implements Resettable {
 	}
 
 	/**
-	 * Set equipment for this player
-	 * To avoid looping in playTurn()
-	 * @param equipment the equipment for player
-	 */
-	public void setEquipment(Equipment equipment) { this.equipment = equipment; }
-
-	/**
 	 * Upon reset: Reset duration of PowerStar, Heals to max hp
 	 */
 	@Override
@@ -108,23 +100,21 @@ public class Player extends Friendly implements Resettable {
 	 * @return a description of equipment this player holds
 	 */
 	private String equipmentDescription() {
-		if (equipment == null)
-			return "";
-
-		if (!equipment.isOnCoolDown())
-			return equipment + " is ready to use\n";
-
-		String cout = equipment + " is on cool down, " + equipment.remainingCoolDown();
-		cout += equipment.remainingCoolDown() == 1 ? " turn " : " turns ";
-		cout += "remaining\n";
-		return cout;
-	}
-
-	/**
-	 * @return if this player is holding an equipment
-	 */
-	public boolean hasEquipment() {
-		return this.equipment != null;
+		StringBuilder cout = new StringBuilder();
+		Equipment equipment;
+		for (Item item : this.getInventory()) {
+			if (item instanceof Equipment) {
+				equipment = (Equipment) item;
+				if (!equipment.isOnCoolDown()) {
+					cout.append(equipment).append(" is ready to use\n");
+				} else {
+					cout.append(equipment).append(" is on cool down, ").append(equipment.remainingCoolDown());
+					cout.append(equipment.remainingCoolDown() == 1 ? " turn " : " turns ");
+					cout.append("remaining\n");
+				}
+			}
+		}
+		return cout.toString();
 	}
 
 	@Override

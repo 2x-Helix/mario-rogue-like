@@ -28,7 +28,6 @@ public abstract class Equipment extends Item {
     public Equipment(String name, char displayChar, boolean portable, Integer coolDownDuration) {
         super(name, displayChar, portable);
         this.coolDownDuration = coolDownDuration;
-        //this.addAction(this.getUseAction());
     }
 
     /**
@@ -77,26 +76,26 @@ public abstract class Equipment extends Item {
     @Override
     public void tick(Location currentLocation, Actor actor) {
         this.tick(currentLocation);
-        if (actor instanceof Player) {
-            Player player = (Player) actor;
-            if (!player.hasEquipment()) {
-                player.setEquipment(this);
-            }
+
+        if (this.isOnCoolDown()) {
+            // remove UseAction if it is on cool down and has the action
+            if (this.getAllowableActions().contains(this.getUseAction()))
+                this.removeAction(this.getUseAction());
+        } else {
+            // add UseAction if it is off cool down and doesn't has the action
+            if (!this.getAllowableActions().contains(this.getUseAction()))
+                this.addAction(this.getUseAction());
         }
     }
 
     /**
-     * General tick method for equipment
+     * Generic tick method for equipment
      * Tick when this equipment is on the ground
      * @param currentLocation The location of the ground on which we lie.
      */
     @Override
     public void tick(Location currentLocation) {
-        if (!isOnCoolDown()) {              // off cool down, no need to recharge
-            // add UseAction if it doesn't have it
-            if (!this.getAllowableActions().contains(this.getUseAction()))
-                this.addAction(this.getUseAction());
-        } else {                            // on cool down, recharge
+        if (isOnCoolDown()) {               // on cool down, recharge
             coolDownCounter += 1;           // recharge
             onCoolDown = !coolDownDuration.equals(coolDownCounter); // keep cooling down until coolDownCounter == coolDownDuration
             if (!isOnCoolDown())            // if done recharging
