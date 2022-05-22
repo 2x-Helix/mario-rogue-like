@@ -4,9 +4,11 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.items.magicalitems.PowerStar;
+import game.items.equipments.Equipment;
+import game.items.magical_items.PowerStar;
 import game.reset.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
@@ -19,7 +21,7 @@ import game.Wallet;
 public class Player extends Friendly implements Resettable {
 
 	private final Menu menu = new Menu();
-	private final Wallet wallet;
+	private final Wallet wallet = new Wallet();
 
 	/**
 	 * Constructor.
@@ -31,7 +33,6 @@ public class Player extends Friendly implements Resettable {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
-		this.wallet = new Wallet();
 		registerResettable();
 	}
 
@@ -46,8 +47,11 @@ public class Player extends Friendly implements Resettable {
 		if (ResetManager.getInstance().resetAvailable())
 			actions.add(new ResetAction());
 
-		// Display effects affecting the player
-		System.out.println(this.statusDescription());
+		// Display player's equipment info FIXME: loop inside
+		System.out.print(this.equipmentDescription());
+
+		// Display player's statuses info
+		this.statusDescription();
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -90,6 +94,27 @@ public class Player extends Friendly implements Resettable {
 	 */
 	private String statusDescription() {
 		return "";
+	}
+
+	/**
+	 * @return a description of equipment this player holds
+	 */
+	private String equipmentDescription() {
+		StringBuilder cout = new StringBuilder();
+		Equipment equipment;
+		for (Item item : this.getInventory()) {
+			if (item instanceof Equipment) {
+				equipment = (Equipment) item;
+				if (!equipment.isOnCoolDown()) {
+					cout.append(equipment).append(" is ready to use\n");
+				} else {
+					cout.append(equipment).append(" is on cool down, ").append(equipment.remainingCoolDown());
+					cout.append(equipment.remainingCoolDown() == 1 ? " turn " : " turns ");
+					cout.append("remaining\n");
+				}
+			}
+		}
+		return cout.toString();
 	}
 
 	@Override
