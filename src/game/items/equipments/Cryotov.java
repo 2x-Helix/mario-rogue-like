@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Cryotov extends Equipment {
 
     public static final String NAME = "Cryotov";
-    public static final char DISPLAY_CHAR = ' ';
+    public static final char DISPLAY_CHAR = '!';
     public static final boolean PORTABLE = true;
 
     /***

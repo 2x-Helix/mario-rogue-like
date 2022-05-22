@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Molotov extends Equipment {
 
     public static final String NAME = "Molotov";
-    public static final char DISPLAY_CHAR = ' ';
+    public static final char DISPLAY_CHAR = 'i';
     public static final boolean PORTABLE = true;
 
     /***

@@ -11,7 +11,7 @@ import java.util.Optional;
 public class Fruit extends Equipment {
 
     public static final String NAME = "Fruit";
-    public static final char DISPLAY_CHAR = ' ';
+    public static final char DISPLAY_CHAR = 'a';
     public static final boolean PORTABLE = true;
 
     /***

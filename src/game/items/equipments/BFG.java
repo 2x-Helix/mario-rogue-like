@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class BFG extends Equipment {
 
     public static final String NAME = "BFG";
-    public static final char DISPLAY_CHAR = ' ';
+    public static final char DISPLAY_CHAR = 'b';
     public static final boolean PORTABLE = true;
 
     /***

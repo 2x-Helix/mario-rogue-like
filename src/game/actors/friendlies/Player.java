@@ -9,11 +9,16 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.equipments.Equipment;
 import game.items.magicalitems.PowerStar;
-import game.actions.ResetAction;
+import game.items.magicalitems.SuperMushroom;
+import game.reset.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.status.Status;
 import game.Wallet;
+import game.status.StatusManager;
+
+import java.util.Enumeration;
+import java.util.Objects;
 
 /**
  * Class representing the Player.
@@ -51,7 +56,7 @@ public class Player extends Friendly implements Resettable {
 		System.out.print(this.equipmentDescription());
 
 		// Display player's statuses info
-		this.statusDescription();
+		System.out.print(this.statusDescription());
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -93,7 +98,18 @@ public class Player extends Friendly implements Resettable {
 	 * @return a description of statuses this player has
 	 */
 	private String statusDescription() {
-		return "";
+		StatusManager manager = StatusManager.getStatusManager();
+
+		String desc = "Player has the following status:\n";
+
+		for (Item item : getInventory()) {
+			if (item.getDisplayChar() == new PowerStar().getDisplayChar())
+				desc = desc+"\t"+item.toString()+"\n";
+		}
+		if (this.hasCapability(Status.TALL))
+			desc = desc+"\t"+(new SuperMushroom().toString()+"\n");
+
+		return desc+"\n";
 	}
 
 	/**
