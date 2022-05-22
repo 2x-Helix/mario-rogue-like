@@ -4,9 +4,10 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.items.equipments.BFG;
+import game.items.equipments.Equipment;
 import game.items.magical_items.PowerStar;
 import game.reset.ResetAction;
 import game.reset.ResetManager;
@@ -20,7 +21,8 @@ import game.Wallet;
 public class Player extends Friendly implements Resettable {
 
 	private final Menu menu = new Menu();
-	private final Wallet wallet;
+	private final Wallet wallet = new Wallet();
+	private Equipment equipment = null;
 
 	/**
 	 * Constructor.
@@ -32,8 +34,6 @@ public class Player extends Friendly implements Resettable {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
-		this.wallet = new Wallet();
-		this.addItemToInventory(new BFG());
 		registerResettable();
 	}
 
@@ -48,8 +48,11 @@ public class Player extends Friendly implements Resettable {
 		if (ResetManager.getInstance().resetAvailable())
 			actions.add(new ResetAction());
 
-		// Display effects affecting the player
-		System.out.println(this.statusDescription());
+		// Display player's equipment info
+		System.out.print(this.equipmentDescription());
+
+		// Display player's statuses info
+		this.statusDescription();
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -74,6 +77,10 @@ public class Player extends Friendly implements Resettable {
 		return super.getIntrinsicWeapon();
 	}
 
+	private Equipment getEquipment() {return this.equipment;}
+
+	public void setEquipment(Equipment equipment) { this.equipment = equipment; }
+
 	/**
 	 * Upon reset: Reset duration of PowerStar, Heals to max hp
 	 */
@@ -92,6 +99,29 @@ public class Player extends Friendly implements Resettable {
 	 */
 	private String statusDescription() {
 		return "";
+	}
+
+	/**
+	 * @return a description of equipment this player holds
+	 */
+	private String equipmentDescription() {
+		if (equipment == null)
+			return "";
+
+		if (!equipment.isOnCoolDown())
+			return equipment + " is ready to use\n";
+
+		String cout = equipment + " is on cool down, " + equipment.remainingCoolDown();
+		cout += equipment.remainingCoolDown() == 1 ? " turn " : " turns ";
+		cout += "remaining\n";
+		return cout;
+	}
+
+	/**
+	 * @return if this player is holding an equipment
+	 */
+	public boolean hasEquipment() {
+		return this.equipment != null;
 	}
 
 	@Override
