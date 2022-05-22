@@ -283,6 +283,10 @@ rather than each class storing a **Random** class as an attribute.
   implementation when adding new classes that use the interface. This is also the case with the **Lava** class which
   extends from **Ground** (following the *Open Close Principle*) to enable us to include new terrain without breaking
   existing functionality.
+- A factory method was added to **WarpPipe**, this was due to engine limitations with the **FancyGroundFactory** class
+which only creates new instances from a no argument constructor. This does violate the *don't repeat yourself principle*,
+however, since we cannot modify the engine for **FancyGroundFactory** and we require to specify the destination. 
+As such a new method **randomizePipes()** was added to **Zone** to generate the pipes.
 
 ## REQ9: More allies and enemies
 ## Changes from Assignment 2:
@@ -292,12 +296,24 @@ so if both actors have the same status or both don't, they won't attack eachothe
 * Removed instanceof checking for Wrench with status check: CAN_SMASH, (removed code smell, and violation of LSP)
 * Replaced Hashmap with Treemap, as it auto sorts based on priority of behaviour.
 ## New implementations: ##
-- Implemented **FlyingKoopa** such that it extends from **Enemy**, and not from **Koopa**, to avoid violation of _Liskov's Substitution Principle_, because Flying Koopa 
-- Implemented ability to rescue Peach through creation of **Key** item and Status **CAN_UNLOCK**, as the **Open-Close Principle** was upheld during implementation, rather than using instanceof Key, as we may want the ability to unlock other actors or objects in the future.
-- Implemented **Fire** class such that it extends **Ground** rather than being an interface, to uphold the **Open-Close Principle** as we avoid modifying the existing Ground code.
-- **Bowser** extends **Enemy**, **PiranhaPlant** extends **Enemy**, both contain certain behaviours thus can be extended from Enemies, this upholds the **Dependency Inversion Principle**, where concrete Enemy classes depend on the abstract **Enemy** class
+- Implemented **FlyingKoopa** such that it extends from **Enemy**, and not from **Koopa**, to avoid violation of 
+_Liskov's Substitution Principle_, because Flying Koopa 
+- Implemented ability to rescue Peach through creation of **Key** item and Status **CAN_UNLOCK**, as the 
+**Open-Close Principle** was upheld during implementation, rather than using instanceof Key, as we may want the ability 
+to unlock other actors or objects in the future.
+- Implemented **Fire** class such that it extends **Ground** rather than being an interface, to uphold the 
+**Open-Close Principle** as we avoid modifying the existing Ground code.
+- **Bowser** extends **Enemy**, **PiranhaPlant** extends **Enemy**, both contain certain behaviours thus can be extended 
+from Enemies, this upholds the **Dependency Inversion Principle**, where concrete Enemy classes depend on the abstract 
+**Enemy** class
 
 ## REQ12: Chests / DisguisedChests ##
-- Create an **OpenChestAction**, which the **Chest** allows the actor to use, this follows the **Open-Close Principle**, as we could reuse this action for different types of Chests or Boxes.
-- Rather than implement **ItemPool** class as a static class, it can be instantiated, (following the **Open-Close Principle**) such that each Chest can have its own **ItemPool**, which rolls a random item from its ArrayList of items.
-- Implemented **DisguisedChest** such that it extends **Enemy**, carrying over the behaviours of **Enemy** further following the **Dependency Inversion Principle**. Moreover, the **Open-Close Principle** is demonstrated here such that both the **Ground Chest** and **Actor DisguisedChest**, have an **ItemPool** as their attribute, emphasizing the re-usability of the class. 
+- Create an **OpenChestAction**, which the **Chest** allows the actor to use, this follows the **Open-Close Principle**, 
+as we could reuse this action for different types of Chests or Boxes.
+- Rather than implement **ItemPool** class as a static class, it can be instantiated, 
+(following the **Open-Close Principle**) such that each Chest can have its own **ItemPool**, 
+which rolls a random item from its ArrayList of items.
+- Implemented **DisguisedChest** such that it extends **Enemy**, carrying over the behaviours of **Enemy** further 
+following the **Dependency Inversion Principle**. Moreover, the **Open-Close Principle** is demonstrated here such that 
+both the **Ground Chest** and **Actor DisguisedChest**, have an **ItemPool** as their attribute, emphasizing the 
+re-usability of the class. 
