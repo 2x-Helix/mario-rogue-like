@@ -77,8 +77,11 @@ public class Player extends Friendly implements Resettable {
 		return super.getIntrinsicWeapon();
 	}
 
-	private Equipment getEquipment() {return this.equipment;}
-
+	/**
+	 * Set equipment for this player
+	 * To avoid looping in playTurn()
+	 * @param equipment the equipment for player
+	 */
 	public void setEquipment(Equipment equipment) { this.equipment = equipment; }
 
 	/**

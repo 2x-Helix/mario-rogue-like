@@ -21,14 +21,14 @@ public abstract class Equipment extends Item {
 
     /***
      * Constructor.
-     *  @param name the name of this Item
+     * @param name the name of this Item
      * @param displayChar the character to use to represent this item if it is on the ground
      * @param portable true if and only if the Item can be picked up
      */
     public Equipment(String name, char displayChar, boolean portable, Integer coolDownDuration) {
         super(name, displayChar, portable);
         this.coolDownDuration = coolDownDuration;
-        this.addAction(this.getUseAction());
+        //this.addAction(this.getUseAction());
     }
 
     /**
@@ -69,16 +69,27 @@ public abstract class Equipment extends Item {
         return coolDownDuration - coolDownCounter;
     }
 
+    /**
+     * Tick when this equipment is on a player
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         this.tick(currentLocation);
         if (actor instanceof Player) {
             Player player = (Player) actor;
-            if (!player.hasEquipment())
+            if (!player.hasEquipment()) {
                 player.setEquipment(this);
+            }
         }
     }
 
+    /**
+     * General tick method for equipment
+     * Tick when this equipment is on the ground
+     * @param currentLocation The location of the ground on which we lie.
+     */
     @Override
     public void tick(Location currentLocation) {
         if (!isOnCoolDown()) {              // off cool down, no need to recharge
