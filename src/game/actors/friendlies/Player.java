@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.equipments.Equipment;
-import game.items.magical_items.PowerStar;
+import game.items.magicalitems.PowerStar;
 import game.reset.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
