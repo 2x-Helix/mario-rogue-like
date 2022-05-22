@@ -40,23 +40,12 @@ public class HighGround extends Ground {
 	 */
     @Override
 	public ActionList allowableActions(Actor actor, Location location, String direction) {
-        ActionList actionList = new ActionList();
+        ActionList actionList = super.allowableActions(actor, location, direction);
+
         // no need to jump is player consumed PowerStar, or actor at current location
-        if (!actor.hasCapability(Status.HIGHER_GROUND) && !(location.containsAnActor())) {
-            // iterate through all ground's exits
-            for (Exit exit : location.getExits()) {
-                // check if an exit contains an actor
-                if(exit.getDestination().containsAnActor()) {
-                    // if actor is standing on a HighGround, then actor can use MoveActorAction
-                    if(exit.getDestination().getGround() instanceof HighGround){
-                        actionList.add(new MoveActorAction(location, direction));
-                    }
-                    else { // otherwise, actor must use JumpActorAction to jump onto HighGround
-                        actionList.add(new JumpActorAction(this, location, direction));
-                    }
-                }
-            }
-        }
+        if (!actor.hasCapability(Status.HIGHER_GROUND) && !(location.containsAnActor()))
+            actionList.add(new JumpActorAction(this, location, direction));
+
 		return actionList;
 	}
 
