@@ -42,7 +42,7 @@ public class Molotov extends Equipment {
 
         // set the locations on fire;
         for (Location location : locationsAffected) {
-            location.getGround().removeCapability(Status.ON_FIRE);
+            location.getGround().addCapability(Status.ON_FIRE);
         }
     }
 
