@@ -2,6 +2,7 @@ package game.items.magicalitems;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import game.actions.ConsumeAction;
 
 /**
  * A class of Item that is consummable by Players (and possibly all actors)

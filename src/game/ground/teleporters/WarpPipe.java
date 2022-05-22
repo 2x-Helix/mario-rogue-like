@@ -1,9 +1,9 @@
 package game.ground.teleporters;
 
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.WarpAction;
 import game.actors.enemies.PiranhaPlant;
 import game.ground.HighGround;
 import game.reset.Resettable;

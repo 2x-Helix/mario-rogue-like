@@ -1,9 +1,10 @@
-package game.items.magicalitems;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Tickable;
+import game.items.magicalitems.MagicalItem;
 
 /**
  * Allow consummable items to be consumed
