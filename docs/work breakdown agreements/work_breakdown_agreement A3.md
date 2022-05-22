@@ -7,7 +7,7 @@
 * Assignee:         Matthew
 * Completed by:     22/5/2022
 
-## Task 9:
+## Task 9 More Allies and Enemies:
 * Assignee:         James
 * Completed by:     22/5/2022
 
@@ -15,11 +15,11 @@
 * Assignee:         Chun
 * Completed by:     22/5/2022
 
-## Task 11:
+## Task 11 More Items:
 * Assignee:         Chun
 * Completed by:     22/5/2022
 
-## Task 12:
+## Task 12 Chests and Disguised Chests:
 * Assignee:         James
 * Completed by:     22/5/2022
 
@@ -29,4 +29,5 @@
 
 # Signed
 * Matthew Siegenthaler: I agree to this WBA
+* James Huynh: I agree to this WBA
   
