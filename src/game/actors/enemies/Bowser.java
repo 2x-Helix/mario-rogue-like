@@ -14,6 +14,12 @@ import game.behaviours.FollowBehaviour;
 import game.items.Key;
 import game.status.Status;
 
+/**
+ * This class represents an Enemy Actor, Bowser, that has capability FIRE_ATTACK, which upon attacking another actor, a Fire will be dropped
+ * on their location.
+ * @author James Huynh
+ * @version 1.0
+ */
 public class Bowser extends Enemy {
     public Bowser() {
         super("Bowser", 'B', 500);

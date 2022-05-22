@@ -15,6 +15,12 @@ import game.behaviours.FollowBehaviour;
 import game.items.magicalitems.SuperMushroom;
 import game.status.Status;
 
+/**
+ * This class represents an Enemy Actor, Flying Koopa, which is similar to Koopa, except has more hitPoints, 150, and is able to walk on
+ * HighGrounds.
+ * @author James Huynh
+ * @version 1.1
+ */
 public class FlyingKoopa extends Enemy {
     public FlyingKoopa() {
         super("Flying Koopa", 'F', 150);

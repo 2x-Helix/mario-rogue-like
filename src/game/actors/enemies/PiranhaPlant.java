@@ -11,6 +11,11 @@ import game.actions.AttackAction;
 import game.behaviours.Behaviour;
 import game.status.Status;
 
+/**
+ * This class represents the Enemy Actor, Piranha Plant. It attacks another actor with its intrinsicWeapon, "chomp", dealing 90 damage. Upon reset, its max health increases.
+ * @author James Huynh
+ * @version 1.1
+ */
 public class PiranhaPlant extends Enemy {
     // Constants
     private static final String NAME = "Piranha Plant";
