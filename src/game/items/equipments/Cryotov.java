@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ground.GroundCapabilities;
 import game.status.Status;
 
 import java.util.ArrayList;
@@ -42,8 +43,8 @@ public class Cryotov extends Equipment {
 
         // freeze the locations;
         for (Location location : locationsAffected) {
-            location.getGround().addCapability(Status.FROZEN);
-            location.getGround().removeCapability(Status.ON_FIRE);
+            location.getGround().addCapability(GroundCapabilities.FROZEN);
+            location.getGround().removeCapability(GroundCapabilities.ON_FIRE);
         }
     }
 

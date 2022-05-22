@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ground.GroundCapabilities;
 import game.status.Status;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class Molotov extends Equipment {
 
         // set the locations on fire;
         for (Location location : locationsAffected) {
-            location.getGround().addCapability(Status.ON_FIRE);
+            location.getGround().addCapability(GroundCapabilities.ON_FIRE);
         }
     }
 

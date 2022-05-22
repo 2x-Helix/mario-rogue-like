@@ -18,7 +18,6 @@ public enum Status {
     CAN_SMASH,              // indicates actor can use SmashShellAction
     RESET,                  // indicates object is to be reset next turn
     POWERFUL,               // base attack damage +15 (NOT WEAPON DAMAGE)
-    GREATER_HEAL,           // heal amount +50
-    ON_FIRE,                // indicates ground is on fire, deals damage to actors
-    FROZEN                  // indicates ground can't be set on fire, put off fire on the ground
+    GREATER_HEAL           // heal amount +50
+
 }
