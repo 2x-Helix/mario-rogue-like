@@ -311,7 +311,7 @@ from Enemies, this upholds the **Dependency Inversion Principle**, where concret
 - An abstract class, **Fountain**, was implemented, to allow the concrete classes, **HealthFountain** and **PowerFountain** to extend from. This adheres to the **Dependency Inversion Principle** as the two concrete classes with their implementation details depend on the abstraction **Fountain**
 
 ## REQ11: More items and equipment
-- An abstract class, **Equipment**, was created for the **BFG**, **Cryotov**, **Molotov**, and **Fruit** to extend from. Indeed, this adheres to the **Single Responsibility Principle** and **Dependency Inversion Principle**, as the concrete equipment classes depend on the **Equipment** class.
+- An abstract class, **Equipment**, was created for the **BFG**, **Cryotov**, **Molotov**, and **Fruit** to extend from. Indeed, this adheres to the **Single Responsibility Principle**, as methods used by the concrete classes are already implemented in the abstract class **Equipment**, so that the specific classes are responsible for the more specific functions (e.g BFG kills all enemies surrounding the actor). Of course, the **Dependency Inversion Principle**, as the concrete equipment classes depend on the **Equipment** class.
 
 ## REQ12: Chests / DisguisedChests ##
 - Chest was created as an abstract class to follow the **Open Close Principle** as this allows for additional chests to
